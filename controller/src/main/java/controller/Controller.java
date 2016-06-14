@@ -36,7 +36,10 @@ public class Controller implements IController {
 		this.view.getMapFromController(arr);
 		
 	}
+	public void orderPerform(final ControllerOrder controllerOrder) {
 	
+		
+	}
 
 
 
