@@ -16,4 +16,6 @@ public interface IView {
 	void printMessage(final String message);
 	
 	public void getMapFromController(String arrayString[][]);
+	
+	//protected static ControllerOrder keyCodeToControllerOrder(final int keyCode);
 }

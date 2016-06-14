@@ -32,6 +32,7 @@ public class Controller implements IController {
 	}
 	String arr[][]={{"1"},{"2"}};
 	public void run(){
+		
 		this.view.getMapFromController(arr);
 		
 	}
