@@ -38,7 +38,7 @@ public class Controller implements IController {
 	}
 	public void orderPerform(final ControllerOrder controllerOrder) {
 	
-		
+		System.out.print(controllerOrder);
 	}
 
 

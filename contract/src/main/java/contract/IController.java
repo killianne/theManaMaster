@@ -6,5 +6,5 @@ package contract;
  * @author Jean-Aymeric Diet
  */
 public interface IController {
-
+		public void orderPerform(ControllerOrder controllerOrder);
 }
