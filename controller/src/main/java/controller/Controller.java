@@ -18,7 +18,7 @@ public class Controller implements IController {
 	private IModel	model;
 
 	
-	public Controller(final IView view, final IModel model) {
+	public Controller( IView view,  IModel model) {
 		this.setView(view);
 		this.setModel(model);
 	}
@@ -30,8 +30,9 @@ public class Controller implements IController {
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
-	
+	String arr[][]={{"1"},{"2"}};
 	public void run(){
+		this.view.getMapFromController(arr);
 		
 	}
 	

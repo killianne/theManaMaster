@@ -55,6 +55,7 @@ public class View implements IView, Runnable {
 	
 	public void getMapFromController(String arrayString[][]){
 		String as[][] = arrayString;
+	
 	}
 
 	/*
