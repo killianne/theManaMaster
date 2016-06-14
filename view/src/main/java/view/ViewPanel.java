@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +27,11 @@ class ViewPanel extends JPanel implements Observer {
 	private BufferedImage imageArray[][];
 	
 	private BufferedImage background;
+	
+	//private JPanel pSouth = new JPanel();
+	
+	private JLabel lLife = new JLabel("Resurections :");
+
 
 	/**
 	 * Instantiates a new view panel.
@@ -38,6 +44,8 @@ class ViewPanel extends JPanel implements Observer {
 		viewFrame.getModel().getObservable().addObserver(this);
 		this.buildViewPanel();
 	}
+	
+	//public
 	
 	public void buildViewPanel(){
 		imageArray = new BufferedImage[12][20];
@@ -53,6 +61,32 @@ class ViewPanel extends JPanel implements Observer {
 			for(int j=0; j<20; j++){
 				try{
 					this.imageArray[i][j] = ImageIO.read(new File("sprite/bone.png"));
+					/*
+					if (arrayString[i][j].equals("b")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/bone.png")); }
+					else if (arrayString[i][j].equals("c")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/crystal_ball.png")); }
+					else if (arrayString[i][j].equals("f1")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/fireball_1.png")); }
+					else if (arrayString[i][j].equals("f2")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/fireball_2.png")); }
+					else if (arrayString[i][j].equals("f3")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/fireball_3.png")); }
+					else if (arrayString[i][j].equals("f4")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/fireball_4.png")); }
+					else if (arrayString[i][j].equals("f5")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/fireball_5.png")); }
+					else if (arrayString[i][j].equals("gc")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/gate_closed.png")); }
+					else if (arrayString[i][j].equals("go")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/gate_open.png")); }
+					else if (arrayString[i][j].equals("lb")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/lorann_b.png")); }
+					else if (arrayString[i][j].equals("lbl")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/loran_lbl.png")); }
+					else if (arrayString[i][j].equals("lbr")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/lorann_lbr.png")); }
+					else if (arrayString[i][j].equals("lbu")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/loran_lu.png")); }
+					else if (arrayString[i][j].equals("lul")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/lorann_lul.png")); }
+					else if (arrayString[i][j].equals("lur")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/loran_lur.png")); }
+					else if (arrayString[i][j].equals("ll")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/lorann_ll.png")); }
+					else if (arrayString[i][j].equals("lr")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/loran_lr.png")); }
+					else if (arrayString[i][j].equals("m1")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/monster_1.png")); }
+					else if (arrayString[i][j].equals("m2")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/monster_2.png")); }
+					else if (arrayString[i][j].equals("m3")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/monster_3.png")); }
+					else if (arrayString[i][j].equals("m4")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/monster_4.png")); }
+					else if (arrayString[i][j].equals("p")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/purse.png")); }
+					else if (arrayString[i][j].equals("vb")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/vertical_bone.png")); }
+					else if (arrayString[i][j].equals("hb")) { this.imageArray[i][j] = ImageIO.read(new File("sprite/horizontal_bone.png")); }
+					*/
 				}
 				catch (IOException e){
 					System.err.println("Can't read images");
@@ -60,7 +94,10 @@ class ViewPanel extends JPanel implements Observer {
 	            }
 			}
 		}
-		
+		 //marche pas
+		this.lLife.setAlignmentY(50);
+		this.lLife.setAlignmentX(50);
+		this.add(lLife);
 	}
 
 	/**

@@ -2,11 +2,13 @@ package view;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import contract.IController;
@@ -26,7 +28,14 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IController				controller;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
-
+	
+	private JMenuBar menuBar = new JMenuBar();
+	
+	private JMenu menuFile = new JMenu("File");
+	
+	private JMenuItem item1 = new JMenuItem("New game");
+	private JMenuItem item2 = new JMenuItem("Setting");
+	private JMenuItem item3 = new JMenuItem("Exit");
 
 	/**
 	 * Instantiates a new view frame.
@@ -133,8 +142,15 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setResizable(false);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
-		this.setSize(640+6+10+10,384+29+10+10);//400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom); //384 par 640
+		this.setSize(640+6+10+10,384+23+29+10+10+29);
+		//400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom); //384 par 640
 		this.setLocationRelativeTo(null);
+		
+		this.menuFile.add(item1);
+		this.menuFile.add(item2);
+		this.menuFile.add(item3);
+		this.menuBar.add(menuFile);
+	    this.setJMenuBar(menuBar);
 	}
 
 	/**
