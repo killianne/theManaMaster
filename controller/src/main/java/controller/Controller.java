@@ -49,6 +49,4 @@ public class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 
-	
-
 }

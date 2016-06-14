@@ -51,6 +51,11 @@ public class View implements IView, Runnable {
 				return ControllerOrder.English;
 		}
 	}*/
+	
+	
+	public void getMapFromController(String arrayString[][]){
+		String as[][] = arrayString;
+	}
 
 	/*
 	 * (non-Javadoc)
