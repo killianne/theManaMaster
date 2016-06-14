@@ -158,10 +158,10 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * (non-Javadoc)
 	 *
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-	 *//*
+	 */
 	public void keyPressed(final KeyEvent e) {
-		this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
-	}*/
+		//this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -170,10 +170,5 @@ class ViewFrame extends JFrame implements KeyListener {
 	 */
 	public void keyReleased(final KeyEvent e) {
 
-	}
-
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }
