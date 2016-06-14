@@ -1,9 +1,15 @@
 package view;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -17,6 +23,8 @@ class ViewPanel extends JPanel implements Observer {
 	private ViewFrame					viewFrame;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
+	
+	private BufferedImage imageArray[][]; 
 
 	/**
 	 * Instantiates a new view panel.
@@ -27,6 +35,25 @@ class ViewPanel extends JPanel implements Observer {
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
+		this.buildViewPanel();
+	}
+	
+	public void buildViewPanel(){
+		imageArray = new BufferedImage[12][20];
+		//load les images
+		/*
+		for(int i=0; i<12; i++){
+			for(int j=0; j<20; j++){
+				try{
+					//this.imageArray[i][j] = ImageIO.read(new File("/masterpom/sprite/bone.png"));
+				}
+				catch (IOException e){
+	                e.printStackTrace();
+	            }
+			}
+		}
+		*/
+		
 	}
 
 	/**
@@ -64,7 +91,18 @@ class ViewPanel extends JPanel implements Observer {
 	 */
 	@Override
 	protected void paintComponent(final Graphics graphics) {
-		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-		graphics.drawString(this.getViewFrame().getModel().getMessage(), 10, 20);
+		//graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
+		//graphics.drawString(this.getViewFrame().getModel().getMessage(), 10, 20);
+		/*
+		int placeX = 10, placeY = 10;
+		for(int i = 0; i<this.imageArray.length; i++) {
+			for(int j=0; j<imageArray[0].length; j++){
+				Graphics2D g2 = (Graphics2D)graphics ;
+	            g2.drawImage(this.imageArray[i][j],placeX,placeY, null);
+	            placeX += 33;
+			}
+			placeY += 33;
+        }
+        */
 	}
 }
