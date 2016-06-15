@@ -54,18 +54,16 @@ class ViewPanel extends JPanel implements Observer {
 	//public
 	
 	public void buildViewPanel(){
-		System.out.println("yo2");
 		String arrayMap[][] = View.getArrayMap();
-		System.out.println("yo3");
 		imageArray = new BufferedImage[12][20];
-		
+		/*
 		try{
 			this.background = ImageIO.read(new File("sprite/fond.png"));
 		}catch (IOException e){
 			System.err.println("Can't read background");
 			e.printStackTrace();
 		}
-		
+		*/
 		if(arrayMap == null) {
 			for(int i=0; i<12; i++){
 				for(int j=0; j<20; j++){
@@ -123,11 +121,11 @@ class ViewPanel extends JPanel implements Observer {
 		pScoreAndLife.setBackground(Color.BLACK);
 		Font font = new Font("Tahoma", Font.BOLD, 20);
 		lLife.setFont(font);
-		lLife.setText("<html><font color = #011111 >Res</font><font color = #022222 >ure</font><font color = #033333>cti</font><font color = #044444>ons</font></html>");
-		lLife.setLocation(10,10);
+		lLife.setText("<html><font color = #011111 >Resurections</font></html>");
+		//lLife.setLocation(10,10);
 		lScore.setFont(font);
 		lScore.setText("<html><font color = #011111 >Score : 00000000</font></html>");
-		lScore.setLocation(10,300);
+		//lScore.setLocation(10,300);
 		pScoreAndLife.add(lLife);
 		pScoreAndLife.add(lScore);
 		this.add(pScoreAndLife, BorderLayout.SOUTH);
