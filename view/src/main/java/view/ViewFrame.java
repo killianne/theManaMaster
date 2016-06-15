@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 
 import contract.IController;
 import contract.IModel;
@@ -34,10 +35,15 @@ class ViewFrame extends JFrame implements KeyListener {
 	private JMenuBar menuBar = new JMenuBar();
 	
 	private JMenu menuFile = new JMenu("File");
+	private JMenu menuDesign = new JMenu("Design");
 	
 	private JMenuItem item1 = new JMenuItem("New game");
 	private JMenuItem item2 = new JMenuItem("Setting");
 	private JMenuItem item3 = new JMenuItem("Exit");
+	
+	private JRadioButtonMenuItem jrbmi1 = new JRadioButtonMenuItem("Pokemon");
+	private JRadioButtonMenuItem jrbmi2 = new JRadioButtonMenuItem("Mario");
+	private JRadioButtonMenuItem jrbmi3 = new JRadioButtonMenuItem("Zelda");
 
 	/**
 	 * Instantiates a new view frame.
@@ -152,8 +158,14 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setSize(640+6+10+10,384+23+29+10+10+29);
 		this.setLocationRelativeTo(null);
 		
+		menuDesign.add(jrbmi1);
+		menuDesign.add(jrbmi2);
+		menuDesign.add(jrbmi3);
+		
 		this.menuFile.add(item1);
 		this.menuFile.add(item2);
+		this.menuFile.add(menuDesign);
+		menuFile.addSeparator();
 		this.menuFile.add(item3);
 		this.menuBar.add(menuFile);
 	    this.setJMenuBar(menuBar);

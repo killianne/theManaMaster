@@ -59,8 +59,6 @@ class ViewPanel extends JPanel implements Observer {
 		this.buildViewPanel();
 	}
 	
-	//public
-	
 	public void buildViewPanel(){
 		String arrayMap[][] = View.getArrayMap();
 		imageArray = new BufferedImage[12][20];
