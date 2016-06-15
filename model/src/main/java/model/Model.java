@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import contract.ControllerOrder;
+import contract.IController;
 import contract.IModel;
 import model.database.DAOWorld;
 import model.worlds.World;
@@ -11,7 +13,7 @@ public class Model extends Observable implements IModel{
 
 	protected World world  = new World();
 	DAOWorld daoWorld = new DAOWorld();
-	
+	private IController controller;
 	// Player
 	/*
 	Player player = new Player();
@@ -58,6 +60,19 @@ public class Model extends Observable implements IModel{
 	public void loadMessage(String key) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public IController getController(){
+		return controller;
+	}
+	
+	public void setController(IController controller){
+		this.controller = controller;
+	}
+	
+	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
+		System.out.println(controllerOrder);
+		return controllerOrder;
 	}
 	
 	/*

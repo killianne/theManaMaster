@@ -48,9 +48,9 @@ public class Controller implements IController {
 		this.view.getMapFromController(arrayMap);
 		//}
 	}
-	public void orderPerform(final ControllerOrder controllerOrder) {
+	public ControllerOrder orderPerform(final ControllerOrder controllerOrder) {
 	
-		System.out.print(controllerOrder);
+		return this.model.getOrderPerform(controllerOrder);
 	}
 
 

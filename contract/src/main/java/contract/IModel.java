@@ -9,6 +9,7 @@ import java.util.Observable;
  */
 public interface IModel {
 
+	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder);
 	/**
 	 * Gets the message.
 	 *
