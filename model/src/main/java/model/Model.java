@@ -1,68 +1,77 @@
 package model;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import contract.IModel;
+import model.database.DAOWorld;
+import model.worlds.World;
 
-/**
- * The Class Model.
- *
- * @author Jean-Aymeric Diet
- */
-public class Model extends Observable implements IModel {
+public class Model extends Observable implements IModel{
 
-	/** The message. */
-	private String message;
-
-	/**
-	 * Instantiates a new model.
-	 */
-	public Model() {
-		this.message = "";
-	}
-
+	protected World world  = new World();
+	DAOWorld daoWorld = new DAOWorld();
+	
+	// Player
 	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage()
-	 */
-	public String getMessage() {
-		return this.message;
-	}
-
-	/**
-	 * Sets the message.
-	 *
-	 * @param message
-	 *          the new message
-	 */
-	private void setMessage(final String message) {
-		this.message = message;
-		this.setChanged();
-		this.notifyObservers();
-	}
-
+	Player player = new Player();
+	*/
+	
+	// Monsters
 	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage(java.lang.String)
-	 */
-	public void loadMessage(final String key) {
-		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setMessage(daoHelloWorld.find(key).getMessage());
-		} catch (final SQLException e) {
-			e.printStackTrace();
+	Monster demonA = new DemonA();
+	Monster demonB = new DemonB();
+	Monster demonC = new DemonC();
+	Monster demonD = new DemonD();
+	*/
+	
+	public Model(){
+		for(int y=0; y<12; y++){
+			for(int x=0; x<20; x++){
+				System.out.print(loadWorld(1).get(x + y*20));
+			}
+			System.out.println("");
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getObservable()
-	 */
-	public Observable getObservable() {
-		return this;
+	
+	public ArrayList<String> loadWorld(int id){
+		return daoWorld.loadWorldById(world.getId());
 	}
+	
+	public Observable getObservable(){
+		return this; // COde bouchonn�
+	}
+	
+	public World getWorld(){
+		return world;
+	}
+	
+	public void setWorld(World world){
+		this.world = world;
+	}
+
+	public String getMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void loadMessage(String key) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/*
+	public Player getPlayer(){
+		return player;
+	}
+	
+	public void setPlayer(Player newPlayer){
+		this.player = newPlayer;
+	}
+	
+	public void tickAll(){
+		getPlayer().tick();
+	}
+	*/
+	
 }
