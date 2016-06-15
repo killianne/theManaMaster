@@ -18,6 +18,8 @@ public class View implements IView, Runnable {
 
 	/** The frame. */
 	private final ViewFrame viewFrame;
+	
+	private static String arrayMap[][];
 
 	/**
 	 * Instantiates a new view.
@@ -53,9 +55,14 @@ public class View implements IView, Runnable {
 	}
 	
 	
-	public void getMapFromController(String arrayString[][]){
-		String as[][] = arrayString;
-		System.out.println(as[0][0]);
+	public void getMapFromController(String arrayMap[][]){
+		this.arrayMap = arrayMap;
+		this.viewFrame.getViewPanel().buildViewPanel();
+		System.out.println("yo1");
+	}
+	
+	protected static String[][] getArrayMap(){
+		return arrayMap;
 	}
 
 	/*

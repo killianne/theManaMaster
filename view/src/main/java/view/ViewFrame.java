@@ -29,6 +29,8 @@ class ViewFrame extends JFrame implements KeyListener {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
 	
+	private ViewPanel viewPanel;
+	
 	private JMenuBar menuBar = new JMenuBar();
 	
 	private JMenu menuFile = new JMenu("File");
@@ -91,6 +93,10 @@ class ViewFrame extends JFrame implements KeyListener {
 		super(title, gc);
 		this.buildViewFrame(model);
 	}
+	
+	public ViewPanel getViewPanel(){
+		return this.viewPanel;
+	}
 
 	/**
 	 * Gets the controller.
@@ -141,9 +147,10 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.addKeyListener(this);
-		this.setContentPane(new ViewPanel(this));
+		viewPanel = new ViewPanel(this);
+		this.setContentPane(viewPanel);
 		this.setSize(640+6+10+10,384+23+29+10+10+29);
-		//400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom); //384 par 640
+		System.out.println("left :" + this.getInsets().left + " | right : " + this.getInsets().right + " | top : " +  this.getInsets().top + " | bottom :" + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
 		
 		this.menuFile.add(item1);

@@ -30,10 +30,21 @@ public class Controller implements IController {
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
-	String arr[][]={{"1"},{"2"}};
 	public void run(){
-		
-		this.view.getMapFromController(arr);
+		System.out.println("yo");
+		String arrayMap[][]={{"b","ga","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","b" },
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"vh"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vh"},
+				             {"b","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","vb","b" }  };
+		this.view.getMapFromController(arrayMap);
 		
 	}
 	public void orderPerform(final ControllerOrder controllerOrder) {
