@@ -150,7 +150,6 @@ class ViewFrame extends JFrame implements KeyListener {
 		viewPanel = new ViewPanel(this);
 		this.setContentPane(viewPanel);
 		this.setSize(640+6+10+10,384+23+29+10+10+29);
-		System.out.println("left :" + this.getInsets().left + " | right : " + this.getInsets().right + " | top : " +  this.getInsets().top + " | bottom :" + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
 		
 		this.menuFile.add(item1);

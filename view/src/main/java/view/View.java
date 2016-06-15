@@ -58,7 +58,6 @@ public class View implements IView, Runnable {
 	public void getMapFromController(String arrayMap[][]){
 		this.arrayMap = arrayMap;
 		this.viewFrame.getViewPanel().buildViewPanel();
-		System.out.println("yo1");
 	}
 	
 	protected static String[][] getArrayMap(){
