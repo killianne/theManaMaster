@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -28,11 +32,11 @@ class ViewPanel extends JPanel implements Observer {
 	
 	private BufferedImage background;
 	
-	//private JPanel pSouth = new JPanel();
+	JPanel pScoreAndLife = new JPanel();
 	
-	private JLabel lLife = new JLabel("Resurections :");
+	private JLabel lLife = new JLabel("Resurections : 00000000");
 	
-	private JLabel lScore = new JLabel("Resurections :");
+	private JLabel lScore = new JLabel("Score : 00000000");
 
 
 	/**
@@ -113,10 +117,20 @@ class ViewPanel extends JPanel implements Observer {
 			}
 		}
 		
-		 //marche pas
-		this.lLife.setAlignmentY(50);
-		this.lLife.setAlignmentX(50);
-		this.add(lLife);
+		//pScoreAndLife.setLayout();
+		this.setLayout(new BorderLayout());
+		pScoreAndLife.setPreferredSize(new Dimension(485,30));
+		pScoreAndLife.setBackground(Color.BLACK);
+		Font font = new Font("Tahoma", Font.BOLD, 20);
+		lLife.setFont(font);
+		lLife.setText("<html><font color = #011111 >Res</font><font color = #022222 >ure</font><font color = #033333>cti</font><font color = #044444>ons</font></html>");
+		lLife.setLocation(10,10);
+		lScore.setFont(font);
+		lScore.setText("<html><font color = #011111 >Score : 00000000</font></html>");
+		lScore.setLocation(10,300);
+		pScoreAndLife.add(lLife);
+		pScoreAndLife.add(lScore);
+		this.add(pScoreAndLife, BorderLayout.SOUTH);
 	}
 
 	/**
