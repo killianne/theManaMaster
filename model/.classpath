@@ -27,6 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Thomas/Downloads/mysql-5.7.11-winx64 (1).zip"/>
+
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
