@@ -31,6 +31,7 @@ public class Controller implements IController {
 		this.model = model;
 	}
 	public void run(){
+		while (true){
 		System.out.println("yo");
 		//                     1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20
 		String arrayMap[][]={{"b","go","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","b" },
@@ -46,7 +47,7 @@ public class Controller implements IController {
 				             {"vb"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vb"},
 				             {"b","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","b" }  };
 		this.view.getMapFromController(arrayMap);
-		
+		}
 	}
 	public void orderPerform(final ControllerOrder controllerOrder) {
 	
