@@ -2,6 +2,8 @@ package view;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -41,9 +43,10 @@ class ViewFrame extends JFrame implements KeyListener {
 	private JMenuItem item2 = new JMenuItem("Setting");
 	private JMenuItem item3 = new JMenuItem("Exit");
 	
-	private JRadioButtonMenuItem jrbmi1 = new JRadioButtonMenuItem("Pokemon");
-	private JRadioButtonMenuItem jrbmi2 = new JRadioButtonMenuItem("Mario");
-	private JRadioButtonMenuItem jrbmi3 = new JRadioButtonMenuItem("Zelda");
+	private JRadioButtonMenuItem jrbmi1 = new JRadioButtonMenuItem("Standard");
+	private JRadioButtonMenuItem jrbmi2 = new JRadioButtonMenuItem("Pokemon");
+	private JRadioButtonMenuItem jrbmi3 = new JRadioButtonMenuItem("Dragon Ball");
+	private JRadioButtonMenuItem jrbmi4 = new JRadioButtonMenuItem("Zelda");
 	
 	private boolean[] arrayKey = {false,false,false,false,false};
 
@@ -160,9 +163,20 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setSize(640+6+10+10,384+23+29+10+10+29);
 		this.setLocationRelativeTo(null);
 		
+		this.buildMenu();
+	}
+	
+	public void buildMenu(){
+		jrbmi1.addActionListener(new StandardWorldListener());
+		jrbmi2.addActionListener(new PokemonWorldListener());
+		jrbmi3.addActionListener(new DBZWorldListener());
+		jrbmi4.addActionListener(new ZeldaWorldListener());
+		jrbmi1.setSelected(true);
+		
 		menuDesign.add(jrbmi1);
 		menuDesign.add(jrbmi2);
 		menuDesign.add(jrbmi3);
+		menuDesign.add(jrbmi4);
 		
 		this.menuFile.add(item1);
 		this.menuFile.add(item2);
@@ -198,10 +212,10 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
 	public void keyPressed(final KeyEvent e) {
-		//this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
 		switch(e.getKeyCode()){
 			case KeyEvent.VK_Z :
 				arrayKey[0] = true;
+				System.out.println(jrbmi1.isSelected());
 				break;
 			case KeyEvent.VK_S :
 				arrayKey[1] = true;
@@ -243,4 +257,29 @@ class ViewFrame extends JFrame implements KeyListener {
 			break;
 	}
 	}
+	
+	public class StandardWorldListener implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {      
+	      
+		}    
+	}
+	
+	public class PokemonWorldListener implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {      
+	      
+		}    
+	}
+	
+	public class DBZWorldListener implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {      
+	      
+		}    
+	}
+	
+	public class ZeldaWorldListener implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {      
+	      
+		}    
+	}
+	
 }
