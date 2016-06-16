@@ -68,7 +68,8 @@ class ViewPanel extends JPanel implements Observer {
 			System.err.println("Can't read background");
 			e.printStackTrace();
 		}
-		if(arrayMap == null) {
+		int cpt = 0;
+		if(arrayMap[0][0] == null) {
 			for(int i=0; i<12; i++){
 				for(int j=0; j<20; j++){
 					try{

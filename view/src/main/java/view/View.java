@@ -57,7 +57,6 @@ public class View implements IView, Runnable {
 	
 	
 	public void getMapFromController(ArrayList<String> alMap){
-		System.out.println("yo");
 		this.convertArrayListToArrayString(alMap);
 		this.viewFrame.getViewPanel().buildViewPanel();
 	}
@@ -65,9 +64,9 @@ public class View implements IView, Runnable {
 	private void convertArrayListToArrayString(ArrayList<String> alMap){
 		int counterX = 0, counterY = 0;
 		for(int i=0; i<240;i++){
-			System.out.println(alMap.get(i));
 			this.arrayMap[counterY][counterX] = alMap.get(i);
-			if(counterX == 19) { counterX = 0; System.out.println(); }
+			if(counterX == 19) { counterX = 0; counterY++; }
+			else               {counterX++;                }
 		}
 	}
 	
