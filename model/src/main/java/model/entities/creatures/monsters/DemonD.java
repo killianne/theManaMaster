@@ -19,5 +19,10 @@ public class DemonD extends Monster{
 	public void move(){
 		
 	}
+
+	public boolean hasSomethingAround() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

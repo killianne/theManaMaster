@@ -2,7 +2,7 @@ package model.entities.creatures;
 
 import model.entities.Entity;
 
-public abstract class Creature extends Entity implements IMove{
+public abstract class Creature extends Entity implements IMove, ICollision{
 
 	protected int health, xMove, yMove;
 	

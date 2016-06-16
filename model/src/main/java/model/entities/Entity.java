@@ -3,7 +3,7 @@ package model.entities;
 public abstract class Entity implements ITick{
 
 	ITick ticks;
-	
+
 	protected int posX, posY;
 	
 	protected final int WIDTH = 32, HEIGHT = 32;
