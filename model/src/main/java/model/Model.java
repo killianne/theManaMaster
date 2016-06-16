@@ -10,7 +10,7 @@ import model.database.DAOWorld;
 import model.entities.creatures.player.Player;
 import model.worlds.World;
 
-public class Model extends Observable implements IModel, Runnable{
+public class Model extends Observable implements IModel{
 
 	protected World world  = new World();
 	DAOWorld daoWorld = new DAOWorld();
@@ -23,10 +23,6 @@ public class Model extends Observable implements IModel, Runnable{
 		System.out.println(player.getDirection());
 		System.out.println("Xplayer = " + player.getPosX());
 		System.out.println("Yplayer = " + player.getPosY());
-	}
-	
-	public Player getPlayer(){
-		return player;
 	}
 	
 	
@@ -44,7 +40,6 @@ public class Model extends Observable implements IModel, Runnable{
 				System.out.print(loadWorld(1).get(x + y*20));
 			}
 			System.out.println("");
-			
 		}
 		
 	}
@@ -78,7 +73,11 @@ public class Model extends Observable implements IModel, Runnable{
 	}
 	
 	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
-
+		// Setting player & monsters directions
+		player.setDirection(controllerOrder);
+		test();
+		player.tick();
+		
 		System.out.println(controllerOrder);
 		return controllerOrder;
 	}
@@ -86,11 +85,6 @@ public class Model extends Observable implements IModel, Runnable{
 	public String getMessage() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public void run() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/*

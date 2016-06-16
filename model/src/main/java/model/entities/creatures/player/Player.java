@@ -13,10 +13,6 @@ public class Player extends Creature{
 	
 	public Player(int posX, int posY, ControllerOrder direction) {
 		super(posX, posY);
-		fireBall = new FireBall(posX, posY, direction);
-		
-		this.direction = direction;
-		// TODO Auto-generated constructor stub
 	}
 
 	public FireBall getFireBall() {
@@ -28,24 +24,35 @@ public class Player extends Creature{
 	}
 
 	public ControllerOrder getDirection() {
-		return direction;
+		return this.direction;
 	}
 
 	public void setDirection(ControllerOrder direction) {
-		this.direction = model.getOrderPerform(direction);
+		this.direction = direction;
 	}
 
 	public void move() {
-		// TODO Auto-generated method stub
+		if(direction == ControllerOrder.UP)    posY--;
+		if(direction == ControllerOrder.DOWN)  posY++;
+		if(direction == ControllerOrder.LEFT)  posX--;
+		if(direction == ControllerOrder.RIGHT) posX++;
+		
+		if(direction == ControllerOrder.UL){   posY--; posX--;  }
+		if(direction == ControllerOrder.UR){   posY--; posX++;  }
+		if(direction == ControllerOrder.DL){   posY++; posX--;  }
+		if(direction == ControllerOrder.DR){   posY++; posX++;  }
 	}
 
 	public void tick() {
-		// TODO Auto-generated method stub
-		
+		move();
 	}
-
+	
+	public void shoot(){
+		fireBall = new FireBall(posX, posY, this.direction);
+		System.out.println("FireBall direction");
+	}
+	
 	public boolean isDead() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
