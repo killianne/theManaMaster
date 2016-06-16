@@ -212,8 +212,9 @@ class ViewFrame extends JFrame implements KeyListener {
 			case KeyEvent.VK_D :
 				arrayKey[3] = true;
 				break;
-			default :
+			case KeyEvent.VK_SPACE :
 				arrayKey[4] = true;
+				break;
 		}
 		this.getController().orderPerform(View.keyCodeToControllerOrder(arrayKey));
 	}
@@ -237,8 +238,9 @@ class ViewFrame extends JFrame implements KeyListener {
 		case KeyEvent.VK_D :
 			arrayKey[3] = false;
 			break;
-		default :
-			arrayKey[4] = false;
+		case KeyEvent.VK_SPACE :
+			arrayKey[4] = true;
+			break;
 	}
 	}
 }

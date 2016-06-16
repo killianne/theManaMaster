@@ -19,7 +19,7 @@ public class View implements IView, Runnable {
 	/** The frame. */
 	private final ViewFrame viewFrame;
 	
-	private static String arrayMap[][] = new String[12][20];
+	private static ArrayList<String> alMap = new ArrayList<String>();
 
 	/**
 	 * Instantiates a new view.
@@ -40,33 +40,25 @@ public class View implements IView, Runnable {
 	 * @return the controller order
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final boolean[] arrayKey) {
-		if(arrayKey[0] && arrayKey[2]) { return ControllerOrder.UL; }
-		else if(arrayKey[0] && arrayKey[3]) { return ControllerOrder.UR; }
-		else if(arrayKey[1] && arrayKey[2]) { return ControllerOrder.DL; }
-		else if(arrayKey[1] && arrayKey[3]) { return ControllerOrder.DR; }
-		else if(arrayKey[0] ) { return ControllerOrder.UP; }
-		else if(arrayKey[1] ) { return ControllerOrder.DOWN; }
-		else if(arrayKey[2] ) { return ControllerOrder.LEFT; }
-		else if(arrayKey[3] ) { return ControllerOrder.RIGHT; }
-		else     { return ControllerOrder.NO; }
+		if(arrayKey[0] && arrayKey[2])      { return ControllerOrder.UL;    }
+		else if(arrayKey[0] && arrayKey[3]) { return ControllerOrder.UR;    }
+		else if(arrayKey[1] && arrayKey[2]) { return ControllerOrder.DL;    }
+		else if(arrayKey[1] && arrayKey[3]) { return ControllerOrder.DR;    }
+		else if(arrayKey[0] )               { return ControllerOrder.UP;    }
+		else if(arrayKey[1] )               { return ControllerOrder.DOWN;  }
+		else if(arrayKey[2] )               { return ControllerOrder.LEFT;  }
+		else if(arrayKey[3] )               { return ControllerOrder.RIGHT; }
+		else if(arrayKey[4] )               { return ControllerOrder.SHOOT; }
+		else                                { return ControllerOrder.NO;    }
 	}
 	
 	public void getMapFromController(ArrayList<String> alMap){
-		this.convertArrayListToArrayString(alMap);
+		this.alMap = alMap;
 		this.viewFrame.getViewPanel().buildViewPanel();
 	}
 	
-	private void convertArrayListToArrayString(ArrayList<String> alMap){
-		int counterX = 0, counterY = 0;
-		for(int i=0; i<240;i++){
-			this.arrayMap[counterY][counterX] = alMap.get(i);
-			if(counterX == 19) { counterX = 0; counterY++; }
-			else               {counterX++;                }
-		}
-	}
-	
-	protected static String[][] getArrayMap(){
-		return arrayMap;
+	protected static ArrayList<String> getArrayListMap(){
+		return alMap;
 	}
 
 	/*

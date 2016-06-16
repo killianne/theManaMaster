@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -34,6 +35,8 @@ class ViewPanel extends JPanel implements Observer {
 	
 	JPanel pScoreAndLife = new JPanel();
 	
+	JPanel pMap = new JPanel();
+	
 	private JLabel lLife = new JLabel();
 	
 	private JLabel lScore = new JLabel();
@@ -56,11 +59,20 @@ class ViewPanel extends JPanel implements Observer {
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
+		this.setLayout(new BorderLayout());
+		pMap.setPreferredSize(new Dimension(485,633));
+		pScoreAndLife.setPreferredSize(new Dimension(485,30));
 		this.buildViewPanel();
 	}
 	
 	public void buildViewPanel(){
-		String arrayMap[][] = View.getArrayMap();
+		this.buildMap();
+		this.buildLifeAndScore();
+		this.repaint();
+	}
+	
+	public void buildMap(){
+		ArrayList<String> alMap = View.getArrayListMap();
 		imageArray = new BufferedImage[12][20];
 		try{
 			this.background = ImageIO.read(new File("sprite/fond.png"));
@@ -68,38 +80,27 @@ class ViewPanel extends JPanel implements Observer {
 			System.err.println("Can't read background");
 			e.printStackTrace();
 		}
-		int cpt = 0;
-		if(arrayMap[0][0] == null) {
-			for(int i=0; i<12; i++){
-				for(int j=0; j<20; j++){
+		int counterX = 0, counterY = 0;
+		if(! alMap.isEmpty()) {
+			for(int i=0;i<240;i++){
+				for(int k=0; k<25;k++){
 					try{
-						this.imageArray[i][j] = ImageIO.read(new File("sprite/blank.png"));
-					}
-					catch (IOException e){
-						System.err.println("Can't read images (without array)");
+						if(alMap.get(i).equals(arraySymbol[k])) { this.imageArray[counterY][counterX] = ImageIO.read(new File("sprite/"+arrayImageName[k]+".png")); }
+					}catch (IOException e){
+						System.err.println("Can't read images (with array)");
 		                e.printStackTrace();
 		            }
 				}
+				if(counterX == this.imageArray[0].length-1) { counterX = 0; counterY++; }
+				else                                        {counterX++;                }
 			}
 		}
-		else {			
-			for(int i=0; i<12; i++){
-				for(int j=0; j<20; j++){
-					for(int k=0; k<25; k++){
-						try{
-							if (arrayMap[i][j].equals(arraySymbol[k])) { this.imageArray[i][j] = ImageIO.read(new File("sprite/" + arrayImageName[k] + ".png")); }
-						}catch (IOException e){
-							System.err.println("Can't read images (with array)");
-			                e.printStackTrace();
-			            }
-					}
-				}
-			}
-		}
-		
+	}
+	
+	public void buildLifeAndScore(){
 		//pScoreAndLife.setLayout();
-		this.setLayout(new BorderLayout());
-		pScoreAndLife.setPreferredSize(new Dimension(485,30));
+		//this.setLayout(new BorderLayout());
+		//pScoreAndLife.setPreferredSize(new Dimension(485,30));
 		pScoreAndLife.setBackground(Color.BLACK);
 		Font font = new Font("Tahoma", Font.BOLD, 20);
 		lLife.setFont(font);
@@ -111,8 +112,6 @@ class ViewPanel extends JPanel implements Observer {
 		pScoreAndLife.add(lLife);
 		pScoreAndLife.add(lScore);
 		this.add(pScoreAndLife, BorderLayout.SOUTH);
-		
-		this.repaint();
 	}
 
 	/**
@@ -158,7 +157,7 @@ class ViewPanel extends JPanel implements Observer {
 		int placeX = 10, placeY = 10;
 		for(int i = 0; i<this.imageArray.length; i++) {
 			for(int j=0; j<imageArray[0].length; j++){
-	            g2.drawImage(this.imageArray[i][j],placeX,placeY, null);
+	            g2.drawImage(this.imageArray[i][j],placeX,placeY, pMap);
 	            placeX += 32;
 			}
 			placeX = 10;
