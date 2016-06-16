@@ -44,6 +44,8 @@ class ViewFrame extends JFrame implements KeyListener {
 	private JRadioButtonMenuItem jrbmi1 = new JRadioButtonMenuItem("Pokemon");
 	private JRadioButtonMenuItem jrbmi2 = new JRadioButtonMenuItem("Mario");
 	private JRadioButtonMenuItem jrbmi3 = new JRadioButtonMenuItem("Zelda");
+	
+	private boolean[] arrayKey = {false,false,false,false,false};
 
 	/**
 	 * Instantiates a new view frame.
@@ -196,7 +198,24 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
 	public void keyPressed(final KeyEvent e) {
-		this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+		//this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+		switch(e.getKeyCode()){
+			case KeyEvent.VK_Z :
+				arrayKey[0] = true;
+				break;
+			case KeyEvent.VK_S :
+				arrayKey[1] = true;
+				break;
+			case KeyEvent.VK_Q :
+				arrayKey[2] = true;
+				break;
+			case KeyEvent.VK_D :
+				arrayKey[3] = true;
+				break;
+			default :
+				arrayKey[4] = true;
+		}
+		this.getController().orderPerform(View.keyCodeToControllerOrder(arrayKey));
 	}
 
 	/*
@@ -205,6 +224,21 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
 	 */
 	public void keyReleased(final KeyEvent e) {
-
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_Z :
+			arrayKey[0] = false;
+			break;
+		case KeyEvent.VK_S :
+			arrayKey[1] = false;
+			break;
+		case KeyEvent.VK_Q :
+			arrayKey[2] = false;
+			break;
+		case KeyEvent.VK_D :
+			arrayKey[3] = false;
+			break;
+		default :
+			arrayKey[4] = false;
+	}
 	}
 }

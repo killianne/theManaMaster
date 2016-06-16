@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
@@ -40,21 +39,17 @@ public class View implements IView, Runnable {
 	 *          the key code
 	 * @return the controller order
 	 */
-	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
-		switch (keyCode) {
-			case KeyEvent.VK_Z:
-				return ControllerOrder.UP;
-			case KeyEvent.VK_S:
-				return ControllerOrder.DOWN;
-			case KeyEvent.VK_Q:
-				return ControllerOrder.LEFT;
-			case KeyEvent.VK_D:
-			 return ControllerOrder.RIGHT;
-			default:
-				return ControllerOrder.NO;
-		}
+	protected static ControllerOrder keyCodeToControllerOrder(final boolean[] arrayKey) {
+		if(arrayKey[0] && arrayKey[2]) { return ControllerOrder.UL; }
+		else if(arrayKey[0] && arrayKey[3]) { return ControllerOrder.UR; }
+		else if(arrayKey[1] && arrayKey[2]) { return ControllerOrder.DL; }
+		else if(arrayKey[1] && arrayKey[3]) { return ControllerOrder.DR; }
+		else if(arrayKey[0] ) { return ControllerOrder.UP; }
+		else if(arrayKey[1] ) { return ControllerOrder.DOWN; }
+		else if(arrayKey[2] ) { return ControllerOrder.LEFT; }
+		else if(arrayKey[3] ) { return ControllerOrder.RIGHT; }
+		else     { return ControllerOrder.NO; }
 	}
-	
 	
 	public void getMapFromController(ArrayList<String> alMap){
 		this.convertArrayListToArrayString(alMap);
