@@ -66,8 +66,7 @@ public class Player extends Creature{
 	}
 
 	public int getPosX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posX;
 	}
 
 	public void setPosX(int posX) {
@@ -76,22 +75,17 @@ public class Player extends Creature{
 	}
 
 	public int getPosY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posY;
 	}
 
 	public void setPosY(int posY) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public int getWIDTH() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public int getHEIGHT() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
