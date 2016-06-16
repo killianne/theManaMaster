@@ -75,8 +75,8 @@ public class Model extends Observable implements IModel{
 	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
 		// Setting player & monsters directions
 		player.setDirection(controllerOrder);
-		test();
 		player.tick();
+		test();
 		
 		System.out.println(controllerOrder);
 		return controllerOrder;
