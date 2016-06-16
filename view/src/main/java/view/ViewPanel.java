@@ -48,6 +48,7 @@ class ViewPanel extends JPanel implements Observer {
 			   "gate_open","lorann_b","loran_lbl","lorann_lbr","loran_lu","lorann_lul","loran_lur","lorann_ll",
 			   "loran_lr","monster_1","monster_2","monster_3","monster_4","purse","vertical_bone","horizontal_bone",
 			   "blank"};
+	private String arrayNameFile[] = {"sprite","spritePokemon","spriteDBZ","spriteZelda"};
 
 
 	/**
@@ -75,7 +76,7 @@ class ViewPanel extends JPanel implements Observer {
 		ArrayList<String> alMap = View.getArrayListMap();
 		imageArray = new BufferedImage[12][20];
 		try{
-			this.background = ImageIO.read(new File("sprite/fond.png"));
+			this.background = ImageIO.read(new File(arrayNameFile[this.viewFrame.getCurrentWorldID()] + "/fond.png"));
 		}catch (IOException e){
 			System.err.println("Can't read background");
 			e.printStackTrace();
@@ -86,9 +87,10 @@ class ViewPanel extends JPanel implements Observer {
 				for(int k=0; k<25;k++){
 					try{
 						if(View.getPlayerPosX() == counterX && View.getPlayerPosY() == counterY) {
-							this.imageArray[counterY][counterX] = ImageIO.read(new File("sprite/lorann_b.png"));
+							System.out.println(View.getPlayerPosX() + " | " + View.getPlayerPosY());
+							this.imageArray[counterY][counterX] = ImageIO.read(new File(arrayNameFile[this.viewFrame.getCurrentWorldID()] + "/lorann_b.png"));
 						}
-						else if(alMap.get(i).equals(arraySymbol[k])) { this.imageArray[counterY][counterX] = ImageIO.read(new File("sprite/"+arrayImageName[k]+".png")); }
+						else if(alMap.get(i).equals(arraySymbol[k])) { this.imageArray[counterY][counterX] = ImageIO.read(new File(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/"+arrayImageName[k]+".png")); }
 					}catch (IOException e){
 						System.err.println("Can't read images (with array)");
 		                e.printStackTrace();

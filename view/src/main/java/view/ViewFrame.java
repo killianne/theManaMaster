@@ -49,7 +49,9 @@ class ViewFrame extends JFrame implements KeyListener {
 	private JRadioButtonMenuItem jrbmi4 = new JRadioButtonMenuItem("Zelda");
 	
 	private boolean[] arrayKey = {false,false,false,false,false};
-
+	
+	private WorldDesign currentDesign = WorldDesign.STANDARD;
+	
 	/**
 	 * Instantiates a new view frame.
 	 *
@@ -107,6 +109,14 @@ class ViewFrame extends JFrame implements KeyListener {
 	
 	public ViewPanel getViewPanel(){
 		return this.viewPanel;
+	}
+	
+	public int getCurrentWorldID(){
+		if(this.currentDesign == WorldDesign.STANDARD) { return 0; }
+		if(this.currentDesign == WorldDesign.STANDARD) { return 1; }
+		if(this.currentDesign == WorldDesign.STANDARD) { return 2; }
+		if(this.currentDesign == WorldDesign.STANDARD) { return 3; }
+		return 0;
 	}
 
 	/**
@@ -260,25 +270,41 @@ class ViewFrame extends JFrame implements KeyListener {
 	
 	public class StandardWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
-	      
+	      currentDesign = WorldDesign.STANDARD;
+	      jrbmi1.setSelected(true);
+	      jrbmi2.setSelected(false);
+	      jrbmi3.setSelected(false);
+	      jrbmi4.setSelected(false);
 		}    
 	}
 	
 	public class PokemonWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
-	      
+			currentDesign = WorldDesign.POKEMON;
+		      jrbmi1.setSelected(false);
+		      jrbmi2.setSelected(true);
+		      jrbmi3.setSelected(false);
+		      jrbmi4.setSelected(false);
 		}    
 	}
 	
 	public class DBZWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
-	      
+			currentDesign = WorldDesign.DRAGONBALL;
+		      jrbmi1.setSelected(false);
+		      jrbmi2.setSelected(false);
+		      jrbmi3.setSelected(true);
+		      jrbmi4.setSelected(false);
 		}    
 	}
 	
 	public class ZeldaWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
-	      
+			currentDesign = WorldDesign.ZELDA;
+		      jrbmi1.setSelected(false);
+		      jrbmi2.setSelected(false);
+		      jrbmi3.setSelected(false);
+		      jrbmi4.setSelected(true);
 		}    
 	}
 	
