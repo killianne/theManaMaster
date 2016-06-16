@@ -4,6 +4,8 @@ import model.entities.Entity;
 
 public abstract class Creature extends Entity implements IMove, ICollision{
 
+	ICreature creature;
+	
 	protected int health, xMove, yMove;
 	
 	protected float speed = 2.0f;

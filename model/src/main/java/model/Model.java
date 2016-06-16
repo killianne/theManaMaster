@@ -7,10 +7,13 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import model.database.DAOWorld;
+import model.entities.Entity;
+import model.entities.creatures.Creature;
+import model.entities.creatures.ICreature;
 import model.entities.creatures.player.Player;
 import model.worlds.World;
 
-public class Model extends Observable implements IModel{
+public class Model extends Observable implements IModel, ICreature{
 
 	protected World world  = new World(2);
 	DAOWorld daoWorld = new DAOWorld();
@@ -41,19 +44,22 @@ public class Model extends Observable implements IModel{
 			}
 			System.out.println("");
 		}
+		//this.getCreature()
 		
 	}
-	/*
-	public void run(){
-		test();
-	}
-	*/
+
 	public ArrayList<String> loadWorld(){
 		return daoWorld.loadWorldById(world.getId());
 	}
 	
-	public Observable getObservable(){
-		return this; // COde bouchonn�
+	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
+		// Setting player & monsters directions
+		player.setDirection(controllerOrder);
+		player.tick();
+		test();
+		
+		System.out.println(controllerOrder);
+		return controllerOrder;
 	}
 	
 	public World getWorld(){
@@ -72,30 +78,23 @@ public class Model extends Observable implements IModel{
 		this.controller = controller;
 	}
 	
-	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
-		// Setting player & monsters directions
-		player.setDirection(controllerOrder);
-		player.tick();
-		test();
-		
-		System.out.println(controllerOrder);
-		return controllerOrder;
-	}
-
-	public String getMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	/*
-	public Player getPlayer(){
-		return player;
-	}
 	
 	public void setPlayer(Player newPlayer){
 		this.player = newPlayer;
 	}
 	
+	public Observable getObservable(){
+		return this;
+	}
+
+
+	public Creature getCreature() {
+		
+		return player;
+	}
+
+	/*
 	public void tickAll(){
 		getPlayer().tick();
 	}

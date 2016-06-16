@@ -14,7 +14,11 @@ public class Player extends Creature{
 	public Player(int posX, int posY, ControllerOrder direction) {
 		super(posX, posY);
 	}
-
+	
+	public Creature getPlayer(){
+		return this;
+	}
+	
 	public FireBall getFireBall() {
 		return fireBall;
 	}
