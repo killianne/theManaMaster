@@ -7,7 +7,6 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import model.database.DAOWorld;
-import model.entities.Entity;
 import model.entities.creatures.Creature;
 import model.entities.creatures.ICreature;
 import model.entities.creatures.player.Player;
@@ -44,7 +43,7 @@ public class Model extends Observable implements IModel, ICreature{
 			}
 			System.out.println("");
 		}
-		//this.getCreature()
+		System.out.println(this.getPlayer().getPosX());
 		
 	}
 
@@ -91,6 +90,11 @@ public class Model extends Observable implements IModel, ICreature{
 
 	public Creature getCreature() {
 		
+		return player;
+	}
+
+
+	public Player getPlayer(){
 		return player;
 	}
 

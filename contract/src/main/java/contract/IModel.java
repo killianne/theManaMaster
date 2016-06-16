@@ -3,6 +3,8 @@ package contract;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import model.entities.creatures.player.Player;
+
 /**
  * The Interface IModel.
  *
@@ -31,6 +33,8 @@ public interface IModel {
 	 * @return the observable
 	 */
 	Observable getObservable();
+	
+	public Player getPlayer();
 	
 	
 }

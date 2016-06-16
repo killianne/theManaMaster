@@ -3,8 +3,6 @@ package model.entities.creatures;
 import model.entities.Entity;
 
 public abstract class Creature extends Entity implements IMove, ICollision{
-
-	ICreature creature;
 	
 	protected int health, xMove, yMove;
 	
