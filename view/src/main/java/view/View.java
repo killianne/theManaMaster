@@ -21,6 +21,8 @@ public class View implements IView, Runnable {
 	private final ViewFrame viewFrame;
 	
 	private static ArrayList<String> alMap = new ArrayList<String>();
+	
+	private static int playerPosX, playerPosY;
 
 	/**
 	 * Instantiates a new view.
@@ -60,6 +62,19 @@ public class View implements IView, Runnable {
 	
 	protected static ArrayList<String> getArrayListMap(){
 		return alMap;
+	}
+	
+	public void getPosXAndPosYPlayerFromController(int x,int y){
+		this.playerPosX = x;
+		this.playerPosY = y;
+	}
+	
+	protected static int getPlayerPosX(){
+		return playerPosX;
+	}
+	
+	protected static int getPlayerPosY(){
+		return playerPosY;
 	}
 
 	/*

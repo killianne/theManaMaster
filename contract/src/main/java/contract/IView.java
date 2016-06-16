@@ -19,5 +19,7 @@ public interface IView {
 	
 	public void getMapFromController(ArrayList<String> alMap);
 	
+	public void getPosXAndPosYPlayerFromController(int x,int y);
+	
 	//protected static ControllerOrder keyCodeToControllerOrder(final int keyCode);
 }

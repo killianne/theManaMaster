@@ -85,7 +85,10 @@ class ViewPanel extends JPanel implements Observer {
 			for(int i=0;i<240;i++){
 				for(int k=0; k<25;k++){
 					try{
-						if(alMap.get(i).equals(arraySymbol[k])) { this.imageArray[counterY][counterX] = ImageIO.read(new File("sprite/"+arrayImageName[k]+".png")); }
+						if(View.getPlayerPosX() == counterX && View.getPlayerPosY() == counterY) {
+							this.imageArray[counterY][counterX] = ImageIO.read(new File("sprite/lorann_b.png"));
+						}
+						else if(alMap.get(i).equals(arraySymbol[k])) { this.imageArray[counterY][counterX] = ImageIO.read(new File("sprite/"+arrayImageName[k]+".png")); }
 					}catch (IOException e){
 						System.err.println("Can't read images (with array)");
 		                e.printStackTrace();

@@ -7,12 +7,10 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import model.database.DAOWorld;
-import model.entities.creatures.Creature;
-import model.entities.creatures.ICreature;
 import model.entities.creatures.player.Player;
 import model.worlds.World;
 
-public class Model extends Observable implements IModel, ICreature{
+public class Model extends Observable implements IModel{
 
 	protected World world  = new World(2);
 	DAOWorld daoWorld = new DAOWorld();
@@ -43,7 +41,7 @@ public class Model extends Observable implements IModel, ICreature{
 			}
 			System.out.println("");
 		}
-		System.out.println(this.getPlayer().getPosX());
+		System.out.println(this.player.getPosX());
 		
 	}
 
@@ -88,15 +86,14 @@ public class Model extends Observable implements IModel, ICreature{
 	}
 
 
-	public Creature getCreature() {
-		
-		return player;
+	public int getPlayerPosX(){
+		return player.getPosX();
+	}
+	
+	public int getPlayerPosY(){
+		return player.getPosY();
 	}
 
-
-	public Player getPlayer(){
-		return player;
-	}
 
 	/*
 	public void tickAll(){

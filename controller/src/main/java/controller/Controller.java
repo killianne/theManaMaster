@@ -37,6 +37,7 @@ public class Controller implements IController {
 		
 		
 		this.view.getMapFromController(this.model.loadWorld());
+		this.view.getPosXAndPosYPlayerFromController(this.model.getPlayerPosX(),this.model.getPlayerPosY());
 		//}
 	}
 	public ControllerOrder orderPerform(final ControllerOrder controllerOrder) {
