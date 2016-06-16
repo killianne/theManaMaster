@@ -12,7 +12,7 @@ import model.worlds.World;
 
 public class Model extends Observable implements IModel{
 
-	protected World world  = new World();
+	protected World world  = new World(2);
 	DAOWorld daoWorld = new DAOWorld();
 	private IController controller;
 	// Player
@@ -37,7 +37,7 @@ public class Model extends Observable implements IModel{
 	public Model(){
 		for(int y=0; y<12; y++){
 			for(int x=0; x<20; x++){
-				System.out.print(loadWorld(1).get(x + y*20));
+				System.out.print(loadWorld().get(x + y*20));
 			}
 			System.out.println("");
 		}
@@ -48,7 +48,7 @@ public class Model extends Observable implements IModel{
 		test();
 	}
 	*/
-	public ArrayList<String> loadWorld(int id){
+	public ArrayList<String> loadWorld(){
 		return daoWorld.loadWorldById(world.getId());
 	}
 	

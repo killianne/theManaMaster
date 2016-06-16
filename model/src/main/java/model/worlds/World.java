@@ -4,13 +4,9 @@ public class World {
 	
 	private int id;
   //private String name;
-
-	public World() {
-		this.setId(1);
-	}
 	
 	public World(int id) {
-		this.setId(id);
+		this.id = id;
 	}
 	
 	/*

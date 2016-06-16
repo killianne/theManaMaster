@@ -49,7 +49,7 @@ public class Controller implements IController {
 				             {"vb"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vb"},
 				             {"b","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","b" }  };
 		*/
-		ArrayList<String> alMap = this.model.loadWorld(1);
+		ArrayList<String> alMap = this.model.loadWorld();
 		this.view.getMapFromController(alMap);
 		//}
 	}
