@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
@@ -19,7 +20,7 @@ public class View implements IView, Runnable {
 	/** The frame. */
 	private final ViewFrame viewFrame;
 	
-	private static String arrayMap[][];
+	private static String arrayMap[][] = new String[12][20];
 
 	/**
 	 * Instantiates a new view.
@@ -55,9 +56,19 @@ public class View implements IView, Runnable {
 	}
 	
 	
-	public void getMapFromController(String arrayMap[][]){
-		this.arrayMap = arrayMap;
+	public void getMapFromController(ArrayList<String> alMap){
+		System.out.println("yo");
+		this.convertArrayListToArrayString(alMap);
 		this.viewFrame.getViewPanel().buildViewPanel();
+	}
+	
+	private void convertArrayListToArrayString(ArrayList<String> alMap){
+		int counterX = 0, counterY = 0;
+		for(int i=0; i<240;i++){
+			System.out.println(alMap.get(i));
+			this.arrayMap[counterY][counterX] = alMap.get(i);
+			if(counterX == 19) { counterX = 0; System.out.println(); }
+		}
 	}
 	
 	protected static String[][] getArrayMap(){

@@ -1,5 +1,6 @@
 package contract;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -23,7 +24,7 @@ public interface IModel {
 	 * @param key
 	 *          the key
 	 */
-	void loadMessage(String key);
+	ArrayList<String> loadWorld(int id);
 
 	/**
 	 * Gets the observable.

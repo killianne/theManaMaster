@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
@@ -32,7 +34,8 @@ public class Controller implements IController {
 	}
 	public void run(){
 		//while (true){
-		//                     1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20
+		//  
+		/*1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20
 		String arrayMap[][]={{"b","go","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","b" },
 				             {"vb"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vb"},
 				             {"vb"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vb"},
@@ -45,7 +48,9 @@ public class Controller implements IController {
 				             {"vb"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vb"},
 				             {"vb"," "," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ," " ,"vb"},
 				             {"b","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","hb","b" }  };
-		this.view.getMapFromController(arrayMap);
+		*/
+		ArrayList<String> alMap = this.model.loadWorld(1);
+		this.view.getMapFromController(alMap);
 		//}
 	}
 	public ControllerOrder orderPerform(final ControllerOrder controllerOrder) {

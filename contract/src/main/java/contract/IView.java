@@ -1,5 +1,7 @@
 package contract;
 
+import java.util.ArrayList;
+
 /**
  * The Interface IView.
  *
@@ -15,7 +17,7 @@ public interface IView {
 	 */
 	void printMessage(final String message);
 	
-	public void getMapFromController(String arrayString[][]);
+	public void getMapFromController(ArrayList<String> alMap);
 	
 	//protected static ControllerOrder keyCodeToControllerOrder(final int keyCode);
 }
