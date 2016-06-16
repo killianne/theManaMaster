@@ -58,6 +58,12 @@ public class Controller implements IController {
 		return this.model.getOrderPerform(controllerOrder);
 	}
 
+	public void getMapForView(ArrayList<String> alMap) {
+		this.view.getMapFromController(alMap);
+	}
+	
+	
+
 
 
 	

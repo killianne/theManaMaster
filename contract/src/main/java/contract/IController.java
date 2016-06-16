@@ -1,5 +1,7 @@
 package contract;
 
+import java.util.ArrayList;
+
 /**
  * The Interface IController.
  *
@@ -7,4 +9,5 @@ package contract;
  */
 public interface IController {
 		public ControllerOrder orderPerform(ControllerOrder controllerOrder);
+		public void getMapForView(ArrayList<String> alMap);
 }
