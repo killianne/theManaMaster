@@ -35,9 +35,8 @@ public class Controller implements IController {
 	public void run(){
 		//while (true){
 		
-		
 		this.view.getMapFromController(this.model.loadWorld());
-		this.view.getPosXAndPosYPlayerFromController(this.model.getPlayerPosX(),this.model.getPlayerPosY());
+		this.view.getPosXAndPosYPlayerFromController(this.model.getPlayerPositions());
 		//}
 	}
 	public ControllerOrder orderPerform(final ControllerOrder controllerOrder) {

@@ -4,55 +4,49 @@ public class DemonA extends Monster{
 
 	public DemonA(int posX, int posY) {
 		super(posX, posY);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void tick(){
-		
+		move();
 	}
 
 	public boolean isDead() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	
 	public void move(){
-		
+		// Mouvements IA
 	}
 
 	public boolean hasSomethingAround() {
-		// TODO Auto-generated method stub
+		// Gestion collisions
 		return false;
 	}
 
 	public int getPosX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posX;
 	}
 
 	public void setPosX(int posX) {
-		// TODO Auto-generated method stub
-		
+		this.posX = posX;
 	}
 
 	public int getPosY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.posY;
 	}
 
 	public void setPosY(int posY) {
-		// TODO Auto-generated method stub
+		this.posY = posY;
 		
 	}
 
 	public int getWIDTH() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.WIDTH;
 	}
 
 	public int getHEIGHT() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.HEIGHT;
 	}
 	
 }

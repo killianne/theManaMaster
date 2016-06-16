@@ -7,22 +7,35 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import model.database.DAOWorld;
+import model.entities.creatures.monsters.DemonA;
+import model.entities.creatures.monsters.DemonB;
+import model.entities.creatures.monsters.DemonC;
+import model.entities.creatures.monsters.DemonD;
 import model.entities.creatures.player.Player;
 import model.worlds.World;
 
 public class Model extends Observable implements IModel{
 
-	protected World world  = new World(2);
+	
+	
+	protected World world  = new World(1);
 	DAOWorld daoWorld = new DAOWorld();
 	private IController controller;
 	// Player
 	
 	Player player = new Player(2,2, ControllerOrder.DOWN);
+	DemonA demonA = new DemonA(10, 10);
+	DemonB demonB = new DemonB(11, 10);
+	DemonC demonC = new DemonC(10, 11);
+	DemonD demonD = new DemonD(11, 11);
+	
 	public void test(){
-		
 		System.out.println(player.getDirection());
 		System.out.println("Xplayer = " + player.getPosX());
 		System.out.println("Yplayer = " + player.getPosY());
+		
+		System.out.println("XdemonA = " + demonA.getPosX());
+		System.out.println("YdemonA = " + demonA.getPosY());
 	}
 	
 	
@@ -92,6 +105,52 @@ public class Model extends Observable implements IModel{
 	
 	public int getPlayerPosY(){
 		return player.getPosY();
+	}
+	
+	public int getDemonAPosX(){
+		return demonA.getPosX();
+	}
+	
+	public int getDemonAPosY(){
+		return demonA.getPosY();
+	}
+	
+	public int getDemonBPosX(){
+		return demonB.getPosX();
+	}
+	
+	public int getDemonBPosY(){
+		return demonB.getPosY();
+	}
+	
+	public int getDemonCPosX(){
+		return demonC.getPosX();
+	}
+	
+	public int getDemonCPosY(){
+		return demonC.getPosY();
+	}
+	
+	public int getDemonDPosX(){
+		return demonD.getPosX();
+	}
+	
+	public int getDemonDPosY(){
+		return demonD.getPosY();
+	}
+	
+	
+	private int tab[] = new int[2];
+	public int[] getPlayerPositions(){
+		tab[0] = player.getPosX();
+		tab[1] = player.getPosY();
+		return tab;
+	}
+	
+	public int[][] getAllCreaturePosition(){
+		
+		
+		return null;
 	}
 
 

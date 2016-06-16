@@ -8,5 +8,7 @@ package contract;
  */
 public interface IController {
 		public ControllerOrder orderPerform(ControllerOrder controllerOrder);
+		public void run();
 	
+		
 }

@@ -87,7 +87,6 @@ class ViewPanel extends JPanel implements Observer {
 				for(int k=0; k<25;k++){
 					try{
 						if(View.getPlayerPosX() == counterX && View.getPlayerPosY() == counterY) {
-							System.out.println(View.getPlayerPosX() + " | " + View.getPlayerPosY());
 							this.imageArray[counterY][counterX] = ImageIO.read(new File(arrayNameFile[this.viewFrame.getCurrentWorldID()] + "/lorann_b.png"));
 						}
 						else if(alMap.get(i).equals(arraySymbol[k])) { this.imageArray[counterY][counterX] = ImageIO.read(new File(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/"+arrayImageName[k]+".png")); }

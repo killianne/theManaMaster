@@ -64,9 +64,11 @@ public class View implements IView, Runnable {
 		return alMap;
 	}
 	
-	public void getPosXAndPosYPlayerFromController(int x,int y){
-		this.playerPosX = x;
-		this.playerPosY = y;
+	public void getPosXAndPosYPlayerFromController(int[] arrayPlayerPos){
+		this.playerPosX = arrayPlayerPos[0];
+		this.playerPosY = arrayPlayerPos[1];
+
+		this.viewFrame.getViewPanel().buildViewPanel();
 	}
 	
 	protected static int getPlayerPosX(){
