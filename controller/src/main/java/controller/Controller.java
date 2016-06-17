@@ -23,7 +23,6 @@ public class Controller implements IController {
 	public Controller( IView view,  IModel model) {
 		this.setView(view);
 		this.setModel(model);
-		this.model.loadWorld();
 	}
 
 	private void setView(final IView view) {
@@ -33,13 +32,12 @@ public class Controller implements IController {
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
-	
-	public void insantiateInitialMap(){
-		this.view.getMapFromController(model.getWorldMap());
-	}
-	
 	public void run(){
-		this.view.getArrayPosFromController(this.model.getPlayerPositions());
+		//while (true){
+		System.out.println("yoyo");
+		this.view.getMapFromController(this.model.loadWorld());
+		this.view.getPosXAndPosYPlayerFromController(this.model.getPlayerPositions());
+		//}
 	}
 	public ControllerOrder orderPerform(final ControllerOrder controllerOrder) {
 	
