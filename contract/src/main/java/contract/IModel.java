@@ -32,9 +32,22 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
-	public ArrayList<String> getWorldMap();
+	public int getPlayerPosX();
+	public int getPlayerPosY();
 	
-	public int[][] getPlayerPositions();
+	public int getDemonAPosX();
+	public int getDemonAPosY();
+	
+	public int getDemonBPosX();
+	public int getDemonBPosY();
+	
+	public int getDemonCPosX();
+	public int getDemonCPosY();
+	
+	public int getDemonDPosX();
+	public int getDemonDPosY();
+	
+	public int[] getPlayerPositions();
 	
 	
 }

@@ -37,6 +37,11 @@ public class Model extends Observable implements IModel{
 		System.out.println("XdemonA = " + demonA.getPosX());
 		System.out.println("YdemonA = " + demonA.getPosY());
 		
+		System.out.println("Player's pos = " + getDemonAPosition().get(0));
+		System.out.println("Player's pos = " + getDemonAPosition().get(1));
+		
+		System.out.println("DEMON A ? = " + DemonAIsInTheWorld());
+		System.out.println("DEMON D ? = " + DemonDIsInTheWorld());
 		this.controller.run();
 	}
 	
@@ -49,7 +54,85 @@ public class Model extends Observable implements IModel{
 	Monster demonD = new DemonD();
 	*/
 	
+	
+	public void arrayToTab(){
+		
+	}
+	
+	public ArrayList<Integer> getPlayerPosition(){
+		return world.loadPlayerPos(world.getId());
+	}
+	
+	public ArrayList<Integer> getDemonAPosition(){
+		if(DemonAIsInTheWorld() == 1)
+			return world.loadDemonAPos(world.getId());
+		return null;
+	}
+	//Chargement DemonB
+	public ArrayList<Integer> getDemonBPosition(){
+		if(DemonBIsInTheWorld() == 1)
+			return world.loadDemonBPos(world.getId());
+		return null;
+	}
+	
+	public ArrayList<Integer> getDemonCPosition(){
+		if(DemonCIsInTheWorld() == 1)
+			return world.loadDemonCPos(world.getId());
+		return null;
+	}
+	
+	public ArrayList<Integer> getDemonDPosition(){
+		if(DemonDIsInTheWorld() == 1)
+			return world.loadDemonDPos(world.getId());
+		return null;
+	}
+	
+	public ArrayList<Integer> getEnergyBubblePosition(){
+		if(EnergyBubbleIsInTheWorld() == 1)
+			return world.loadEnergyBubblePos(world.getId());
+		return null;
+	}
+	
+	public ArrayList<Integer> getDoorPosition(){
+		return world.loadDoorPos(world.getId());
+	}
+	
+	public ArrayList<Integer> getPursePosition(){
+		if(PurseIsInTheWorld() == 1)
+			return world.loadPursePos(world.getId());
+		return null;
+	}
+	
+	// TEST WHAT DEMONS ARE IN THE WORLD
+	
+	public Integer DemonAIsInTheWorld(){
+		return world.checkIfDemonAIsInTheWorld(world.getId());
+	}
+	
+	public Integer DemonBIsInTheWorld(){
+		return world.checkIfDemonBIsInTheWorld(world.getId());
+	}
+	
+	public Integer DemonCIsInTheWorld(){
+		return world.checkIfDemonCIsInTheWorld(world.getId());
+	}
+
+	public Integer DemonDIsInTheWorld(){
+		return world.checkIfDemonDIsInTheWorld(world.getId());
+	}
+
+	public Integer EnergyBubbleIsInTheWorld(){
+		return world.checkIfEnergyBubbleIsInTheWorld(world.getId());
+	}
+	
+	public Integer PurseIsInTheWorld(){
+		return world.checkIfPurseIsInTheWorld(world.getId());
+	}
+	
 	public Model(){
+		
+		
+	/*
 		for(int y=0; y<12; y++){
 			for(int x=0; x<20; x++){
 				System.out.print(loadWorld().get(x + y*20));
@@ -57,15 +140,11 @@ public class Model extends Observable implements IModel{
 			System.out.println("");
 		}
 		System.out.println(this.player.getPosX());
-		
+	*/
 	}
 
 	public ArrayList<String> loadWorld(){
 		return daoWorld.loadWorldById(world.getId());
-	}
-	
-	public ArrayList<String> getWorldMap(){
-		return daoWorld.getWorldMap();
 	}
 	
 	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
@@ -146,11 +225,11 @@ public class Model extends Observable implements IModel{
 	}
 	
 	
-	private int tab[][] = new int[1][3];
-	public int[][] getPlayerPositions(){
-		tab[0][0] = player.getPosX();
-		tab[0][1] = player.getPosY();
-		tab[0][2] = 0;
+	private int tab[] = new int[2];
+	public int[] getPlayerPositions(){
+		tab[0] = player.getPosX();
+		tab[1] = player.getPosY();
+		System.out.println("yo");
 		return tab;
 	}
 	

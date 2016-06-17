@@ -24,9 +24,6 @@ public class DAOWorld {
 			*/		
 	}
 	
-	public ArrayList<String> getWorldMap(){
-		return worldMap;
-	}
 	
 	public ArrayList<String> loadWorldById(final int id) {
 		worldMap = new ArrayList<String>();
@@ -47,6 +44,193 @@ public class DAOWorld {
 		}
 		return null;
 	}
+	
+	int[] positions;
+	ArrayList<Integer> position;
+	
+	public ArrayList<Integer> checkWhatMonsterIsInTheWorld(int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call wordlSpace(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 6 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Integer> loadPlayerPosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call playerPos(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 2 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Integer> loadDemonAPosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call m1Pos(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 2 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Integer> loadDemonBPosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call m2Pos(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 2 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Integer> loadDemonCPosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call m3Pos(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 2 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Integer> loadDemonDPosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call m4Pos(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 2 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Integer> loadEnergyBubblePosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call energyBublePose(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 2 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Integer> loadDoorPosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call doorPos(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 3 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<Integer> loadPursePosition(final int id){
+		position = new ArrayList<Integer>();
+		try {
+			CallableStatement call;
+			call = dbConnection.getConnection().prepareCall("{call pursePos(?)}");
+			
+			call.setInt(1, id);
+			call.execute();
+			final ResultSet resultat = call.getResultSet();
+			while(resultat.next()){
+				for(int x = 1 ; x <= 2 ; x++)
+					position.add(resultat.getInt(x));
+				}
+			return position;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+
+	
 	/*
 	public ArrayList<String> loadWorldByName(final String name) {
 		try {
