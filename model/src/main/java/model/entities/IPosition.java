@@ -1,6 +1,6 @@
 package model.entities;
 
-public interface IStats {
+public interface IPosition {
 
 	public int getPosX();
 

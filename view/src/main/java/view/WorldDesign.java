@@ -4,5 +4,6 @@ public enum WorldDesign {
 	STANDARD,
 	POKEMON,
 	DRAGONBALL,
-	ZELDA;
+	ZELDA,
+	RETRO;
 }

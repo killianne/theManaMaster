@@ -6,7 +6,6 @@ public abstract class Item extends Entity implements ITypeItem{
 
 	public Item(int posX, int posY) {
 		super(posX, posY);
-		// TODO Auto-generated constructor stub
 	}
 
 }

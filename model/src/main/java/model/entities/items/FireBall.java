@@ -4,57 +4,65 @@ import contract.ControllerOrder;
 
 public class FireBall extends Item{
 
+	ControllerOrder direction;
+	
 	public FireBall(int posX, int posY, ControllerOrder direction) {
 		super(posX, posY);
-		// TODO Auto-generated constructor stub
+		setDirection(direction);
 	}
 
-	public boolean isSolid() {
-		return true;
+	public boolean isSolid()      { return false; } // Go into Player and Monsters  --> KILL monsters.
+
+	public void tick()			  { move();	}
+	
+	public void move(){
+		if(this.direction == ControllerOrder.UL){
+			this.posY--;
+			this.posX--;
+		}
+		if(this.direction == ControllerOrder.UR){
+			this.posY--;
+			this.posX++;
+		}
+		if(this.direction == ControllerOrder.DL){
+			this.posY++;
+			this.posX--;
+		}
+		if(this.direction == ControllerOrder.DR){
+			this.posY++;
+			this.posX++;
+		}
 		
-	}
-
-	public void tick() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean isDead() {
-		return false;
+		if(this.direction == ControllerOrder.UP)
+			this.posY--;
+		if(this.direction == ControllerOrder.DOWN)
+			this.posY++;
+		if(this.direction == ControllerOrder.LEFT)
+			this.posX--;
+		if(this.direction == ControllerOrder.RIGHT)
+			this.posX++;
 	}
 	
-	public void hasSomethingAround(){
-		
+	public ControllerOrder getDirection(){
+		return this.direction;
+	}
+	
+	public void setDirection(ControllerOrder direction){
+		this.direction = direction;
 	}
 
-	public int getPosX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public boolean isDead() 	  { return false; }
 
-	public void setPosX(int posX) {
-		// TODO Auto-generated method stub
-		
-	}
+	public int getPosX()          { return this.posX; }
 
-	public int getPosY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public void setPosX(int posX) { this.posX = posX; }
 
-	public void setPosY(int posY) {
-		// TODO Auto-generated method stub
-		
-	}
+	public int getPosY()          { return this.posY; }
 
-	public int getWIDTH() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public void setPosY(int posY) { this.posY = posY; }
 
-	public int getHEIGHT() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int getWIDTH()         { return this.WIDTH; }
+
+	public int getHEIGHT()        { return this.HEIGHT; }
 
 }

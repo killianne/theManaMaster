@@ -4,52 +4,24 @@ public class HorizontalBone extends Wall{
 
 	public HorizontalBone(int posX, int posY) {
 		super(posX, posY);
-		// TODO Auto-generated constructor stub
 	}
 
-	public boolean isSolid() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean isSolid()      { return true; }
 
-	public void tick() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void tick() 			  {}
 
-	public boolean isDead() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean isDead()       { return false; }
 
-	public int getPosX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int getPosX()          { return this.posX; }
 
-	public void setPosX(int posX) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setPosX(int posX) { this.posX = posX; }
 
-	public int getPosY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int getPosY()          { return this.posY; }
 
-	public void setPosY(int posY) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setPosY(int posY) { this.posY = posY; }
 
-	public int getWIDTH() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int getWIDTH()         { return this.WIDTH; }
 
-	public int getHEIGHT() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int getHEIGHT()        { return this.HEIGHT; }
 
 }

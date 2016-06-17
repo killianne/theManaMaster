@@ -4,7 +4,6 @@ public class Dark extends Item{
 
 	public Dark(int posX, int posY) {
 		super(posX, posY);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean isSolid() {

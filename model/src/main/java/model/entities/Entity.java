@@ -1,6 +1,6 @@
 package model.entities;
 
-public abstract class Entity implements ITick, IStats{
+public abstract class Entity implements ITick, IPosition{
 
 	protected int posX, posY;
 	
