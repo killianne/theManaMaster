@@ -47,7 +47,7 @@ public interface IModel {
 	public int getDemonDPosX();
 	public int getDemonDPosY();
 	
-	public int[] getPlayerPositions();
+	public int[][] getPlayerPositions();
 	
 	
 }

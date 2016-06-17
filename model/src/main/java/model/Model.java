@@ -225,11 +225,12 @@ public class Model extends Observable implements IModel{
 	}
 	
 	
-	private int tab[] = new int[2];
-	public int[] getPlayerPositions(){
-		tab[0] = player.getPosX();
-		tab[1] = player.getPosY();
-		System.out.println("yo");
+	private int tab[][] = new int[1][3];
+	public int[][] getPlayerPositions(){
+		tab[0][0] = player.getPosX();
+		tab[0][1] = player.getPosY();
+		tab[0][2] = 0;
+		
 		return tab;
 	}
 	

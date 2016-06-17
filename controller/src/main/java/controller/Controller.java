@@ -32,11 +32,15 @@ public class Controller implements IController {
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
+	public void instantiateInitialMap(){
+		this.view.getMapFromController(this.model.loadWorld());
+		this.view.getArrayPosFromController(this.model.getPlayerPositions());
+	}
 	public void run(){
 		//while (true){
-		System.out.println("yoyo");
-		this.view.getMapFromController(this.model.loadWorld());
-		this.view.getPosXAndPosYPlayerFromController(this.model.getPlayerPositions());
+		
+		
+		this.view.getArrayPosFromController(this.model.getPlayerPositions());
 		//}
 	}
 	public ControllerOrder orderPerform(final ControllerOrder controllerOrder) {
