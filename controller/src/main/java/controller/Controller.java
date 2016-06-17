@@ -33,9 +33,13 @@ public class Controller implements IController {
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
-	public void run(){
+	
+	public void insantiateInitialMap(){
 		this.view.getMapFromController(model.getWorldMap());
-		this.view.getPosXAndPosYPlayerFromController(this.model.getPlayerPositions());
+	}
+	
+	public void run(){
+		this.view.getArrayPosFromController(this.model.getPlayerPositions());
 	}
 	public ControllerOrder orderPerform(final ControllerOrder controllerOrder) {
 	

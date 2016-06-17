@@ -34,7 +34,7 @@ public interface IModel {
 	
 	public ArrayList<String> getWorldMap();
 	
-	public int[] getPlayerPositions();
+	public int[][] getPlayerPositions();
 	
 	
 }

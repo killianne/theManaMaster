@@ -22,7 +22,7 @@ public class View implements IView, Runnable {
 	
 	private static ArrayList<String> alMap = new ArrayList<String>();
 	
-	private static int playerPosX, playerPosY;
+	private static int arrayPos[][];
 
 	/**
 	 * Instantiates a new view.
@@ -57,35 +57,15 @@ public class View implements IView, Runnable {
 	
 	public void getMapFromController(ArrayList<String> alMap){
 		this.alMap = alMap;
-		this.viewFrame.getViewPanel().buildViewPanel();
+		this.viewFrame.getViewPanel().setalMap(alMap);
 	}
 	
-	protected static ArrayList<String> getArrayListMap(){
-		return alMap;
+	public void getArrayPosFromController(int[][] arrayPos){
+		this.arrayPos = arrayPos;
 	}
 	
-	public void getPosXAndPosYPlayerFromController(int[] arrayPlayerPos){
-		this.playerPosX = arrayPlayerPos[0];
-		this.playerPosY = arrayPlayerPos[1];
-
-		this.viewFrame.getViewPanel().buildViewPanel();
-	}
-	
-	protected static int getPlayerPosX(){
-		return playerPosX;
-	}
-	
-	protected static int getPlayerPosY(){
-		return playerPosY;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IView#printMessage(java.lang.String)
-	 */
-	public void printMessage(final String message) {
-		this.viewFrame.printMessage(message);
+	protected static int[][] getArrayPos(){
+		return arrayPos;
 	}
 
 	/*
