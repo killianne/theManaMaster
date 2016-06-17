@@ -24,6 +24,10 @@ public class DAOWorld {
 			*/		
 	}
 	
+	public ArrayList<String> getWorldMap(){
+		return worldMap;
+	}
+	
 	public ArrayList<String> loadWorldById(final int id) {
 		worldMap = new ArrayList<String>();
 		try {

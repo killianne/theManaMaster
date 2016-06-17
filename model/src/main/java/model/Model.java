@@ -36,6 +36,12 @@ public class Model extends Observable implements IModel{
 		
 		System.out.println("XdemonA = " + demonA.getPosX());
 		System.out.println("YdemonA = " + demonA.getPosY());
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.controller.run();
 	}
 	
@@ -61,6 +67,10 @@ public class Model extends Observable implements IModel{
 
 	public ArrayList<String> loadWorld(){
 		return daoWorld.loadWorldById(world.getId());
+	}
+	
+	public ArrayList<String> getWorldMap(){
+		return daoWorld.getWorldMap();
 	}
 	
 	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
