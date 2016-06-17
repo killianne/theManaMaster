@@ -37,7 +37,7 @@ class ViewPanel extends JPanel implements Observer {
 	private String arraySymbol[] = {"b","vb","hb"," "};
 	
 	private String arrayImageName[] = {"bone","vertical_bone","horizontal_bone","blank"};
-	private String arrayNameFile[] = {"sprite","spritePokemonn","spriteDBZ","spriteZelda"};
+	private String arrayNameFile[] = {"sprite","spritePokemon","spriteDBZ","spriteZelda"};
 	
 	private ArrayList<String> alMap;
 	
