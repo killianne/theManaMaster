@@ -28,7 +28,10 @@ public class Model extends Observable implements IModel{
 	DemonB demonB = new DemonB(11, 10);
 	DemonC demonC = new DemonC(10, 11);
 	DemonD demonD = new DemonD(11, 11);
+	ArrayList<String> Map =new ArrayList();
 	
+	public int lastPlayerX;
+	public int lastPlayerY;
 	public void test(){
 		System.out.println(player.getDirection());
 		System.out.println("Xplayer = " + player.getPosX());
@@ -144,13 +147,22 @@ public class Model extends Observable implements IModel{
 	}
 
 	public ArrayList<String> loadWorld(){
+		Map=daoWorld.loadWorldById(world.getId());
 		return daoWorld.loadWorldById(world.getId());
 	}
 	
 	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
 		// Setting player & monsters directions
+		lastPlayerX=player.getPosX();
+		lastPlayerY=player.getPosY();
 		player.setDirection(controllerOrder);
 		player.tick();
+		
+		if(getChock(player.getPosX(),player.getPosY())==true){
+			
+			collider();
+		}
+		System.out.println("Que se passa OMG :"+getChock(player.getPosX(),player.getPosY()));
 		test();
 		
 		System.out.println(controllerOrder);
@@ -224,6 +236,23 @@ public class Model extends Observable implements IModel{
 		return demonD.getPosY();
 	}
 	
+	
+	public void collider(){
+		player.setPosX(lastPlayerX);
+		player.setPosY(lastPlayerY);
+	}
+	public boolean getChock(int x, int y){
+
+		if(Map.get((20*(y)+x)).contains("b")||Map.get((20*(y)+x)).contains("hb")||Map.get((20*(y)+x)).contains("vb")){
+			return true;
+			}
+		
+		
+		
+		
+		
+			return false;
+		}
 	
 	private int tab[][] = new int[1][3];
 	public int[][] getPlayerPositions(){
