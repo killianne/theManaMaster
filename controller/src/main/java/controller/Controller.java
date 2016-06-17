@@ -34,7 +34,7 @@ public class Controller implements IController {
 	}
 	public void run(){
 		//while (true){
-		
+		System.out.println("yoyo");
 		this.view.getMapFromController(this.model.loadWorld());
 		this.view.getPosXAndPosYPlayerFromController(this.model.getPlayerPositions());
 		//}

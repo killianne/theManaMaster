@@ -36,6 +36,7 @@ public class Model extends Observable implements IModel{
 		
 		System.out.println("XdemonA = " + demonA.getPosX());
 		System.out.println("YdemonA = " + demonA.getPosY());
+		this.controller.run();
 	}
 	
 	
@@ -144,6 +145,7 @@ public class Model extends Observable implements IModel{
 	public int[] getPlayerPositions(){
 		tab[0] = player.getPosX();
 		tab[1] = player.getPosY();
+		System.out.println("yo");
 		return tab;
 	}
 	
