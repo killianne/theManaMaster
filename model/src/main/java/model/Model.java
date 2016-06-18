@@ -57,7 +57,8 @@ public class Model extends Observable implements IModel{
 	Monster demonD = new DemonD();
 	*/
 	
-	
+	private int[] checkMapItem =new int[5];
+
 	public void arrayToTab(){
 		
 	}
@@ -131,6 +132,7 @@ public class Model extends Observable implements IModel{
 	public Integer PurseIsInTheWorld(){
 		return world.checkIfPurseIsInTheWorld(world.getId());
 	}
+	
 	
 	public Model(){
 		

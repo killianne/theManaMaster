@@ -52,4 +52,10 @@ public interface IModel {
 	public int[][] getPlayerPositions();
 	
 	
+	public Integer DemonAIsInTheWorld();
+	public Integer DemonBIsInTheWorld();
+	public Integer DemonCIsInTheWorld();
+	public Integer DemonDIsInTheWorld();
+	public Integer EnergyBubbleIsInTheWorld();
+	public Integer PurseIsInTheWorld();
 }

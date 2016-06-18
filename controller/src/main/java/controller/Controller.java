@@ -27,6 +27,7 @@ public class Controller implements IController {
 	
 	/** tab position in map for all entity */
 	int tab[][]= new int[1][3];
+	int checkItem[] =new int[6];
 	
 	/** Direction */ 
 	ControllerOrder controllerOrder;
@@ -46,6 +47,15 @@ public class Controller implements IController {
 		map=this.model.loadWorld();
 	}
 
+	public void checkMapItem(){
+		checkItem[0]=this.model.DemonAIsInTheWorld();
+		checkItem[1]=this.model.DemonBIsInTheWorld();
+		checkItem[2]=this.model.DemonCIsInTheWorld();
+		checkItem[3]=this.model.DemonDIsInTheWorld();
+		checkItem[4]=this.model.EnergyBubbleIsInTheWorld();
+		checkItem[5]=this.model.PurseIsInTheWorld();
+	}
+		
 	private void setView(final IView view) {
 		this.view = view;
 	}
@@ -64,7 +74,7 @@ public class Controller implements IController {
 		this.getCollision(playerPositionX, playerPositionY);
 		this.view.getArrayPosFromController(this.getPlayerPositions());
 		
-		
+	
 		System.out.println(controllerOrder);
 	}
 	
