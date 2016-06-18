@@ -34,6 +34,8 @@ public interface IModel {
 	
 	public int getPlayerPosX();
 	public int getPlayerPosY();
+	public void setPlayerPosY(int y);
+	public void setPlayerPosX(int x);
 	
 	public int getDemonAPosX();
 	public int getDemonAPosY();

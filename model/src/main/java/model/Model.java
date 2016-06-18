@@ -160,9 +160,9 @@ public class Model extends Observable implements IModel{
 		
 		if(getChock(player.getPosX(),player.getPosY())==true){
 			
-			collider();
+			collision();
 		}
-		System.out.println("Que se passa OMG :"+getChock(player.getPosX(),player.getPosY()));
+		System.out.println("collision or not:"+getChock(player.getPosX(),player.getPosY()));
 		test();
 		
 		System.out.println(controllerOrder);
@@ -203,6 +203,13 @@ public class Model extends Observable implements IModel{
 	public int getPlayerPosY(){
 		return player.getPosY();
 	}
+	public void setPlayerPosX(int x){
+		  player.setPosX(x);
+	}
+	
+	public void setPlayerPosY(int y){
+		 player.setPosY(y);
+	}
 	
 	public int getDemonAPosX(){
 		return demonA.getPosX();
@@ -237,20 +244,17 @@ public class Model extends Observable implements IModel{
 	}
 	
 	
-	public void collider(){
+	public void collision(){
 		player.setPosX(lastPlayerX);
 		player.setPosY(lastPlayerY);
 	}
+	
 	public boolean getChock(int x, int y){
 
 		if(Map.get((20*(y)+x)).contains("b")||Map.get((20*(y)+x)).contains("hb")||Map.get((20*(y)+x)).contains("vb")){
 			return true;
 			}
-		
-		
-		
-		
-		
+		//TODO collission
 			return false;
 		}
 	
