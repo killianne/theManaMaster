@@ -58,4 +58,7 @@ public interface IModel {
 	public Integer DemonDIsInTheWorld();
 	public Integer EnergyBubbleIsInTheWorld();
 	public Integer PurseIsInTheWorld();
+	
+	public void instantiateMonsters();
+	public int[][] arrayPos();
 }

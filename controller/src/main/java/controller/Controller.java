@@ -72,6 +72,7 @@ public class Controller implements IController {
 	}
 	public void instantiateInitialMap(){
 		this.view.getMapFromController(this.model.getWorldForController());
+		this.model.instantiateMonsters();
 		this.view.getArrayPosFromController(this.getPlayerPositions());
 	}
 	public void run(){
@@ -95,20 +96,7 @@ public class Controller implements IController {
 	}
 	
 public int[][] getPlayerPositions(){
-		tab[0][0] = this.model.getPlayerPosX();
-		tab[0][1] = this.model.getPlayerPosY();
-		tab[0][2] = 0;
-	/*	tab[1][0] = this.model.getPlayerPosX();
-		tab[1][1] = this.model.getPlayerPosY();
-		tab[1][2] = 0;
-	/*	for(i=0;i<6;i++){
-			if(checkItem[i]==1){
-				tab[][0]=;
-			}
-		}*/
-		
-		
-		return tab;
+		return model.arrayPos();
 	}
 	
 public void getCollision(int x , int y){

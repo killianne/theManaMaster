@@ -62,7 +62,7 @@ class ViewPanel extends JPanel implements Observer {
 	private int formerPlayerPosX = -1,formerPlayerPosY = -1;
 	
 	/** The array that contains the positions of the personage-monsters-items*/
-	private int[][] arrayPlayPos;
+	private int[][] arrayPos;
 	
 	private String lorannKey = "";
 
@@ -170,22 +170,22 @@ class ViewPanel extends JPanel implements Observer {
 			case 0 :
 				this.setBackground(Color.BLACK);
 				pScoreAndLife.setBackground(Color.BLACK);
-				this.UpdateMap(arrayPlayPos);
+				this.UpdateMap(arrayPos);
 				break;
 			case 1 :
 				this.setBackground(Color.WHITE);
 				pScoreAndLife.setBackground(Color.WHITE);
-				this.UpdateMap(arrayPlayPos);
+				this.UpdateMap(arrayPos);
 				break;
 			case 2 :
 				this.setBackground(Color.BLACK);
 				pScoreAndLife.setBackground(Color.BLACK);
-				this.UpdateMap(arrayPlayPos);
+				this.UpdateMap(arrayPos);
 				break;
 			case 3 :
 				this.setBackground(Color.BLACK);
 				pScoreAndLife.setBackground(Color.BLACK);
-				this.UpdateMap(arrayPlayPos);
+				this.UpdateMap(arrayPos);
 				break;
 		}
 		
@@ -197,27 +197,29 @@ class ViewPanel extends JPanel implements Observer {
 	 * @param arrayPlayPos
 	 * 			The array that contains the positions of the personage-monsters-items
 	 */
-	public void UpdateMap(int arrayPlayPos[][]){
-		this.arrayPlayPos = arrayPlayPos;
+	public void UpdateMap(int arrayPos[][]){
+		this.arrayPos = arrayPos;
 		if(formerPlayerPosX != -1 && formerPlayerPosY != -1) {
-			if(formerPlayerPosX != arrayPlayPos[0][0] || formerPlayerPosY != arrayPlayPos[0][1]){
+			if(formerPlayerPosX != arrayPos[0][0] || formerPlayerPosY != arrayPos[0][1]){
 				jArrayMap[formerPlayerPosY][formerPlayerPosX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
 			}
 		}
-		formerPlayerPosX = arrayPlayPos[0][0];
-		formerPlayerPosY = arrayPlayPos[0][1];
-
-		for(int i=1; i<arrayPlayPos.length; i++){
+		formerPlayerPosX = arrayPos[0][0];
+		formerPlayerPosY = arrayPos[0][1];
+		
+		//i = 1 because we don't want the pos of the player
+		for(int i=1; i<arrayPos.length; i++){
 			for(int k=0; k<arrayNonStaticImageName.length; k++){
-				if(arrayPlayPos[i][2] == k) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayNonStaticImageName[k] + ".png")); }
+				// k- 1 because in the table ID = 1 minimum but in the array of name it begin at 0
+				if(arrayPos[i][2] == k) { jArrayMap[arrayPos[i][1]] [arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayNonStaticImageName[k-1] + ".png")); }
 			}
 		}
 		
 		if(lorannKey.equals("")){
-			jArrayMap[arrayPlayPos[0][1]] [arrayPlayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayLorannImageName[View.getCounterThread()] + ".png"));
+			jArrayMap[arrayPos[0][1]] [arrayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayLorannImageName[View.getCounterThread()] + ".png"));
 		}
 		else{
-			jArrayMap[arrayPlayPos[0][1]] [arrayPlayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + lorannKey + ".png"));
+			jArrayMap[arrayPos[0][1]] [arrayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + lorannKey + ".png"));
 			lorannKey ="";
 		}
 	}
