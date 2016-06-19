@@ -116,7 +116,7 @@ class ViewPanel extends JPanel implements Observer {
 		}
 		
 	}
-	
+	String changeItem;
 	public void UpdateMap(int arrayPlayPos[][]){
 		this.arrayPlayPos = arrayPlayPos;
 		if(formerPlayerPosX != -1 && formerPlayerPosY != -1) {
@@ -129,7 +129,52 @@ class ViewPanel extends JPanel implements Observer {
 		formerPlayerPosY = arrayPlayPos[0][1];
 
 		for(int i=0; i<arrayPlayPos.length; i++){
-			if(arrayPlayPos[i][2] == 0)       { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/lorann_b.png")); }
+			switch(arrayPlayPos[i][2]){
+			case 0:
+				changeItem="/lorann_b.png";
+				break;
+			case 1:
+				changeItem="/monster_1.png";
+				break;
+			case 2:
+				changeItem="/monster_2.png";
+				break;
+			case 3:
+				changeItem="/monster_3.png";
+				break;
+			case 4:
+				changeItem="/monster_4.png";
+				break;
+			case 5:
+				changeItem="/crystal_ball.png";
+				break;
+			case 6:
+				changeItem="/purse.png";
+				break;
+			case 7:
+				changeItem="/gate_open.png";
+				break;
+			case 8:
+				changeItem="/gate_closed.png";
+				break;
+			case 9:
+				changeItem="/fireball_1.png";
+				break;
+			case 10:
+				changeItem="/fireball_2.png";
+				break;
+			case 11:
+				changeItem="/fireball_3.png";
+				break;
+			case 12:
+				changeItem="/fireball_4.png";
+				break;
+			case 13:
+				changeItem="/fireball_5.png";
+				break;
+			}
+			jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+changeItem));
+		/*	if(arrayPlayPos[i][2] == 0)       { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/lorann_b.png")); }
 			else if(arrayPlayPos[i][2] == 1)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/monster_1.png")); }
 			else if(arrayPlayPos[i][2] == 2)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/monster_2.png")); }
 			else if(arrayPlayPos[i][2] == 3)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/monster_3.png")); }
@@ -143,7 +188,7 @@ class ViewPanel extends JPanel implements Observer {
 			else if(arrayPlayPos[i][2] == 11) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_3.png")); }
 			else if(arrayPlayPos[i][2] == 12) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_4.png")); }
 			else if(arrayPlayPos[i][2] == 13) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_5.png")); }
-		}
+		*/}
 	}
 	
 	public void buildLifeAndScore(){

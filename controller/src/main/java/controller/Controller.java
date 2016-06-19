@@ -91,7 +91,9 @@ public int[][] getPlayerPositions(){
 		tab[0][0] = this.model.getPlayerPosX();
 		tab[0][1] = this.model.getPlayerPosY();
 		tab[0][2] = 0;
-		
+		//tab[1][0] = 13;
+		//tab[1][1] = 9;
+		//tab[1][2] = 1;
 		return tab;
 	}
 	
