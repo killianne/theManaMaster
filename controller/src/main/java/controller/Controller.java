@@ -81,7 +81,6 @@ public class Controller implements IController {
 		this.playerMove();
 		this.getCollision(playerPositionX, playerPositionY);
 		this.view.getArrayPosFromController(this.getPlayerPositions());
-		System.out.println("DemonX:"+this.model.getDemonBPosX()+"DemonY:"+this.model.getDemonBPosY());
 	
 		System.out.println(controllerOrder);
 	}

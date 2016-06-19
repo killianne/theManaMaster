@@ -36,7 +36,7 @@ public interface IModel {
 	public int getPlayerPosY();
 	public void setPlayerPosY(int y);
 	public void setPlayerPosX(int x);
-	
+	/*
 	public int getDemonAPosX();
 	public int getDemonAPosY();
 	
@@ -48,7 +48,7 @@ public interface IModel {
 	
 	public int getDemonDPosX();
 	public int getDemonDPosY();
-	
+	*/
 	public int[][] getPlayerPositions();
 	
 	

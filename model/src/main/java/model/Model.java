@@ -12,7 +12,6 @@ import model.entities.creatures.monsters.DemonA;
 import model.entities.creatures.monsters.DemonB;
 import model.entities.creatures.monsters.DemonC;
 import model.entities.creatures.monsters.DemonD;
-import model.entities.creatures.monsters.Monster;
 import model.entities.creatures.player.Player;
 import model.entities.items.EnergyBubble;
 import model.entities.items.Gold;
@@ -28,11 +27,8 @@ public class Model extends Observable implements IModel{
 	// Player
 	private ArrayList<Integer> DemonAPosBegin=daoWorld.loadDemonAPosition(world.getId());
 //	DemonAPosBegin=daoWorld.loadDemonAposition(world.getID());
-	Player player = new Player(2,2, ControllerOrder.DOWN);
-	DemonA demonA = new DemonA(daoWorld.loadDemonAPosition(world.getId()).get(0),daoWorld.loadDemonAPosition(world.getId()).get(1));
-	DemonB demonB = new DemonB(daoWorld.loadDemonBPosition(world.getId()).get(0),daoWorld.loadDemonBPosition(world.getId()).get(1));
-	DemonC demonC = new DemonC(daoWorld.loadDemonCPosition(world.getId()).get(0),daoWorld.loadDemonCPosition(world.getId()).get(1));
-	DemonD demonD = new DemonD(10,10);
+	Player player = new Player(0,0, ControllerOrder.NO);
+	
 	private ArrayList<Entity> alEntity;
 	ArrayList<String> Map =new ArrayList();
 	
@@ -120,38 +116,6 @@ public class Model extends Observable implements IModel{
 		return array;
 	}
 	
-	
-	public void test(){
-		System.out.println(player.getDirection());
-		System.out.println("Xplayer = " + player.getPosX());
-		System.out.println("Yplayer = " + player.getPosY());
-		
-		System.out.println("XdemonA = " + demonA.getPosX());
-		System.out.println("YdemonA = " + demonA.getPosY());
-		
-		System.out.println("Player's pos = " + getDemonAPosition().get(0));
-		System.out.println("Player's pos = " + getDemonAPosition().get(1));
-		
-		System.out.println("DEMON A ? = " + DemonAIsInTheWorld());
-		System.out.println("DEMON D ? = " + DemonDIsInTheWorld());
-		this.controller.run();
-	}
-	
-	
-	// Monsters
-	/*
-	Monster demonA = new DemonA();
-	Monster demonB = new DemonB();
-	Monster demonC = new DemonC();
-	Monster demonD = new DemonD();
-	*/
-	
-	
-
-	public void arrayToTab(){
-		
-	}
-	
 	public ArrayList<Integer> getPlayerPosition(){
 		return world.loadPlayerPos(world.getId());
 	}
@@ -224,17 +188,6 @@ public class Model extends Observable implements IModel{
 	
 	
 	public Model(){
-		
-		
-	/*
-		for(int y=0; y<12; y++){
-			for(int x=0; x<20; x++){
-				System.out.print(loadWorld().get(x + y*20));
-			}
-			System.out.println("");
-		}
-		System.out.println(this.player.getPosX());
-	*/
 	}
 
 	public ArrayList<String> getWorldForController(){
@@ -254,7 +207,6 @@ public class Model extends Observable implements IModel{
 			collision();
 		}
 		System.out.println("collision or not:"+getChock(player.getPosX(),player.getPosY()));
-		test();
 		
 		System.out.println(controllerOrder);
 		return controllerOrder;
@@ -302,6 +254,7 @@ public class Model extends Observable implements IModel{
 		 player.setPosY(y);
 	}
 	
+	/*
 	public int getDemonAPosX(){
 		return demonA.getPosX();
 	}
@@ -333,6 +286,7 @@ public class Model extends Observable implements IModel{
 	public int getDemonDPosY(){
 		return demonD.getPosY();
 	}
+	*/
 	
 	
 	public void collision(){
