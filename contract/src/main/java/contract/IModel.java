@@ -32,23 +32,20 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
+	
+	
 	public int getPlayerPosX();
 	public int getPlayerPosY();
 	public void setPlayerPosY(int y);
 	public void setPlayerPosX(int x);
-	/*
-	public int getDemonAPosX();
-	public int getDemonAPosY();
 	
-	public int getDemonBPosX();
-	public int getDemonBPosY();
+	public int [][] getDemonAPos();
+	public int [][] getDemonBPos();
+	public int [][] getDemonCPos();
+	public int [][] getDemonDPos();
+
+	public void setDemonAPos(ControllerOrder controllerOrder,int id);
 	
-	public int getDemonCPosX();
-	public int getDemonCPosY();
-	
-	public int getDemonDPosX();
-	public int getDemonDPosY();
-	*/
 	public int[][] getPlayerPositions();
 	
 	

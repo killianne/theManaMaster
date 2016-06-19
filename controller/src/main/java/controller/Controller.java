@@ -38,29 +38,13 @@ public class Controller implements IController {
 	int playerPositionY;
 	
 	// arraylist
-	private ArrayList<String> map =new ArrayList<String>();
+	private ArrayList<String> map = new ArrayList<String>();
 	
 	
 	public Controller( IView view,  IModel model) {
 		this.setView(view);
 		this.setModel(model);
 		map=this.model.getWorldForController();
-	}
-
-	public void checkMapItem(){
-		checkItem[0]=this.model.DemonAIsInTheWorld();
-		checkItem[1]=this.model.DemonBIsInTheWorld();
-		checkItem[2]=this.model.DemonCIsInTheWorld();
-		checkItem[3]=this.model.DemonDIsInTheWorld();
-		checkItem[4]=this.model.EnergyBubbleIsInTheWorld();
-		checkItem[5]=this.model.PurseIsInTheWorld();
-	}
-		int i=0;
-	public void itemHere(){
-		switch(checkItem[i]){
-		case 1:
-			
-		}
 	}
 	
 	private void setView(final IView view) {
@@ -70,17 +54,22 @@ public class Controller implements IController {
 	private void setModel(final IModel model) {
 		this.model = model;
 	}
+	
 	public void instantiateInitialMap(){
 		this.view.getMapFromController(this.model.getWorldForController());
 		this.model.instantiateMonsters();
-		this.view.getArrayPosFromController(this.getPlayerPositions());
+		this.view.getArrayPosFromController(this.getPos());
 	}
+	
 	public void run(){
 	
 		this.memoryPos();
 		this.playerMove();
 		this.getCollision(playerPositionX, playerPositionY);
-		this.view.getArrayPosFromController(this.getPlayerPositions());
+		
+		monsterIaTypeA();
+		
+		this.view.getArrayPosFromController(this.getPos());
 	
 		System.out.println(controllerOrder);
 	}
@@ -91,14 +80,74 @@ public class Controller implements IController {
 		playerPositionY=this.model.getPlayerPosY();
 		lastPlayerPositionX=this.model.getPlayerPosX();
 		lastPlayerPositionY=this.model.getPlayerPosY();
-				
-	}
+		}
 	
-public int[][] getPlayerPositions(){
+	public int[][] getPos(){
 		return model.arrayPos();
 	}
+
+	public boolean getCollisionMonster(int x, int y){
+		int xColis, yColis;
+		xColis=x;yColis=y;
+		positionInArraylist=map.get(20*yColis+xColis);
+		System.out.println("Position Monster : "+positionInArraylist);
+		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
+			System.out.println("Monster Collision ");
+			return true;
+		}
+		
+		
+		
+		return false;	
+	}
 	
-public void getCollision(int x , int y){
+	public void monsterIaTypeA(){
+		ControllerOrder controllerOrder = ControllerOrder.NO;
+		int random;
+		int[][] arreyMonsterA = this.model.getDemonAPos();
+		for(int i=0; i<arreyMonsterA.length; i++){
+			random = (int) (Math.random() * 4);
+			System.out.println(random);
+			
+			switch(random){
+			case 0:
+				controllerOrder = ControllerOrder.UP;
+				break;
+			case 1:
+				controllerOrder = ControllerOrder.DOWN;
+				break;
+			case 2:
+				controllerOrder = ControllerOrder.RIGHT;
+				break;
+			case 3:
+				controllerOrder = ControllerOrder.LEFT;
+				break;
+			}
+			
+		
+			this.model.setDemonAPos(controllerOrder,arreyMonsterA[i][2]);
+			arreyMonsterA = this.model.getDemonAPos();
+			if(getCollisionMonster(arreyMonsterA[i][0],arreyMonsterA[i][1]))
+				returnPosMonster(controllerOrder,arreyMonsterA[i][2]);
+			
+			arreyMonsterA = this.model.getDemonAPos();
+			
+		}
+		
+	}
+	
+	public void returnPosMonster(ControllerOrder controllerOrder,int id){
+		ControllerOrder[] real = {ControllerOrder.RIGHT,ControllerOrder.LEFT,ControllerOrder.DOWN,ControllerOrder.UP} ;
+		ControllerOrder[] inverseReal = {ControllerOrder.LEFT,ControllerOrder.RIGHT,ControllerOrder.UP,ControllerOrder.DOWN} ;
+		for(int i=0;i<4;i++){
+			if(controllerOrder == real[i]){
+				System.out.println("ok sa me casse les couille:" + i);
+				this.model.setDemonAPos(inverseReal[i],id);
+			}
+		}
+	}
+	
+	public void getCollision(int x , int y){
 	
 		positionInArraylist=map.get(20*y+x);
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
@@ -108,13 +157,12 @@ public void getCollision(int x , int y){
 		//TODO collission	
 		}
 
-public void collision(){
+	public void collision(){
 	this.model.setPlayerPosX(lastPlayerPositionX);
 	this.model.setPlayerPosY(lastPlayerPositionY);
 }
 
-
-public void playerMove() {
+	public void playerMove() {
 	
 	if(controllerOrder == ControllerOrder.UL){   playerPositionY--; playerPositionX--;  }
 	if(controllerOrder == ControllerOrder.UR){   playerPositionY--; playerPositionX++;  }

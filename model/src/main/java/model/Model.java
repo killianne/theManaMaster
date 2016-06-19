@@ -13,6 +13,7 @@ import model.entities.creatures.monsters.DemonB;
 import model.entities.creatures.monsters.DemonC;
 import model.entities.creatures.monsters.DemonD;
 import model.entities.creatures.player.Player;
+import model.entities.items.Door;
 import model.entities.items.EnergyBubble;
 import model.entities.items.Gold;
 import model.worlds.World;
@@ -53,6 +54,9 @@ public class Model extends Observable implements IModel{
 		for(int i=0;i<daoWorld.loadPursePosition(world.getId()).size()/2;i+=2){
 			alEntity.add(new Gold(daoWorld.loadPursePosition(world.getId()).get(i)-1,daoWorld.loadPursePosition(world.getId()).get(i+1)-1));
 		}
+		for(int i=0;i<daoWorld.loadDoorPosition(world.getId()).size()/2;i+=2){
+			alEntity.add(new Door(daoWorld.loadDoorPosition(world.getId()).get(i)-1,daoWorld.loadDoorPosition(world.getId()).get(i+1)-1,daoWorld.loadDoorPosition(world.getId()).get(i+2)==1));
+		}
 		
 		//instantiation of the personage in function the Database
 		player.setPosX(daoWorld.loadPlayerPosition(world.getId()).get(0)-1);
@@ -60,49 +64,63 @@ public class Model extends Observable implements IModel{
 	}
 	
 	public int[][] arrayPos(){
-		int[][] array = new int[alEntity.size()+1][3];
+		int[][] array = new int[alEntity.size()+1][4];
 		
 		array[0][0] = this.getPlayerPosX();
 		array[0][1] = this.getPlayerPosY();
 		array[0][2] = 0;
 		
 		for(int i=0; i<alEntity.size(); i++){
+			//i + 1 because there is the player in the array but not in the ArrayList
 			if(alEntity.get(i) instanceof DemonA) {
-				System.out.println("A");
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
 				array[i+1][2] = 1;
+				array[i+1][3] = i;
 			}
 			if(alEntity.get(i) instanceof DemonB) {
-				System.out.println("B");
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
 				array[i+1][2] = 2;
+				array[i+1][3] = i;
 			}
 			if(alEntity.get(i) instanceof DemonC) {
-				System.out.println("C");
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
 				array[i+1][2] = 3;
+				array[i+1][3] = i;
 			}
 			if(alEntity.get(i) instanceof DemonD) {
-				System.out.println("D");
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
 				array[i+1][2] = 4;
+				array[i+1][3] = i;
 			}
 			if(alEntity.get(i) instanceof EnergyBubble) {
-				System.out.println("EnergyBubble");
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
 				array[i+1][2] = 5;
+				array[i+1][3] = i;
 			}
 			if(alEntity.get(i) instanceof Gold) {
-				System.out.println("Purse");
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
 				array[i+1][2] = 6;
+				array[i+1][3] = i;
 			}
+			
+			if(alEntity.get(i) instanceof Door) {
+				array[i+1][0] = alEntity.get(i).getPosX();
+				array[i+1][1] = alEntity.get(i).getPosY();
+				/*if(alEntity.get(i).isOpen()){*/
+					array[i+1][2] = 7;
+			/*	}
+				else{
+					array[i+1][2] = 8;
+				}*/
+				array[i+1][3] = i;
+			}
+			
 		}
 		for(int i=0; i<array.length; i++){
 			for(int j=0; j<array[0].length; j++){
@@ -233,39 +251,104 @@ public class Model extends Observable implements IModel{
 		 player.setPosY(y);
 	}
 	
-	/*
-	public int getDemonAPosX(){
-		return demonA.getPosX();
+	
+	public int[][] getDemonAPos(){
+		int counter=0;
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonA ){
+				counter++;
+			}
+		}
+		int[][] arrayDem = new int[counter][3];
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonA ){
+				arrayDem[i][0]=alEntity.get(i).getPosX();
+				arrayDem[i][1]=alEntity.get(i).getPosY();
+				arrayDem[i][2]=i;
+			}
+		}
+		if(counter==0)
+			return null;
+		return arrayDem;
+	}
+	public int[][] getDemonBPos(){
+		int counter=0;
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonB ){
+				counter++;
+			}
+		}
+		int[][] arrayDem = new int[counter][3];
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonB ){
+				arrayDem[i][0]=alEntity.get(i).getPosX();
+				arrayDem[i][1]=alEntity.get(i).getPosY();
+				arrayDem[i][2]=i;
+			}
+		}
+		if(counter==0)
+			return null;
+		return arrayDem;
+	}
+	public int[][] getDemonCPos(){
+		int counter=0;
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonC ){
+				counter++;
+			}
+		}
+		int[][] arrayDem = new int[counter][3];
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonC ){
+				arrayDem[i][0]=alEntity.get(i).getPosX();
+				arrayDem[i][1]=alEntity.get(i).getPosY();
+				arrayDem[i][2]=i;
+			}
+		}
+		if(counter==0)
+			return null;
+		return arrayDem;
+	}
+	public int[][] getDemonDPos(){
+		int counter=0;
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonD ){
+				counter++;
+			}
+		}
+		int[][] arrayDem = new int[counter][3];
+		for(int i=0;i<alEntity.size();i++ ){
+			if(alEntity.get(i) instanceof DemonD ){
+				arrayDem[i][0]=alEntity.get(i).getPosX();
+				arrayDem[i][1]=alEntity.get(i).getPosY();
+				arrayDem[i][2]=i;
+			}
+		}
+		if(counter==0)
+			return null;
+		return arrayDem;
+	}	
+	public void setDemonAPos(ControllerOrder controllerOrder,int id){
+		System.out.println("x debut : " + alEntity.get(id).getPosX() + " | y debut : " + alEntity.get(id).getPosY());
+		switch(controllerOrder){
+			case RIGHT:
+				alEntity.get(id).setPosX(alEntity.get(id).getPosX() + 1);
+				break;
+			case LEFT:
+				alEntity.get(id).setPosX(alEntity.get(id).getPosX() - 1);
+				break;
+			case UP:
+				alEntity.get(id).setPosY(alEntity.get(id).getPosY() - 1);
+				break;
+			case DOWN:
+				alEntity.get(id).setPosY(alEntity.get(id).getPosY() + 1);
+				break;
+		}
+		System.out.println("x fin : " + alEntity.get(id).getPosX() + " | y fin : " + alEntity.get(id).getPosY());
 	}
 	
-	public int getDemonAPosY(){
-		return demonA.getPosY();
-	}
+
 	
-	public int getDemonBPosX(){
-		return demonB.getPosX();
-	}
-	
-	public int getDemonBPosY(){
-		return demonB.getPosY();
-	}
-	
-	public int getDemonCPosX(){
-		return demonC.getPosX();
-	}
-	
-	public int getDemonCPosY(){
-		return demonC.getPosY();
-	}
-	
-	public int getDemonDPosX(){
-		return demonD.getPosX();
-	}
-	
-	public int getDemonDPosY(){
-		return demonD.getPosY();
-	}
-	*/
 	
 	private int tab[][] = new int[1][3];
 	public int[][] getPlayerPositions(){
@@ -281,6 +364,7 @@ public class Model extends Observable implements IModel{
 		
 		return null;
 	}
+
 
 
 	/*

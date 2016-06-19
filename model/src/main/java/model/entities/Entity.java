@@ -1,5 +1,7 @@
 package model.entities;
 
+import model.entities.items.IDoor;
+
 public abstract class Entity implements ITick, IPosition{
 
 	protected int posX, posY;

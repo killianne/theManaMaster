@@ -1,13 +1,13 @@
 package model.entities.items;
 
-public class Door extends Item{
-
-	public Door(int posX, int posY) {
-		super(posX, posY);
-		// TODO Auto-generated constructor stub
-	}
+public class Door extends Item implements IDoor{
 	
-	public boolean isOpen = false;
+	public boolean isOpen;
+
+	public Door(int posX, int posY,boolean door) {
+		super(posX, posY);
+		this.isOpen=door;
+	}
 	
 	public boolean isOpen(){
 		if(isOpen == true)
@@ -36,6 +36,8 @@ public class Door extends Item{
 	public int getWIDTH()         { return this.WIDTH; }
 
 	public int getHEIGHT()        { return this.HEIGHT; }
+	
+	public void openDoor()        { isOpen = true; }
 	
 
 }
