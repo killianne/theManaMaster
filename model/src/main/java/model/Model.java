@@ -22,12 +22,13 @@ public class Model extends Observable implements IModel{
 	DAOWorld daoWorld = new DAOWorld();
 	private IController controller;
 	// Player
-	
+	private ArrayList<Integer> DemonAPosBegin=daoWorld.loadDemonAPosition(world.getId());
+//	DemonAPosBegin=daoWorld.loadDemonAposition(world.getID());
 	Player player = new Player(2,2, ControllerOrder.DOWN);
-	DemonA demonA = new DemonA(10, 10);
-	DemonB demonB = new DemonB(11, 10);
-	DemonC demonC = new DemonC(10, 11);
-	DemonD demonD = new DemonD(11, 11);
+	DemonA demonA = new DemonA(daoWorld.loadDemonAPosition(world.getId()).get(0),daoWorld.loadDemonAPosition(world.getId()).get(1));
+	DemonB demonB = new DemonB(daoWorld.loadDemonBPosition(world.getId()).get(0),daoWorld.loadDemonBPosition(world.getId()).get(1));
+	DemonC demonC = new DemonC(daoWorld.loadDemonCPosition(world.getId()).get(0),daoWorld.loadDemonCPosition(world.getId()).get(1));
+	DemonD demonD = new DemonD(10,10);
 	ArrayList<String> Map =new ArrayList();
 	
 	public int lastPlayerX;
@@ -57,7 +58,7 @@ public class Model extends Observable implements IModel{
 	Monster demonD = new DemonD();
 	*/
 	
-	private int[] checkMapItem =new int[5];
+	
 
 	public void arrayToTab(){
 		

@@ -26,7 +26,7 @@ public class Controller implements IController {
 	String positionInArraylist;
 	
 	/** tab position in map for all entity */
-	int tab[][]= new int[2][3];
+	int tab[][]= new int[1][3];
 	int checkItem[] =new int[6];
 	
 	/** Direction */ 
@@ -80,7 +80,7 @@ public class Controller implements IController {
 		this.playerMove();
 		this.getCollision(playerPositionX, playerPositionY);
 		this.view.getArrayPosFromController(this.getPlayerPositions());
-		System.out.println("DemonX:"+this.model.getDemonAPosX()+"DemonY:"+this.model.getDemonAPosY());
+		System.out.println("DemonX:"+this.model.getDemonBPosX()+"DemonY:"+this.model.getDemonBPosY());
 	
 		System.out.println(controllerOrder);
 	}
