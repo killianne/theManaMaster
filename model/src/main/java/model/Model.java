@@ -24,13 +24,10 @@ public class Model extends Observable implements IModel{
 	protected World world  = new World(1);
 	DAOWorld daoWorld = new DAOWorld();
 	private IController controller;
-	// Player
-	private ArrayList<Integer> DemonAPosBegin=daoWorld.loadDemonAPosition(world.getId());
-//	DemonAPosBegin=daoWorld.loadDemonAposition(world.getID());
+
 	Player player = new Player(0,0, ControllerOrder.NO);
 	
 	private ArrayList<Entity> alEntity;
-	ArrayList<String> Map =new ArrayList();
 	
 	public int lastPlayerX;
 	public int lastPlayerY;
@@ -191,25 +188,7 @@ public class Model extends Observable implements IModel{
 	}
 
 	public ArrayList<String> getWorldForController(){
-		Map=daoWorld.loadWorldById(world.getId());
 		return daoWorld.loadWorldById(world.getId());
-	}
-	
-	public ControllerOrder getOrderPerform(ControllerOrder controllerOrder){
-		// Setting player & monsters directions
-		lastPlayerX=player.getPosX();
-		lastPlayerY=player.getPosY();
-		player.setDirection(controllerOrder);
-		player.tick();
-		
-		if(getChock(player.getPosX(),player.getPosY())==true){
-			
-			collision();
-		}
-		System.out.println("collision or not:"+getChock(player.getPosX(),player.getPosY()));
-		
-		System.out.println(controllerOrder);
-		return controllerOrder;
 	}
 	
 	public World getWorld(){
@@ -287,21 +266,6 @@ public class Model extends Observable implements IModel{
 		return demonD.getPosY();
 	}
 	*/
-	
-	
-	public void collision(){
-		player.setPosX(lastPlayerX);
-		player.setPosY(lastPlayerY);
-	}
-	
-	public boolean getChock(int x, int y){
-
-		if(Map.get((20*(y)+x)).contains("b")||Map.get((20*(y)+x)).contains("hb")||Map.get((20*(y)+x)).contains("vb")){
-			return true;
-			}
-		//TODO collission
-			return false;
-		}
 	
 	private int tab[][] = new int[1][3];
 	public int[][] getPlayerPositions(){
