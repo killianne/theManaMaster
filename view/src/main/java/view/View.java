@@ -12,16 +12,18 @@ import java.util.ArrayList;
 /**
  * The Class View.
  *
- * @author Jean-Aymeric Diet
+ * @author Thomas
  */
 public class View implements IView, Runnable {
 
 	/** The frame. */
-	private final ViewFrame viewFrame;
+	private static ViewFrame viewFrame;
 	
-	private static ArrayList<String> alMap = new ArrayList<String>();
+	private static Thread thread;
 	
-	private static int arrayPos[][];
+	private static boolean running= false;
+	
+	private static int counterThread;
 
 	/**
 	 * Instantiates a new view.
@@ -30,42 +32,52 @@ public class View implements IView, Runnable {
 	 *          the model
 	 */
 	public View(final IModel model) {
-		this.viewFrame = new ViewFrame(model);
+		viewFrame = new ViewFrame(model);
 		SwingUtilities.invokeLater(this);
 	}
 	
 	/**
-	 * Key code to controller order.
+	 * The direction of the personage.
 	 *
-	 * @param keyCode
-	 *          the key code
+	 * @param arrayKey
+	 *          the array of the key(s) pressed
 	 * @return the controller order
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final boolean[] arrayKey) {
-		if(arrayKey[0] && arrayKey[2])      { return ControllerOrder.UL;    }
-		else if(arrayKey[0] && arrayKey[3]) { return ControllerOrder.UR;    }
-		else if(arrayKey[1] && arrayKey[2]) { return ControllerOrder.DL;    }
-		else if(arrayKey[1] && arrayKey[3]) { return ControllerOrder.DR;    }
-		else if(arrayKey[0] )               { return ControllerOrder.UP;    }
-		else if(arrayKey[1] )               { return ControllerOrder.DOWN;  }
-		else if(arrayKey[2] )               { return ControllerOrder.LEFT;  }
-		else if(arrayKey[3] )               { return ControllerOrder.RIGHT; }
+		if(arrayKey[0] && arrayKey[2])      { viewFrame.getViewPanel().setLorannKey("lorann_ul"); return ControllerOrder.UL;    }
+		else if(arrayKey[0] && arrayKey[3]) { viewFrame.getViewPanel().setLorannKey("lorann_ur"); return ControllerOrder.UR;    }
+		else if(arrayKey[1] && arrayKey[2]) { viewFrame.getViewPanel().setLorannKey("lorann_bl"); return ControllerOrder.DL;    }
+		else if(arrayKey[1] && arrayKey[3]) { viewFrame.getViewPanel().setLorannKey("lorann_br"); return ControllerOrder.DR;    }
+		else if(arrayKey[0] )               { viewFrame.getViewPanel().setLorannKey("lorann_u");  return ControllerOrder.UP;    }
+		else if(arrayKey[1] )               { viewFrame.getViewPanel().setLorannKey("lorann_b");  return ControllerOrder.DOWN;  }
+		else if(arrayKey[2] )               { viewFrame.getViewPanel().setLorannKey("lorann_l");  return ControllerOrder.LEFT;  }
+		else if(arrayKey[3] )               { viewFrame.getViewPanel().setLorannKey("lorann_r");  return ControllerOrder.RIGHT; }
 		else if(arrayKey[4] )               { return ControllerOrder.SHOOT; }
 		else                                { return ControllerOrder.NO;    }
 	}
 	
+	/**
+	 * Gets map from controller and give it to ViewPanel
+	 * 
+	 * @param alMap
+	 * 			the ArrayList that contains the map
+	 */
 	public void getMapFromController(ArrayList<String> alMap){
-		//this.alMap = alMap;
-		this.viewFrame.getViewPanel().setalMap(alMap);
+		viewFrame.getViewPanel().setALMap(alMap);
 	}
 	
+	/**
+	 * Gets the positions of the player-monsters-items from controller and give it to ViewPanel
+	 * 
+	 * @param arrayPos
+	 * 			the array that contains all the positions
+	 */
 	public void getArrayPosFromController(int[][] arrayPos){
-		//this.arrayPos = arrayPos;
-		this.viewFrame.getViewPanel().UpdateMap(arrayPos);
+		viewFrame.getViewPanel().UpdateMap(arrayPos);
 	}
 	
-	protected static int[][] getArrayPos(){
-		return arrayPos;
+	protected static int getCounterThread(){
+		return counterThread;
 	}
 
 	/*
@@ -74,8 +86,53 @@ public class View implements IView, Runnable {
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
-		this.viewFrame.setVisible(true);
+		init();
+		
+		while(running) {
+			tick();
+			render();
+		}
+		
 	}
+	
+	public void init(){
+		counterThread=0;
+	}
+	
+	public void tick(){
+		counterThread++;
+		if(counterThread==8){counterThread = 0; }
+		try {
+			Thread.sleep(80);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void render(){
+		viewFrame.getViewPanel().moovePersonage(counterThread);
+	}
+	
+	public synchronized void start(){
+		if(running)
+			return;
+		running = true;
+		thread = new Thread(this);
+		thread.start();
+	}
+	
+	public static synchronized void stop(){
+		if(!running)
+			return;
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	/**
 	 * Sets the controller.
@@ -84,7 +141,7 @@ public class View implements IView, Runnable {
 	 *          the new controller
 	 */
 	public void setController(final IController controller) {
-		this.viewFrame.setController(controller);
+		viewFrame.setController(controller);
 	}
 
 

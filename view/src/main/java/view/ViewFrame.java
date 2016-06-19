@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 /**
  * The Class ViewFrame.
  *
- * @author Jean-Aymeric Diet
+ * @author Thomas
  */
 class ViewFrame extends JFrame implements KeyListener {
 
@@ -25,24 +25,31 @@ class ViewFrame extends JFrame implements KeyListener {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
 	
+	/** The viewPanel */
 	private ViewPanel viewPanel;
 	
+	/** The menu */
 	private JMenuBar menuBar = new JMenuBar();
 	
+	/** The menus that lead you to others choices */
 	private JMenu menuFile = new JMenu("File");
 	private JMenu menuDesign = new JMenu("Design");
 	
-	private JMenuItem item1 = new JMenuItem("New game");
-	private JMenuItem item2 = new JMenuItem("Setting");
-	private JMenuItem item3 = new JMenuItem("Exit");
+	/** The choices you have in the menu bar*/
+	private JMenuItem itemNewGame = new JMenuItem("New game");
+	private JMenuItem itemSetting = new JMenuItem("Setting");
+	private JMenuItem itemExit = new JMenuItem("Exit");
 	
+	/** The design of the game that you can choose*/
 	private JRadioButtonMenuItem jrbmi1 = new JRadioButtonMenuItem("Standard");
 	private JRadioButtonMenuItem jrbmi2 = new JRadioButtonMenuItem("Pokemon");
 	private JRadioButtonMenuItem jrbmi3 = new JRadioButtonMenuItem("Dragon Ball");
 	private JRadioButtonMenuItem jrbmi4 = new JRadioButtonMenuItem("Zelda");
 	
+	/** The array needed to know the key(s) pressed*/
 	private boolean[] arrayKey = {false,false,false,false,false};
 	
+	/** The current design of the word*/
 	private WorldDesign currentDesign = WorldDesign.STANDARD;
 	
 	/**
@@ -100,10 +107,19 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.buildViewFrame(model);
 	}
 	
+	/**
+	 * Gets the viewPanel
+	 * @return the viewPanel
+	 */
 	public ViewPanel getViewPanel(){
 		return this.viewPanel;
 	}
 	
+	/**
+	 * Return the design ID of the design you want
+	 * 
+	 * @return the design ID
+	 */
 	public int getCurrentWorldID(){
 		if(this.currentDesign == WorldDesign.STANDARD)   { return 0; }
 		if(this.currentDesign == WorldDesign.POKEMON)    { return 1; }
@@ -151,7 +167,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	}
 
 	/**
-	 * Builds the view frame.
+	 * Builds the view frame and call the methode that create the menu bar.
 	 *
 	 * @param model
 	 *          the model
@@ -167,8 +183,12 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setLocationRelativeTo(null);
 		
 		this.buildMenu();
+		this.setVisible(true);
 	}
 	
+	/**
+	 * Builds the menu bar
+	 */
 	public void buildMenu(){
 		jrbmi1.addActionListener(new StandardWorldListener());
 		jrbmi2.addActionListener(new PokemonWorldListener());
@@ -181,23 +201,19 @@ class ViewFrame extends JFrame implements KeyListener {
 		menuDesign.add(jrbmi3);
 		menuDesign.add(jrbmi4);
 		
-		this.menuFile.add(item1);
-		this.menuFile.add(item2);
+		itemExit.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		        System.exit(0);
+		      }
+		    });
+		
+		this.menuFile.add(itemNewGame);
+		this.menuFile.add(itemSetting);
 		this.menuFile.add(menuDesign);
 		menuFile.addSeparator();
-		this.menuFile.add(item3);
+		this.menuFile.add(itemExit);
 		this.menuBar.add(menuFile);
 	    this.setJMenuBar(menuBar);
-	}
-
-	/**
-	 * Prints the message.
-	 *
-	 * @param message
-	 *          the message
-	 */
-	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, message);
 	}
 
 	/*
@@ -206,7 +222,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
 	 */
 	public void keyTyped(final KeyEvent e) {
-
+		
 	}
 
 	/*
@@ -218,7 +234,6 @@ class ViewFrame extends JFrame implements KeyListener {
 		switch(e.getKeyCode()){
 			case KeyEvent.VK_Z :
 				arrayKey[0] = true;
-				System.out.println(jrbmi1.isSelected());
 				break;
 			case KeyEvent.VK_S :
 				arrayKey[1] = true;
@@ -243,24 +258,29 @@ class ViewFrame extends JFrame implements KeyListener {
 	 */
 	public void keyReleased(final KeyEvent e) {
 		switch(e.getKeyCode()){
-		case KeyEvent.VK_Z :
-			arrayKey[0] = false;
-			break;
-		case KeyEvent.VK_S :
-			arrayKey[1] = false;
-			break;
-		case KeyEvent.VK_Q :
-			arrayKey[2] = false;
-			break;
-		case KeyEvent.VK_D :
-			arrayKey[3] = false;
-			break;
-		case KeyEvent.VK_SPACE :
-			arrayKey[4] = true;
-			break;
+			case KeyEvent.VK_Z :
+				arrayKey[0] = false;
+				break;
+			case KeyEvent.VK_S :
+				arrayKey[1] = false;
+				break;
+			case KeyEvent.VK_Q :
+				arrayKey[2] = false;
+				break;
+			case KeyEvent.VK_D :
+				arrayKey[3] = false;
+				break;
+			case KeyEvent.VK_SPACE :
+				arrayKey[4] = false;
+				break;
+		}
 	}
-	}
-	
+	/**
+	 * Create an inner class that select the design of the world and modify the menu so you can only choose one design
+	 * Here it's for the design STANDARD
+	 * @author Thomas
+	 *
+	 */
 	public class StandardWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
 	      currentDesign = WorldDesign.STANDARD;
@@ -272,6 +292,12 @@ class ViewFrame extends JFrame implements KeyListener {
 		}    
 	}
 	
+	/**
+	 * Create an inner class that select the design of the world and modify the menu so you can only choose one design
+	 * Here it's for the design POKEMON
+	 * @author Thomas
+	 *
+	 */
 	public class PokemonWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
 			currentDesign = WorldDesign.POKEMON;
@@ -283,6 +309,12 @@ class ViewFrame extends JFrame implements KeyListener {
 		}    
 	}
 	
+	/**
+	 * Create an inner class that select the design of the world and modify the menu so you can only choose one design
+	 * Here it's for the design DRAGONBALL
+	 * @author Thomas
+	 *
+	 */
 	public class DBZWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
 			currentDesign = WorldDesign.DRAGONBALL;
@@ -294,6 +326,12 @@ class ViewFrame extends JFrame implements KeyListener {
 		}    
 	}
 	
+	/**
+	 * Create an inner class that select the design of the world and modify the menu so you can only choose one design
+	 * Here it's for the design ZELDA
+	 * @author Thomas
+	 *
+	 */
 	public class ZeldaWorldListener implements ActionListener{
 		public void actionPerformed(ActionEvent arg0) {      
 			currentDesign = WorldDesign.ZELDA;

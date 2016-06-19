@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 /**
  * The Class ViewPanel.
  *
- * @author Jean-Aymeric Diet
+ * @author Thomas
  */
 class ViewPanel extends JPanel implements Observer {
 
@@ -24,26 +24,47 @@ class ViewPanel extends JPanel implements Observer {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
 	
+	/** The JPanel that contains the label of the available life(s) and the actual score. */
 	JPanel pScoreAndLife = new JPanel();
 	
+	/** The JPanel that contains the map. */
 	JPanel pMap = new JPanel();
 	
+	/** The array of JPanel that contains the image of the design. */
 	JLabel jArrayMap[][] = new JLabel[12][20];
 	
+	/** The JLabel of the available life(s). */
 	private JLabel lLife = new JLabel();
 	
+	/** The JLabel of the actual score. */
 	private JLabel lScore = new JLabel();
 	
+	/** The array that contains the symbols of the map's items. */
 	private String arraySymbol[] = {"b","vb","hb"," "};
 	
-	private String arrayImageName[] = {"bone","vertical_bone","horizontal_bone","blank"};
+	/** The array that contains the name of the static items images. */
+	private String arrayStaticImageName[] = {"bone","vertical_bone","horizontal_bone","blank"};
+	
+	/** The array that contains the name of the non static items images. */
+	private String arrayNonStaticImageName[] = {"monster_1","monster_2","monster_3","monster_4","crystal_ball","purse",
+			"gate_open","gate_closed","fireball_1","fireball_2","fireball_3","fireball_4","fireball_5"};
+	
+	/** The array that contains the name of all the lorann images */
+	private String arrayLorannImageName[] = {"lorann_b","lorann_bl","lorann_l","lorann_ul","lorann_u","lorann_ur","lorann_r","lorann_br"};
+	
+	/** The array that contains the name of the files that contain the images for the different design. */
 	private String arrayNameFile[] = {"sprite","spritePokemon","spriteDBZ","spriteZelda"};
 	
+	/** The array that contains the name of the static items image. */
 	private ArrayList<String> alMap;
 	
+	/** The former positions of the personage  */
 	private int formerPlayerPosX = -1,formerPlayerPosY = -1;
 	
+	/** The array that contains the positions of the personage-monsters-items*/
 	private int[][] arrayPlayPos;
+	
+	private String lorannKey = "";
 
 
 	/**
@@ -69,17 +90,30 @@ class ViewPanel extends JPanel implements Observer {
 		
 	}
 	
-	public void setalMap(ArrayList<String> alMap){
+	public void setLorannKey(String s){
+		this.lorannKey=s;
+	}
+	
+	/**
+	 * Save the map in a variable and load the JPanels that ViewPanel contains
+	 * 
+	 * @param alMap
+	 * 			The ArrayList that contains the map
+	 */
+	public void setALMap(ArrayList<String> alMap){
 		this.alMap = alMap;
 		this.loadMap();
 		this.buildLifeAndScore();
 	}
 	
-	public void loadMap(){ //le tableau ne peut pas se mettre dans un jPanel c'est bizarre
+	/**
+	 * Load the map in an array of JPanels from an ArrayList
+	 */
+	public void loadMap(){
 		int counterX=0, counterY=0;
 		for(int i=0;i<240;i++){
-			for(int k=0; k<arrayImageName.length;k++){
-					if(alMap.get(i).equals(arraySymbol[k])) { this.jArrayMap[counterY][counterX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/"+arrayImageName[k]+".png")); }
+			for(int k=0; k<arrayStaticImageName.length;k++){
+					if(alMap.get(i).equals(arraySymbol[k])) { this.jArrayMap[counterY][counterX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/"+arrayStaticImageName[k]+".png")); }
 	         }
 			if(counterX==jArrayMap[0].length-1){
 				counterY++;
@@ -90,6 +124,46 @@ class ViewPanel extends JPanel implements Observer {
 		this.add(pMap);
 	}
 	
+	/**
+	 * Build the JLabel of the life and the score
+	 */
+	public void buildLifeAndScore(){
+		pScoreAndLife.setLayout(new BorderLayout());
+		pScoreAndLife.setBackground(Color.BLACK);
+		Font font = new Font("Tahoma", Font.BOLD, 20);
+		lLife.setFont(font);
+		lLife.setText("<html><font color = #1E7FCB >Resurections : 00</font></html>");
+		lScore.setFont(font);
+		lScore.setText("<html><font color = #F0C300 >Score : 00000000</font></html>");
+		pScoreAndLife.add(lLife, BorderLayout.WEST);
+		pScoreAndLife.add(lScore, BorderLayout.EAST);
+		this.add(pScoreAndLife);
+		pScoreAndLife.revalidate();
+	}
+	
+	/**
+	 * Sets the score
+	 * 
+	 * @param score
+	 * 			The score
+	 */
+	public void setScore(int score){
+		lScore.setText("<html><font color = #F0C300 >Score : " + score + "</font></html>");
+	}
+	
+	/**
+	 * Sets the available life(s)
+	 * 
+	 * @param life
+	 * 			The number of life(s)
+	 */
+	public void setLife(int life){
+		lLife.setText("<html><font color = #1E7FCB >Resurections : " + life + "</font></html>");
+	}
+	
+	/**
+	 * Modify the current design
+	 */
 	public void updateDesign(){
 		this.loadMap();
 		switch(this.viewFrame.getCurrentWorldID()){
@@ -116,11 +190,16 @@ class ViewPanel extends JPanel implements Observer {
 		}
 		
 	}
-	String changeItem;
+	
+	/**
+	 * Update the map in function of the positions of the personage-monsters-items
+	 * 
+	 * @param arrayPlayPos
+	 * 			The array that contains the positions of the personage-monsters-items
+	 */
 	public void UpdateMap(int arrayPlayPos[][]){
 		this.arrayPlayPos = arrayPlayPos;
 		if(formerPlayerPosX != -1 && formerPlayerPosY != -1) {
-			System.out.println("x : "+ formerPlayerPosX + " = " + arrayPlayPos[0][0] + "  y : " + formerPlayerPosY + " = " + arrayPlayPos[0][1]);
 			if(formerPlayerPosX != arrayPlayPos[0][0] || formerPlayerPosY != arrayPlayPos[0][1]){
 				jArrayMap[formerPlayerPosY][formerPlayerPosX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
 			}
@@ -128,90 +207,31 @@ class ViewPanel extends JPanel implements Observer {
 		formerPlayerPosX = arrayPlayPos[0][0];
 		formerPlayerPosY = arrayPlayPos[0][1];
 
-		for(int i=0; i<arrayPlayPos.length; i++){
-			switch(arrayPlayPos[i][2]){
-			case 0:
-				changeItem="/lorann_b.png";
-				break;
-			case 1:
-				changeItem="/monster_1.png";
-				break;
-			case 2:
-				changeItem="/monster_2.png";
-				break;
-			case 3:
-				changeItem="/monster_3.png";
-				break;
-			case 4:
-				changeItem="/monster_4.png";
-				break;
-			case 5:
-				changeItem="/crystal_ball.png";
-				break;
-			case 6:
-				changeItem="/purse.png";
-				break;
-			case 7:
-				changeItem="/gate_open.png";
-				break;
-			case 8:
-				changeItem="/gate_closed.png";
-				break;
-			case 9:
-				changeItem="/fireball_1.png";
-				break;
-			case 10:
-				changeItem="/fireball_2.png";
-				break;
-			case 11:
-				changeItem="/fireball_3.png";
-				break;
-			case 12:
-				changeItem="/fireball_4.png";
-				break;
-			case 13:
-				changeItem="/fireball_5.png";
-				break;
+		for(int i=1; i<arrayPlayPos.length; i++){
+			for(int k=0; k<arrayNonStaticImageName.length; k++){
+				if(arrayPlayPos[i][2] == k) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayNonStaticImageName[k] + ".png")); }
 			}
-			jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+changeItem));
-		/*	if(arrayPlayPos[i][2] == 0)       { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/lorann_b.png")); }
-			else if(arrayPlayPos[i][2] == 1)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/monster_1.png")); }
-			else if(arrayPlayPos[i][2] == 2)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/monster_2.png")); }
-			else if(arrayPlayPos[i][2] == 3)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/monster_3.png")); }
-			else if(arrayPlayPos[i][2] == 4)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/monster_4.png")); }
-			else if(arrayPlayPos[i][2] == 5)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/crystal_ball.png")); }
-			else if(arrayPlayPos[i][2] == 6)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/purse.png")); }
-			else if(arrayPlayPos[i][2] == 7)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/gate_open.png")); }
-			else if(arrayPlayPos[i][2] == 8)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/gate_closed.png")); }
-			else if(arrayPlayPos[i][2] == 9)  { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_1.png")); }
-			else if(arrayPlayPos[i][2] == 10) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_2.png")); }
-			else if(arrayPlayPos[i][2] == 11) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_3.png")); }
-			else if(arrayPlayPos[i][2] == 12) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_4.png")); }
-			else if(arrayPlayPos[i][2] == 13) { jArrayMap[arrayPlayPos[i][1]] [arrayPlayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/fireball_5.png")); }
-		*/}
+		}
+		
+		if(lorannKey.equals("")){
+			jArrayMap[arrayPlayPos[0][1]] [arrayPlayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayLorannImageName[View.getCounterThread()] + ".png"));
+		}
+		else{
+			jArrayMap[arrayPlayPos[0][1]] [arrayPlayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + lorannKey + ".png"));
+			lorannKey ="";
+		}
 	}
 	
-	public void buildLifeAndScore(){
-		pScoreAndLife.setLayout(new BorderLayout());
-		pScoreAndLife.setBackground(Color.BLACK);
-		Font font = new Font("Tahoma", Font.BOLD, 20);
-		lLife.setFont(font);
-		lLife.setText("<html><font color = #1E7FCB >Resurections : 00</font></html>");
-		lScore.setFont(font);
-		lScore.setText("<html><font color = #F0C300 >Score : 00000000</font></html>");
-		pScoreAndLife.add(lLife, BorderLayout.WEST);
-		pScoreAndLife.add(lScore, BorderLayout.EAST);
-		this.add(pScoreAndLife);
-		pScoreAndLife.revalidate();
-	}
-
 	/**
-	 * Gets the view frame.
-	 *
-	 * @return the view frame
+	 * Make the sprite of the personage moove
+	 * 
+	 * @param counterThread
+	 * 				The Id the personage's image
 	 */
-	private ViewFrame getViewFrame() {
-		return this.viewFrame;
+	public void moovePersonage(int counterThread){
+		for(int k=0; k<arrayLorannImageName.length; k++){
+			if(counterThread == k) { jArrayMap[formerPlayerPosY][formerPlayerPosX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/" + arrayLorannImageName[k] + ".png")); }
+		}
 	}
 
 	/**

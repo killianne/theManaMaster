@@ -26,7 +26,7 @@ public class Controller implements IController {
 	String positionInArraylist;
 	
 	/** tab position in map for all entity */
-	int tab[][]= new int[1][3];
+	int tab[][]= new int[2][3];
 	int checkItem[] =new int[6];
 	
 	/** Direction */ 
@@ -38,7 +38,7 @@ public class Controller implements IController {
 	int playerPositionY;
 	
 	// arraylist
-	private ArrayList<String> map =new ArrayList();
+	private ArrayList<String> map =new ArrayList<String>();
 	
 	
 	public Controller( IView view,  IModel model) {
@@ -55,7 +55,14 @@ public class Controller implements IController {
 		checkItem[4]=this.model.EnergyBubbleIsInTheWorld();
 		checkItem[5]=this.model.PurseIsInTheWorld();
 	}
-		
+		int i=0;
+	public void itemHere(){
+		switch(checkItem[i]){
+		case 1:
+			
+		}
+	}
+	
 	private void setView(final IView view) {
 		this.view = view;
 	}
@@ -65,7 +72,7 @@ public class Controller implements IController {
 	}
 	public void instantiateInitialMap(){
 		this.view.getMapFromController(this.model.getWorldForController());
-		this.view.getArrayPosFromController(getPlayerPositions());
+		this.view.getArrayPosFromController(this.getPlayerPositions());
 	}
 	public void run(){
 	
@@ -73,7 +80,7 @@ public class Controller implements IController {
 		this.playerMove();
 		this.getCollision(playerPositionX, playerPositionY);
 		this.view.getArrayPosFromController(this.getPlayerPositions());
-		
+		System.out.println("DemonX:"+this.model.getDemonAPosX()+"DemonY:"+this.model.getDemonAPosY());
 	
 		System.out.println(controllerOrder);
 	}
@@ -91,9 +98,16 @@ public int[][] getPlayerPositions(){
 		tab[0][0] = this.model.getPlayerPosX();
 		tab[0][1] = this.model.getPlayerPosY();
 		tab[0][2] = 0;
-		//tab[1][0] = 13;
-		//tab[1][1] = 9;
-		//tab[1][2] = 1;
+	/*	tab[1][0] = this.model.getPlayerPosX();
+		tab[1][1] = this.model.getPlayerPosY();
+		tab[1][2] = 0;
+	/*	for(i=0;i<6;i++){
+			if(checkItem[i]==1){
+				tab[][0]=;
+			}
+		}*/
+		
+		
 		return tab;
 	}
 	
