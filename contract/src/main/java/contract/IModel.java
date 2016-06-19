@@ -23,7 +23,7 @@ public interface IModel {
 	 * @param key
 	 *          the key
 	 */
-	ArrayList<String> loadWorld();
+	ArrayList<String> getWorldForController();
 
 	/**
 	 * Gets the observable.

@@ -148,7 +148,7 @@ public class Model extends Observable implements IModel{
 	*/
 	}
 
-	public ArrayList<String> loadWorld(){
+	public ArrayList<String> getWorldForController(){
 		Map=daoWorld.loadWorldById(world.getId());
 		return daoWorld.loadWorldById(world.getId());
 	}

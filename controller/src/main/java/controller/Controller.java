@@ -44,7 +44,7 @@ public class Controller implements IController {
 	public Controller( IView view,  IModel model) {
 		this.setView(view);
 		this.setModel(model);
-		map=this.model.loadWorld();
+		map=this.model.getWorldForController();
 	}
 
 	public void checkMapItem(){
@@ -64,8 +64,8 @@ public class Controller implements IController {
 		this.model = model;
 	}
 	public void instantiateInitialMap(){
-		this.view.getMapFromController(this.model.loadWorld());
-		this.view.getArrayPosFromController(this.model.getPlayerPositions());
+		this.view.getMapFromController(this.model.getWorldForController());
+		this.view.getArrayPosFromController(getPlayerPositions());
 	}
 	public void run(){
 	
