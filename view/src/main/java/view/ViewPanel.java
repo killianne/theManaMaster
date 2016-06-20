@@ -46,8 +46,11 @@ class ViewPanel extends JPanel implements Observer {
 	private String arrayStaticImageName[] = {"bone","vertical_bone","horizontal_bone","blank"};
 	
 	/** The array that contains the name of the non static items images. */
-	private String arrayNonStaticImageName[] = {"monster_1","monster_2","monster_3","monster_4","crystal_ball","purse",
-			"gate_open","gate_closed","fireball_1","fireball_2","fireball_3","fireball_4","fireball_5"};
+	private String arrayMonsterImageName[] = {"monster_1","monster_2","monster_3","monster_4"};
+	
+	private String arrayItemImageName[] = {"crystal_ball","purse","gate_open","gate_closed"};
+	
+	private String arrayFIreBallImageName[] = {"fireball_1","fireball_2","fireball_3","fireball_4","fireball_5"};
 	
 	/** The array that contains the name of all the lorann images */
 	private String arrayLorannImageName[] = {"lorann_b","lorann_bl","lorann_l","lorann_ul","lorann_u","lorann_ur","lorann_r","lorann_br"};
@@ -65,6 +68,8 @@ class ViewPanel extends JPanel implements Observer {
 	private int[][] arrayPos;
 	
 	private String lorannKey = "";
+	
+	private boolean boolMonsterFirstTime = false;
 
 
 	/**
@@ -170,35 +175,40 @@ class ViewPanel extends JPanel implements Observer {
 			case 0 :
 				this.setBackground(Color.BLACK);
 				pScoreAndLife.setBackground(Color.BLACK);
-				this.UpdateMap(arrayPos);
+				//this.UpdateMap(arrayPos);
+				this.updateMapPersonage(arrayPos);
+				this.updateMapMonster(arrayPos);
+				this.updateMapItem(arrayPos);
 				break;
 			case 1 :
 				this.setBackground(Color.WHITE);
 				pScoreAndLife.setBackground(Color.WHITE);
-				this.UpdateMap(arrayPos);
+				//this.UpdateMap(arrayPos);
+				this.updateMapPersonage(arrayPos);
+				this.updateMapMonster(arrayPos);
+				this.updateMapItem(arrayPos);
 				break;
 			case 2 :
 				this.setBackground(Color.BLACK);
 				pScoreAndLife.setBackground(Color.BLACK);
-				this.UpdateMap(arrayPos);
+				//this.UpdateMap(arrayPos);
+				this.updateMapPersonage(arrayPos);
+				this.updateMapMonster(arrayPos);
+				this.updateMapItem(arrayPos);
 				break;
 			case 3 :
 				this.setBackground(Color.BLACK);
 				pScoreAndLife.setBackground(Color.BLACK);
-				this.UpdateMap(arrayPos);
+				//this.UpdateMap(arrayPos);
+				this.updateMapPersonage(arrayPos);
+				this.updateMapMonster(arrayPos);
+				this.updateMapItem(arrayPos);
 				break;
 		}
 		
 	}
 	
-	/**
-	 * Update the map in function of the positions of the personage-monsters-items
-	 * 
-	 * @param arrayPlayPos
-	 * 			The array that contains the positions of the personage-monsters-items
-	 */
-	public void UpdateMap(int arrayPos[][]){
-		this.arrayPos = arrayPos;
+	public void updateMapPersonage(int arrayPos[][]){
 		if(formerPlayerPosX != -1 && formerPlayerPosY != -1) {
 			if(formerPlayerPosX != arrayPos[0][0] || formerPlayerPosY != arrayPos[0][1]){
 				jArrayMap[formerPlayerPosY][formerPlayerPosX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
@@ -207,14 +217,6 @@ class ViewPanel extends JPanel implements Observer {
 		formerPlayerPosX = arrayPos[0][0];
 		formerPlayerPosY = arrayPos[0][1];
 		
-		//i = 1 because we don't want the pos of the player
-		for(int i=1; i<arrayPos.length; i++){
-			for(int k=0; k<arrayNonStaticImageName.length; k++){
-				// k- 1 because in the table ID = 1 minimum but in the array of name it begin at 0
-				if(arrayPos[i][2] == k) { jArrayMap[arrayPos[i][1]] [arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayNonStaticImageName[k-1] + ".png")); }
-			}
-		}
-		
 		if(lorannKey.equals("")){
 			jArrayMap[arrayPos[0][1]] [arrayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayLorannImageName[View.getCounterThread()] + ".png"));
 		}
@@ -222,6 +224,56 @@ class ViewPanel extends JPanel implements Observer {
 			jArrayMap[arrayPos[0][1]] [arrayPos[0][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + lorannKey + ".png"));
 			lorannKey ="";
 		}
+		
+		this.arrayPos = arrayPos;
+	}
+	
+	public void updateMapMonster(int arrayPos[][]){
+		int IDMaxMonsterInArray=1;
+		//i and IDMaxMonsterInArray = 1 because we don't want the pos of the player
+		//calculate where the monster stop in the array
+		for(int i=1; i<arrayPos.length; i++){
+			if(arrayPos[i][2] > 4){
+				i = arrayPos.length;
+			}
+			else{
+				IDMaxMonsterInArray++;
+			}
+		}
+		//Display the monster
+		for(int i=1; i<IDMaxMonsterInArray; i++){
+			for(int k=0; k<arrayMonsterImageName.length; k++){
+				if(boolMonsterFirstTime){
+					if(this.arrayPos[i][0] != arrayPos[i][0] || this.arrayPos[i][1] != arrayPos[i][1] ){
+						jArrayMap[this.arrayPos[i][1]][this.arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
+					}
+				}
+				// k- 1 because in the table ID = 1 minimum but in the array of name it begin at 0
+				if(arrayPos[i][2] == k) { jArrayMap[arrayPos[i][1]] [arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayMonsterImageName[k-1] + ".png")); }
+			}
+		}
+		boolMonsterFirstTime = true;
+		this.arrayPos = arrayPos;
+	}
+	
+	public void updateMapItem(int arrayPos[][]){
+		int IDMinItemInArray=1;
+		//i and IDMinItemInArray = 1 because we don't want the pos of the player
+		//calculate where the monster stop in the array
+		for(int i=1; i<arrayPos.length; i++){
+			if(arrayPos[i][2] > 4){
+				IDMinItemInArray++;
+			}
+		}
+		//Display the items
+		for(int i=IDMinItemInArray; i<arrayPos.length; i++){
+			for(int k=0; k<arrayItemImageName.length; k++){
+				// k- 1 because in the table ID = 1 minimum for the entities but in the array of name it begin at 0
+				//k+4 because of the ID that was input in the map with all entity
+				if(arrayPos[i][2] == k+5) { jArrayMap[arrayPos[i][1]] [arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayItemImageName[k] + ".png")); }
+			}
+		}
+		this.arrayPos = arrayPos;
 	}
 	
 	/**

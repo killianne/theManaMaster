@@ -59,7 +59,7 @@ public class ControllerMonster implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			view.getArrayPosFromController(controller.getPos());
+			view.getArrayPosMonsterFromController(controller.getPos());
 		}
 		
 	}

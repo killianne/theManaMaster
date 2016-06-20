@@ -12,5 +12,12 @@ public interface IView {
 	public void getMapFromController(ArrayList<String> alMap);
 	
 	public void getArrayPosFromController(int[][] arrayPos);
+	
+	public void getArrayPosPersonageFromController(int[][] arrayPos);
+	
+	public void getArrayPosMonsterFromController(int[][] arrayPos);
+	
+	public void getArrayPosItemFromController(int[][] arrayPos);
+	
 
 }

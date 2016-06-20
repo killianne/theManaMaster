@@ -69,7 +69,7 @@ public class Controller implements IController {
 		
 		//monsterIaTypeA();
 		
-		this.view.getArrayPosFromController(this.getPos());
+		this.view.getArrayPosPersonageFromController(this.getPos());
 	
 		System.out.println(controllerOrder);
 	}
