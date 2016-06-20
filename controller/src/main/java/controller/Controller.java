@@ -67,7 +67,7 @@ public class Controller implements IController {
 		this.playerMove();
 		this.getCollision(playerPositionX, playerPositionY);
 		
-		monsterIaTypeA();
+		//monsterIaTypeA();
 		
 		this.view.getArrayPosFromController(this.getPos());
 	
@@ -86,67 +86,10 @@ public class Controller implements IController {
 		return model.arrayPos();
 	}
 
-	public boolean getCollisionMonster(int x, int y){
-		int xColis, yColis;
-		xColis=x;yColis=y;
-		positionInArraylist=map.get(20*yColis+xColis);
-		System.out.println("Position Monster : "+positionInArraylist);
-		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
-			System.out.println("Monster Collision ");
-			return true;
-		}
-		
-		
-		
-		return false;	
-	}
 	
-	public void monsterIaTypeA(){
-		ControllerOrder controllerOrder = ControllerOrder.NO;
-		int random;
-		int[][] arreyMonsterA = this.model.getDemonAPos();
-		for(int i=0; i<arreyMonsterA.length; i++){
-			random = (int) (Math.random() * 4);
-			System.out.println(random);
-			
-			switch(random){
-			case 0:
-				controllerOrder = ControllerOrder.UP;
-				break;
-			case 1:
-				controllerOrder = ControllerOrder.DOWN;
-				break;
-			case 2:
-				controllerOrder = ControllerOrder.RIGHT;
-				break;
-			case 3:
-				controllerOrder = ControllerOrder.LEFT;
-				break;
-			}
-			
-		
-			this.model.setDemonAPos(controllerOrder,arreyMonsterA[i][2]);
-			arreyMonsterA = this.model.getDemonAPos();
-			if(getCollisionMonster(arreyMonsterA[i][0],arreyMonsterA[i][1]))
-				returnPosMonster(controllerOrder,arreyMonsterA[i][2]);
-			
-			arreyMonsterA = this.model.getDemonAPos();
-			
-		}
-		
-	}
+
 	
 	public IModel getModel() { return this.model; }
-	
-	public void returnPosMonster(ControllerOrder controllerOrder,int id){
-		ControllerOrder[] real = {ControllerOrder.RIGHT,ControllerOrder.LEFT,ControllerOrder.DOWN,ControllerOrder.UP} ;
-		ControllerOrder[] inverseReal = {ControllerOrder.LEFT,ControllerOrder.RIGHT,ControllerOrder.UP,ControllerOrder.DOWN} ;
-		for(int i=0;i<4;i++){
-			if(controllerOrder == real[i]){
-				this.model.setDemonAPos(inverseReal[i],id);
-			}
-		}
-	}
 	
 	public void getCollision(int x , int y){
 	
