@@ -73,10 +73,10 @@ public class View implements IView, Runnable {
 	 * 			the array that contains all the positions
 	 */
 	public void getArrayPosFromController(int[][] arrayPos){
-		//viewFrame.getViewPanel().UpdateMap(arrayPos);
-		viewFrame.getViewPanel().updateMapPersonage(arrayPos);
-		viewFrame.getViewPanel().updateMapMonster(arrayPos);
-		viewFrame.getViewPanel().updateMapItem(arrayPos);
+		viewFrame.getViewPanel().updateMap(arrayPos);
+		//viewFrame.getViewPanel().updateMapPersonage(arrayPos);
+		//viewFrame.getViewPanel().updateMapMonster(arrayPos);
+		//viewFrame.getViewPanel().updateMapItem(arrayPos);
 	}
 	
 	public void getArrayPosPersonageFromController(int[][] arrayPos){

@@ -16,7 +16,7 @@ public class ControllerMonster implements Runnable {
 	
 	/** Map arraylist in String */
 	String positionInArraylist;
-	
+	int itemCollision[][];
 	/** arraylist, map for contain position of item   */
 	private ArrayList<String> map = new ArrayList<String>();
 	
@@ -29,16 +29,25 @@ public class ControllerMonster implements Runnable {
 		map=this.model.getWorldForController();
 	}
 	
-	public boolean getCollisionMonster(int x, int y){
+	public boolean getCollisionMonster(int x, int y,int id){
 		int xColis, yColis;
 		xColis=x;yColis=y;
+		this.itemCollision=controller.getPos();
 		positionInArraylist=map.get(20*yColis+xColis);
-		System.out.println("Position Monster : "+positionInArraylist);
+		
+		System.out.println("Position Monster : "+positionInArraylist + "/id ="+ id);
+		
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
 			System.out.println("Monster Collision ");
 			return true;
 		}
-		
+		for(int i=0;i<itemCollision.length;i++)
+		{
+			if(itemCollision[i][4]!=id && itemCollision[i][0]==x && itemCollision[i][1]==y){
+				System.out.println("collision with player or other item");
+				return true;
+			}
+		}
 		
 		
 		return false;	
@@ -54,12 +63,12 @@ public class ControllerMonster implements Runnable {
 		while(running) {
 			monsterIaTypeA();
 			try {
-				Thread.sleep(250);
+				Thread.sleep(125);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			view.getArrayPosMonsterFromController(controller.getPos());
+			//view.getArrayPosMonsterFromController(controller.getPos());
+			view.getArrayPosFromController(controller.getPos());
 		}
 		
 	}
@@ -105,9 +114,10 @@ public class ControllerMonster implements Runnable {
 			}
 			
 		
-			this.model.setDemonAPos(controllerOrder,arreyMonsterA[i][2]);
-			arreyMonsterA = this.model.getDemonAPos();
-			if(getCollisionMonster(arreyMonsterA[i][0],arreyMonsterA[i][1]))
+			this.model.setDemonPos(controllerOrder,arreyMonsterA[i][2]);
+		arreyMonsterA = this.model.getDemonAPos();
+		System.out.println(arreyMonsterA[i][2]+"<-oklm");
+			if(getCollisionMonster(arreyMonsterA[i][0],arreyMonsterA[i][1],arreyMonsterA[i][3]))
 				returnPosMonster(controllerOrder,arreyMonsterA[i][2]);
 			
 			arreyMonsterA = this.model.getDemonAPos();
@@ -121,7 +131,7 @@ public class ControllerMonster implements Runnable {
 		ControllerOrder[] inverseReal = {ControllerOrder.LEFT,ControllerOrder.RIGHT,ControllerOrder.UP,ControllerOrder.DOWN} ;
 		for(int i=0;i<4;i++){
 			if(controllerOrder == real[i]){
-				this.model.setDemonAPos(inverseReal[i],id);
+				this.model.setDemonPos(inverseReal[i],id);
 			}
 		}
 	}

@@ -29,6 +29,7 @@ public class Controller implements IController {
 	int tab[][]= new int[1][3];
 	int checkItem[] =new int[6];
 	
+	
 	/** Direction */ 
 	ControllerOrder controllerOrder;
 	/** position Player */
@@ -40,10 +41,12 @@ public class Controller implements IController {
 	// arraylist
 	private ArrayList<String> map = new ArrayList<String>();
 	
+	private ControllerFireBall controllerFireBall;
 	
 	public Controller( IView view,  IModel model) {
 		this.setView(view);
 		this.setModel(model);
+		controllerFireBall = new ControllerFireBall(this,model,view);
 		map=this.model.getWorldForController();
 	}
 	
@@ -69,7 +72,8 @@ public class Controller implements IController {
 		
 		//monsterIaTypeA();
 		
-		this.view.getArrayPosPersonageFromController(this.getPos());
+		//this.view.getArrayPosPersonageFromController(this.getPos());
+		this.view.getArrayPosFromController(this.getPos());
 	
 		System.out.println(controllerOrder);
 	}
@@ -92,12 +96,20 @@ public class Controller implements IController {
 	public IModel getModel() { return this.model; }
 	
 	public void getCollision(int x , int y){
-	
+		int[][] itemCollision=getPos();
 		positionInArraylist=map.get(20*y+x);
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
 			collision();
 			System.out.println("ok");
 			}
+		for(int i=0;i<itemCollision.length;i++)
+		{
+			System.out.println(i+" cheep"+itemCollision[i][3]);
+			if(itemCollision[i][4]!=0 && itemCollision[i][0]==x && itemCollision[i][1]==y){
+				System.out.println("collision with player or other item");
+				collision();
+			}
+		}
 		//TODO collission	
 		}
 

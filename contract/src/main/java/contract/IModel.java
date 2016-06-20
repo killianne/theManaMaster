@@ -46,7 +46,7 @@ public interface IModel {
 	public int [][] getDemonCPos();
 	public int [][] getDemonDPos();
 
-	public void setDemonAPos(ControllerOrder controllerOrder,int id);
+	public void setDemonPos(ControllerOrder controllerOrder,int id);
 	
 	public int[][] getPlayerPositions();
 	

@@ -1,6 +1,7 @@
 package controller;
 
 import contract.IModel;
+import contract.IView;
 
 public class ControllerFireBall implements Runnable {
 	
@@ -8,13 +9,16 @@ public class ControllerFireBall implements Runnable {
 	
 	private IModel model;
 	
+	private IView view;
+	
 	private static boolean running= false;
 	
 	private Thread thread;
 	
-	public ControllerFireBall(Controller ctrl, IModel model){
+	public ControllerFireBall(Controller ctrl, IModel model, IView view){
 		this.ctrl = ctrl;		
 		this.model = model;
+		this.view = view;
 	}
 
 	public void run() {
@@ -28,7 +32,7 @@ public class ControllerFireBall implements Runnable {
 	}
 	
 	public void init(){
-		
+		this.model.shootFireBall();
 	}
 	
 	public void tick(){

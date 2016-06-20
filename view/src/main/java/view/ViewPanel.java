@@ -50,7 +50,7 @@ class ViewPanel extends JPanel implements Observer {
 	
 	private String arrayItemImageName[] = {"crystal_ball","purse","gate_open","gate_closed"};
 	
-	private String arrayFIreBallImageName[] = {"fireball_1","fireball_2","fireball_3","fireball_4","fireball_5"};
+	private String arrayFireBallImageName[] = {"fireball_1","fireball_2","fireball_3","fireball_4","fireball_5"};
 	
 	/** The array that contains the name of all the lorann images */
 	private String arrayLorannImageName[] = {"lorann_b","lorann_bl","lorann_l","lorann_ul","lorann_u","lorann_ur","lorann_r","lorann_br"};
@@ -208,6 +208,15 @@ class ViewPanel extends JPanel implements Observer {
 		
 	}
 	
+	public void updateMap(int arrayPos[][]){
+		//the program was supposed to execute one of the function for what he want to use but with the thread,
+		//the array was update when I didn't want him to be so now when you move I the program update all the map 
+		this.updateMapPersonage(arrayPos);
+		this.updateMapMonster(arrayPos);
+		this.updateMapItem(arrayPos);
+		this.arrayPos = arrayPos;
+	}
+	
 	public void updateMapPersonage(int arrayPos[][]){
 		if(formerPlayerPosX != -1 && formerPlayerPosY != -1) {
 			if(formerPlayerPosX != arrayPos[0][0] || formerPlayerPosY != arrayPos[0][1]){
@@ -225,7 +234,7 @@ class ViewPanel extends JPanel implements Observer {
 			lorannKey ="";
 		}
 		
-		this.arrayPos = arrayPos;
+		//this.arrayPos = arrayPos;
 	}
 	
 	public void updateMapMonster(int arrayPos[][]){
@@ -244,7 +253,8 @@ class ViewPanel extends JPanel implements Observer {
 		for(int i=1; i<IDMaxMonsterInArray; i++){
 			for(int k=0; k<arrayMonsterImageName.length; k++){
 				if(boolMonsterFirstTime){
-					if(this.arrayPos[i][0] != arrayPos[i][0] || this.arrayPos[i][1] != arrayPos[i][1] ){
+					//if the monster isn't at the same place he used to be
+					if(this.arrayPos[i][0] != arrayPos[i][0] || this.arrayPos[i][1] != arrayPos[i][1]){
 						jArrayMap[this.arrayPos[i][1]][this.arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
 					}
 				}
@@ -253,7 +263,7 @@ class ViewPanel extends JPanel implements Observer {
 			}
 		}
 		boolMonsterFirstTime = true;
-		this.arrayPos = arrayPos;
+		//this.arrayPos = arrayPos;
 	}
 	
 	public void updateMapItem(int arrayPos[][]){
@@ -273,7 +283,7 @@ class ViewPanel extends JPanel implements Observer {
 				if(arrayPos[i][2] == k+5) { jArrayMap[arrayPos[i][1]] [arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayItemImageName[k] + ".png")); }
 			}
 		}
-		this.arrayPos = arrayPos;
+		//this.arrayPos = arrayPos;
 	}
 	
 	/**
