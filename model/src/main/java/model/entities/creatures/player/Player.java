@@ -22,16 +22,20 @@ public class Player extends Creature{
 	public boolean isFireBallNull()                     { return fireBall == null; }
 	
 	public boolean shootFireBall(){
-		if(!isFireBallNull()){
+		if(isFireBallNull()){
 			switch(direction){
 				case UP :
-					fireBall = new FireBall(posX,posY+1,ControllerOrder.DOWN);
+					fireBall = new FireBall(posX,posY,ControllerOrder.DOWN);
+					break;
 				case DOWN :
-					fireBall = new FireBall(posX,posY-1,ControllerOrder.UP);
+					fireBall = new FireBall(posX,posY,ControllerOrder.UP);
+					break;
 				case RIGHT :
-					fireBall = new FireBall(posX-1,posY,ControllerOrder.LEFT);
+					fireBall = new FireBall(posX,posY,ControllerOrder.LEFT);
+					break;
 				case LEFT :
-					fireBall = new FireBall(posX+1,posY,ControllerOrder.RIGHT);
+					fireBall = new FireBall(posX,posY,ControllerOrder.RIGHT);
+					break;
 			}
 			return true;
 		}

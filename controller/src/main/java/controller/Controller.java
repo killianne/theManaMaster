@@ -100,13 +100,13 @@ public class Controller implements IController {
 		positionInArraylist=map.get(20*y+x);
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
 			collision();
-			System.out.println("ok");
-			}
+			//System.out.println("ok");
+		}
 		for(int i=0;i<itemCollision.length;i++)
 		{
-			System.out.println(i+" cheep"+itemCollision[i][3]);
+			//System.out.println(i+" cheep"+itemCollision[i][3]);
 			if(itemCollision[i][4]!=0 && itemCollision[i][0]==x && itemCollision[i][1]==y){
-				System.out.println("collision with player or other item");
+				//System.out.println("collision with player or other item");
 				collision();
 			}
 		}
@@ -130,12 +130,18 @@ public class Controller implements IController {
 	if(controllerOrder == ControllerOrder.LEFT)  playerPositionX--;
 	if(controllerOrder == ControllerOrder.RIGHT) playerPositionX++;
 	
+	if(controllerOrder != ControllerOrder.SHOOT){
+		this.model.setPlayerDirection(controllerOrder);
+	}
 	this.model.setPlayerPosX(playerPositionX);
 	this.model.setPlayerPosY(playerPositionY);
 }
 
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		this.controllerOrder=controllerOrder;
+		if(controllerOrder == controllerOrder.SHOOT){
+			this.controllerFireBall.start();
+		}
 		this.run();
 	}
 

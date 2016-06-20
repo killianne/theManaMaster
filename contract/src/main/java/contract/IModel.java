@@ -33,13 +33,16 @@ public interface IModel {
 	Observable getObservable();
 	
 	public boolean shootFireBall();
-	
-	
+	public void moveFireBall();
+	public int[] getPosFireBall();
+	public ControllerOrder getDirectionFireBall();
+	public void moveFireBallReverse();
 	
 	public int getPlayerPosX();
 	public int getPlayerPosY();
 	public void setPlayerPosY(int y);
 	public void setPlayerPosX(int x);
+	public void setPlayerDirection(ControllerOrder direction);
 	
 	public int [][] getDemonAPos();
 	public int [][] getDemonBPos();

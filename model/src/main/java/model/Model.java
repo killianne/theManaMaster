@@ -36,7 +36,6 @@ public class Model extends Observable implements IModel{
 	public void instantiateMonsters(){
 		this.alEntity = new ArrayList<Entity>();
 		for(int i=0;i<daoWorld.loadDemonAPosition(world.getId()).size()/2;i+=2){
-			System.out.println(daoWorld.loadDemonAPosition(world.getId()).get(i+1));
 			alEntity.add(new DemonA(daoWorld.loadDemonAPosition(world.getId()).get(i)-1,daoWorld.loadDemonAPosition(world.getId()).get(i+1)-1));
 		}
 		for(int i=0;i<daoWorld.loadDemonBPosition(world.getId()).size()/2;i+=2){
@@ -131,17 +130,41 @@ public class Model extends Observable implements IModel{
 			}
 			
 		}
+		/*
 		for(int i=0; i<array.length; i++){
 			for(int j=0; j<array[0].length; j++){
 				System.out.print(array[i][j] + "-");
 			}
 			System.out.println();
-		}
+		}*/
 		return array;
 	}
 	
 	public boolean shootFireBall(){
 		return player.shootFireBall();
+	}
+	
+	public void moveFireBall(){
+		player.getFireBall().move();
+	}
+	
+	public int[] getPosFireBall(){
+		int[] arrayPosFB = new int[2];
+		arrayPosFB[0] = player.getFireBall().getPosX();
+		arrayPosFB[1] = player.getFireBall().getPosY();
+		return arrayPosFB;
+	}
+	
+	public void moveFireBallReverse(){
+		this.player.getFireBall().moveReverse();
+	}
+	
+	public void setPlayerDirection(ControllerOrder direction){
+		player.setDirection(direction);
+	}
+	
+	public ControllerOrder getDirectionFireBall(){
+		return player.getFireBall().getDirection();
 	}
 	
 	public ArrayList<Integer> getPlayerPosition(){
@@ -274,12 +297,14 @@ public class Model extends Observable implements IModel{
 		}
 		//arrayDem[x][0] = X; arrayDem[x][1] = Y; arrayDem[x][2] = ID in ArrayList; arrayDem[x][3] = ID in arrayPos
 		int[][] arrayDem = new int[counter][4];
+		int cpt = 0;
 		for(int i=0;i<alEntity.size();i++ ){
 			if(alEntity.get(i) instanceof DemonA ){
-				arrayDem[i][0]=alEntity.get(i).getPosX();
-				arrayDem[i][1]=alEntity.get(i).getPosY();
-				arrayDem[i][2]=i;
-				arrayDem[i][3]=i+1;
+				arrayDem[cpt][0]=alEntity.get(i).getPosX();
+				arrayDem[cpt][1]=alEntity.get(i).getPosY();
+				arrayDem[cpt][2]=i;
+				arrayDem[cpt][3]=i+1;
+				cpt++;
 			}
 		}
 		if(counter==0)
@@ -295,18 +320,22 @@ public class Model extends Observable implements IModel{
 				counter++;
 			}
 		}
-		int[][] arrayDem = new int[counter][3];
+		int[][] arrayDem = new int[counter][4];
+		int cpt = 0;
 		for(int i=0;i<alEntity.size();i++ ){
 			if(alEntity.get(i) instanceof DemonB ){
-				arrayDem[i][0]=alEntity.get(i).getPosX();
-				arrayDem[i][1]=alEntity.get(i).getPosY();
-				arrayDem[i][2]=i;
+				arrayDem[cpt][0]=alEntity.get(i).getPosX();
+				arrayDem[cpt][1]=alEntity.get(i).getPosY();
+				arrayDem[cpt][2]=i;
+				arrayDem[cpt][3]=i+1;
+				cpt++;
 			}
 		}
 		if(counter==0)
 			return null;
 		return arrayDem;
 	}
+	
 	public int[][] getDemonCPos(){
 		int counter=0;
 		for(int i=0;i<alEntity.size();i++ ){
@@ -314,18 +343,22 @@ public class Model extends Observable implements IModel{
 				counter++;
 			}
 		}
-		int[][] arrayDem = new int[counter][3];
+		int[][] arrayDem = new int[counter][4];
+		int cpt = 0;
 		for(int i=0;i<alEntity.size();i++ ){
 			if(alEntity.get(i) instanceof DemonC ){
-				arrayDem[i][0]=alEntity.get(i).getPosX();
-				arrayDem[i][1]=alEntity.get(i).getPosY();
-				arrayDem[i][2]=i;
+				arrayDem[cpt][0]=alEntity.get(i).getPosX();
+				arrayDem[cpt][1]=alEntity.get(i).getPosY();
+				arrayDem[cpt][2]=i;
+				arrayDem[cpt][3]=i+1;
+				cpt++;
 			}
 		}
 		if(counter==0)
 			return null;
 		return arrayDem;
 	}
+	
 	public int[][] getDemonDPos(){
 		int counter=0;
 		for(int i=0;i<alEntity.size();i++ ){
@@ -333,12 +366,15 @@ public class Model extends Observable implements IModel{
 				counter++;
 			}
 		}
-		int[][] arrayDem = new int[counter][3];
+		int[][] arrayDem = new int[counter][4];
+		int cpt = 0;
 		for(int i=0;i<alEntity.size();i++ ){
 			if(alEntity.get(i) instanceof DemonD ){
-				arrayDem[i][0]=alEntity.get(i).getPosX();
-				arrayDem[i][1]=alEntity.get(i).getPosY();
-				arrayDem[i][2]=i;
+				arrayDem[cpt][0]=alEntity.get(i).getPosX();
+				arrayDem[cpt][1]=alEntity.get(i).getPosY();
+				arrayDem[cpt][2]=i;
+				arrayDem[cpt][3]=i+1;
+				cpt++;
 			}
 		}
 		if(counter==0)
@@ -348,7 +384,6 @@ public class Model extends Observable implements IModel{
 	
 	
 	public void setDemonPos(ControllerOrder controllerOrder,int id){
-		System.out.println("x debut : " + alEntity.get(id).getPosX() + " | y debut : " + alEntity.get(id).getPosY());
 		switch(controllerOrder){
 			case RIGHT:
 				alEntity.get(id).setPosX(alEntity.get(id).getPosX() + 1);
@@ -363,7 +398,6 @@ public class Model extends Observable implements IModel{
 				alEntity.get(id).setPosY(alEntity.get(id).getPosY() + 1);
 				break;
 		}
-		System.out.println("x fin : " + alEntity.get(id).getPosX() + " | y fin : " + alEntity.get(id).getPosY());
 	}
 	
 

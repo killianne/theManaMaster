@@ -12,6 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import contract.ControllerOrder;
+
 /**
  * The Class ViewPanel.
  *
@@ -70,6 +72,8 @@ class ViewPanel extends JPanel implements Observer {
 	private String lorannKey = "";
 	
 	private boolean boolMonsterFirstTime = false;
+	
+	private int formerPosXFireBall = -1, formerPosYFireBall = -1;
 
 
 	/**
@@ -286,8 +290,18 @@ class ViewPanel extends JPanel implements Observer {
 		//this.arrayPos = arrayPos;
 	}
 	
+	public void updateMapFireBall(int posX, int posY, int IDImage, ControllerOrder direction){
+		if(this.formerPosXFireBall != -1 && this.formerPosYFireBall != -1){
+			jArrayMap[this.formerPosYFireBall][this.formerPosXFireBall].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
+		}
+		jArrayMap[posY][posX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayFireBallImageName[IDImage] + ".png"));
+		
+		this.formerPosXFireBall = posX;
+		this.formerPosYFireBall = posY;
+	}
+	
 	/**
-	 * Make the sprite of the personage moove
+	 * Make the sprite of the personage move
 	 * 
 	 * @param counterThread
 	 * 				The Id the personage's image

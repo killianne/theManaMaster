@@ -8,7 +8,7 @@ public class FireBall extends Item{
 	
 	public FireBall(int posX, int posY, ControllerOrder direction) {
 		super(posX, posY);
-		setDirection(direction);
+		this.direction = direction;
 	}
 	
 
@@ -44,8 +44,41 @@ public class FireBall extends Item{
 			this.posX++;
 	}
 	
-	public ControllerOrder getDirection(){
-		return this.direction;
+	public void moveReverse(){
+		/*
+		if(this.direction == ControllerOrder.UL){
+			this.posY--;
+			this.posX--;
+		}
+		if(this.direction == ControllerOrder.UR){
+			this.posY--;
+			this.posX++;
+		}
+		if(this.direction == ControllerOrder.DL){
+			this.posY++;
+			this.posX--;
+		}
+		if(this.direction == ControllerOrder.DR){
+			this.posY++;
+			this.posX++;
+		}
+		*/
+		if(this.direction == ControllerOrder.UP){
+			this.posY++;
+			this.direction = ControllerOrder.DOWN;
+		}
+		else if(this.direction == ControllerOrder.DOWN){
+			this.posY--;
+			this.direction = ControllerOrder.UP;
+		}
+		else if(this.direction == ControllerOrder.LEFT){
+			this.posX++;
+			this.direction = ControllerOrder.RIGHT;
+		}
+		else if(this.direction == ControllerOrder.RIGHT){
+			this.posX--;
+			this.direction = ControllerOrder.LEFT;
+		}
 	}
 	
 	public void setDirection(ControllerOrder direction){
@@ -53,6 +86,8 @@ public class FireBall extends Item{
 	}
 
 	public boolean isDead() 	  { return false; }
+	
+	public ControllerOrder getDirection() { return direction; }
 
 	public int getPosX()          { return this.posX; }
 

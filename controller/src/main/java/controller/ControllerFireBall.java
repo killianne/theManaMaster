@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import contract.IModel;
 import contract.IView;
 
@@ -11,9 +13,13 @@ public class ControllerFireBall implements Runnable {
 	
 	private IView view;
 	
+	private int idImage=0;
+	
 	private static boolean running= false;
 	
 	private Thread thread;
+	
+	private ArrayList<String> alMap;
 	
 	public ControllerFireBall(Controller ctrl, IModel model, IView view){
 		this.ctrl = ctrl;		
@@ -27,20 +33,27 @@ public class ControllerFireBall implements Runnable {
 		while(running) {
 			tick();
 			render();
+			idImage++;
+			if(idImage == 5) { idImage=0;}
+			
+			try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
 		
 	}
 	
 	public void init(){
 		this.model.shootFireBall();
+		alMap = this.model.getWorldForController();
 	}
 	
 	public void tick(){
-		
+		this.model.moveFireBall();
+		this.collision();
 	}
 	
 	public void render(){
-		
+		System.out.println("dir view : " + this.model.getDirectionFireBall());
+		this.view.getArrayPosFireBallFromController(this.model.getPosFireBall()[0], this.model.getPosFireBall()[1], this.idImage, this.model.getDirectionFireBall());
 	}
 	
 	public synchronized void start(){
@@ -62,6 +75,14 @@ public class ControllerFireBall implements Runnable {
 		}
 	}
 	
-	
+	public void collision(){
+		int x = this.model.getPosFireBall()[0];
+		int y = this.model.getPosFireBall()[1];
+		String elementInArrayList = alMap.get(20*y+x);
+		if(elementInArrayList.equals("vb") || elementInArrayList.equals("hb") || elementInArrayList.equals("b")){
+			System.out.println("MUR !!");
+			this.model.moveFireBallReverse();
+		}
+	}
 
 }

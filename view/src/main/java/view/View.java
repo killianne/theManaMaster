@@ -91,6 +91,10 @@ public class View implements IView, Runnable {
 		viewFrame.getViewPanel().updateMapItem(arrayPos);
 	}
 	
+	public void getArrayPosFireBallFromController(int x, int y, int id, ControllerOrder direction){
+		viewFrame.getViewPanel().updateMapFireBall(x, y, id, direction);
+	}
+	
 	protected static int getCounterThread(){
 		return counterThread;
 	}
@@ -147,7 +151,6 @@ public class View implements IView, Runnable {
 			e.printStackTrace();
 		}
 	}
-	
 
 	/**
 	 * Sets the controller.
