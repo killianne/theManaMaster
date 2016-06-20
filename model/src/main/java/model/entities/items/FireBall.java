@@ -10,6 +10,7 @@ public class FireBall extends Item{
 		super(posX, posY);
 		setDirection(direction);
 	}
+	
 
 	public boolean isSolid()      { return false; } // Go into Player and Monsters  --> KILL monsters.
 

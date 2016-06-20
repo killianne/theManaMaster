@@ -112,12 +112,14 @@ public class Model extends Observable implements IModel{
 			if(alEntity.get(i) instanceof Door) {
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
-				/*if(alEntity.get(i).isOpen()){*/
+				Door door = (Door) alEntity.get(i);
+				boolean isOpen = door.isOpen();
+				if(isOpen){
 					array[i+1][2] = 7;
-			/*	}
+				}
 				else{
 					array[i+1][2] = 8;
-				}*/
+				}
 				array[i+1][3] = i;
 			}
 			
@@ -129,6 +131,10 @@ public class Model extends Observable implements IModel{
 			System.out.println();
 		}
 		return array;
+	}
+	
+	public boolean shootFireBall(){
+		return player.shootFireBall();
 	}
 	
 	public ArrayList<Integer> getPlayerPosition(){

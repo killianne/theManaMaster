@@ -1,15 +1,20 @@
 package controller;
 
+import contract.IModel;
+
 public class ControllerFireBall implements Runnable {
 	
 	private Controller ctrl;
+	
+	private IModel model;
 	
 	private static boolean running= false;
 	
 	private Thread thread;
 	
-	public ControllerFireBall(Controller ctrl){
+	public ControllerFireBall(Controller ctrl, IModel model){
 		this.ctrl = ctrl;		
+		this.model = model;
 	}
 
 	public void run() {
@@ -23,7 +28,7 @@ public class ControllerFireBall implements Runnable {
 	}
 	
 	public void init(){
-		this.ctrl.getModel();
+		
 	}
 	
 	public void tick(){

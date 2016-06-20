@@ -32,6 +32,8 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
+	public boolean shootFireBall();
+	
 	
 	
 	public int getPlayerPosX();

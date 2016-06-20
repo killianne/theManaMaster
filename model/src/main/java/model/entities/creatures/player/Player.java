@@ -18,6 +18,25 @@ public class Player extends Creature{
 	public FireBall getFireBall() 						{ return fireBall; }
 
 	public void setFireBall(FireBall fireBall) 			{ this.fireBall = fireBall; }
+	
+	public boolean isFireBallNull()                     { return fireBall == null; }
+	
+	public boolean shootFireBall(){
+		if(!isFireBallNull()){
+			switch(direction){
+				case UP :
+					fireBall = new FireBall(posX,posY+1,ControllerOrder.DOWN);
+				case DOWN :
+					fireBall = new FireBall(posX,posY-1,ControllerOrder.UP);
+				case RIGHT :
+					fireBall = new FireBall(posX-1,posY,ControllerOrder.LEFT);
+				case LEFT :
+					fireBall = new FireBall(posX+1,posY,ControllerOrder.RIGHT);
+			}
+			return true;
+		}
+		return false;
+	}
 
 	public ControllerOrder getDirection() 				{ return this.direction; }
 
