@@ -136,12 +136,13 @@ public class Controller implements IController {
 		
 	}
 	
+	public IModel getModel() { return this.model; }
+	
 	public void returnPosMonster(ControllerOrder controllerOrder,int id){
 		ControllerOrder[] real = {ControllerOrder.RIGHT,ControllerOrder.LEFT,ControllerOrder.DOWN,ControllerOrder.UP} ;
 		ControllerOrder[] inverseReal = {ControllerOrder.LEFT,ControllerOrder.RIGHT,ControllerOrder.UP,ControllerOrder.DOWN} ;
 		for(int i=0;i<4;i++){
 			if(controllerOrder == real[i]){
-				System.out.println("ok sa me casse les couille:" + i);
 				this.model.setDemonAPos(inverseReal[i],id);
 			}
 		}
