@@ -107,7 +107,17 @@ public class Controller implements IController {
 			//System.out.println(i+" cheep"+itemCollision[i][3]);
 			if(itemCollision[i][4]!=0 && itemCollision[i][0]==x && itemCollision[i][1]==y){
 				//System.out.println("collision with player or other item");
-				collision();
+				if(itemCollision[i][2]==6){
+					this.model.addPurse(500);
+					this.view.setScore(this.model.getPurse());
+					this.model.removeAlFromEntity(itemCollision[i][3]);
+				}
+				else if(itemCollision[i][2]==5){
+					this.model.openDoor(itemCollision[i][3]);
+					this.model.removeAlFromEntity(itemCollision[i][3]);
+				}
+				
+				else {collision();}
 			}
 		}
 		//TODO collission	

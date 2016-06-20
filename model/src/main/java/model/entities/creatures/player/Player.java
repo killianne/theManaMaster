@@ -9,6 +9,16 @@ public class Player extends Creature{
 
 	FireBall fireBall;
 	Model model;
+	int purse=0;
+	
+	public int getPurse() {
+		return purse;
+	}
+
+	public void addPurse(int purse) {
+		this.purse += purse;
+	}
+
 	ControllerOrder direction;
 	
 	public Player(int posX, int posY, ControllerOrder direction) {

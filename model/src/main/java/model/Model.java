@@ -417,8 +417,28 @@ public class Model extends Observable implements IModel{
 		
 		return null;
 	}
+	
+	public void addPurse(int purse){
+		player.addPurse(purse);
+	}
+	
+	public int getPurse(){
+		return player.getPurse();
+	}
+	
+	public void removeAlFromEntity(int id){
+		alEntity.remove(id);
+	}
 
-
+	public void openDoor(int id){
+		
+		Door door = (Door) alEntity.get(id);
+		door.openDoor();
+	//	alEntity.get(id)=door;
+		((Door) alEntity.get(id)).openDoor();
+	}
+	
+	
 
 	/*
 	public void tickAll(){

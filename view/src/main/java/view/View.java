@@ -162,5 +162,7 @@ public class View implements IView, Runnable {
 		viewFrame.setController(controller);
 	}
 
-
+	public void setScore(int purse){
+		this.viewFrame.getViewPanel().setScore(purse);
+	}
 }

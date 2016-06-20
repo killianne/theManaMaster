@@ -32,6 +32,12 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
+	public void addPurse(int purse);
+	public int getPurse();
+	public void openDoor(int id);
+	
+	public void removeAlFromEntity(int id);
+	
 	public boolean shootFireBall();
 	public void moveFireBall();
 	public int[] getPosFireBall();

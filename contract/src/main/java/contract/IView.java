@@ -20,5 +20,7 @@ public interface IView {
 	public void getArrayPosItemFromController(int[][] arrayPos);
 	
 	public void getArrayPosFireBallFromController(int x, int y,int id, ControllerOrder direction);
+	
+	public void setScore(int purse);
 
 }
