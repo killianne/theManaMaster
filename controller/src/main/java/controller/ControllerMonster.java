@@ -62,6 +62,7 @@ public class ControllerMonster implements Runnable {
 		
 		while(running) {
 			monsterIaTypeA();
+			monsterIaTypeB();
 			try {
 				Thread.sleep(125);
 			} catch (InterruptedException e) {
@@ -96,7 +97,6 @@ public class ControllerMonster implements Runnable {
 		int[][] arreyMonsterA = this.model.getDemonAPos();
 		for(int i=0; i<arreyMonsterA.length; i++){
 			random = (int) (Math.random() * 4);
-			System.out.println(random);
 			
 			switch(random){
 			case 0:
@@ -116,7 +116,6 @@ public class ControllerMonster implements Runnable {
 		
 			this.model.setDemonPos(controllerOrder,arreyMonsterA[i][2]);
 		arreyMonsterA = this.model.getDemonAPos();
-		System.out.println(arreyMonsterA[i][2]+"<-oklm");
 			if(getCollisionMonster(arreyMonsterA[i][0],arreyMonsterA[i][1],arreyMonsterA[i][3]))
 				returnPosMonster(controllerOrder,arreyMonsterA[i][2]);
 			
@@ -125,7 +124,88 @@ public class ControllerMonster implements Runnable {
 		}
 		
 	}
+	public void monsterIaTypeB(){
+		ControllerOrder controllerOrder = ControllerOrder.NO;
+		int random;
+		int[][] position=controller.getPos();
+		int x,y;
+		boolean xT=false,yT=false;
+		int[][] arreyMonsterB = this.model.getDemonBPos();
+		for(int i=0; i<arreyMonsterB.length; i++){
+			
+			x=position[0][0]-arreyMonsterB[i][0];
+			y=position[0][1]-arreyMonsterB[i][1];
+			 if(x<= 0){
+				 x=x*-1;
+				 xT=true;
+			 }
+			 if(y<=0){
+				 y=y*-1;
+				 yT=true;
+			 }
+			controllerOrder=iAMonsterBExtend( x,  y,  xT , yT);
+			
+			 
+			 
+			 
+			 
+			System.out.println("Monster B direction: "+controllerOrder + " // X="+x+"Y="+y);
+		
+			
+			
+			
+			
+		
+			this.model.setDemonPos(controllerOrder,arreyMonsterB[i][2]);
+			arreyMonsterB = this.model.getDemonBPos();
+			if(getCollisionMonster(arreyMonsterB[i][0],arreyMonsterB[i][1],arreyMonsterB[i][3]))
+				returnPosMonster(controllerOrder,arreyMonsterB[i][2]);
+							
+			arreyMonsterB = this.model.getDemonBPos();
+			
+		}
+		
+	}
+	public ControllerOrder iAMonsterBExtend(int x, int y, boolean xT ,boolean yT){
 	
+		if(x<y && xT==true && x!=0){
+			System.out.println("1");
+			 return ControllerOrder.LEFT;
+		 }
+		 else if(x<y && x!=0 ){
+			 System.out.println("2");
+			 return ControllerOrder.RIGHT;
+		 }
+		 else if(y<x && yT==true&& y!=0){
+			 System.out.println("3");
+			 return ControllerOrder.UP;
+		 }
+		 else if(y<x && y!=0){
+			 System.out.println("4");
+			 return ControllerOrder.DOWN;
+		 }
+		 else if(x<y  && x==0 && yT==true){
+			 System.out.println("5");
+			 return ControllerOrder.UP;
+		 }
+		 else if(x<y && x==0 ){
+			 System.out.println("6");
+			 return ControllerOrder.DOWN;
+		 }
+		 else if(y<x  && y==0 && xT==true){
+			 System.out.println("7");
+			 return ControllerOrder.LEFT;
+		 }
+		 else if(y<x && y==0){
+			 System.out.println("8");
+			 return ControllerOrder.RIGHT;
+		 }
+		 else{
+			 return ControllerOrder.NO;
+		 }
+		
+		
+	}
 	public void returnPosMonster(ControllerOrder controllerOrder,int id){
 		ControllerOrder[] real = {ControllerOrder.RIGHT,ControllerOrder.LEFT,ControllerOrder.DOWN,ControllerOrder.UP} ;
 		ControllerOrder[] inverseReal = {ControllerOrder.LEFT,ControllerOrder.RIGHT,ControllerOrder.UP,ControllerOrder.DOWN} ;
