@@ -1,6 +1,4 @@
-package model.entities.items.walls;
-
-import model.entities.items.Item;
+package model.entities.items;
 
 public abstract class Wall extends Item{
 
