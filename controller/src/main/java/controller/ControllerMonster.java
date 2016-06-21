@@ -73,21 +73,20 @@ public class ControllerMonster implements Runnable {
 		while(running) {
 			
 			if(this.model.getSwitchWorldMonster()){
+				try { thread.sleep(500);} catch (InterruptedException e) { e.printStackTrace(); }
 				map=this.model.getWorldForController();
-				getMonster();}
+				getMonster();
+				}
 			if(iaMonster1){
 				monsterIaTypeA();
 				System.out.println("ok------>><<");
 				}
-				if(iaMonster2)
+			if(iaMonster2)
 				monsterIaTypeB();
-			try {
-				Thread.sleep(125);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			
 			//view.getArrayPosMonsterFromController(controller.getPos());
 			view.getArrayPosFromController(controller.getPos());
+			try { Thread.sleep(125); } catch (InterruptedException e) {e.printStackTrace();}
 		}
 		
 	}

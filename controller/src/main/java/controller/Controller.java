@@ -65,8 +65,15 @@ public class Controller implements IController {
 	}
 	
 	public void run() throws Exception{
-		if(this.model.getSwitchWorldPlayer())
+		if(this.model.getSwitchWorldPlayer()){
 			map=this.model.getWorldForController();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 		this.memoryPos();
 		this.playerMove();
 		this.getCollision(playerPositionX, playerPositionY);

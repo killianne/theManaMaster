@@ -216,7 +216,7 @@ class ViewPanel extends JPanel implements Observer {
 		
 	}
 	
-	public void updateMap(int arrayPos[][]){
+	public synchronized void updateMap(int arrayPos[][]){
 		//the program was supposed to execute one of the function for what he want to use but with the thread,
 		//the array was update when I didn't want him to be so now when you move I the program update all the map 
 		this.updateMapPersonage(arrayPos);
@@ -225,7 +225,7 @@ class ViewPanel extends JPanel implements Observer {
 		this.arrayPos = arrayPos;
 	}
 	
-	public void updateMapPersonage(int arrayPos[][]){
+	public synchronized void updateMapPersonage(int arrayPos[][]){
 		if(formerPlayerPosX != -1 && formerPlayerPosY != -1) {
 			if(formerPlayerPosX != arrayPos[0][0] || formerPlayerPosY != arrayPos[0][1]){
 				jArrayMap[formerPlayerPosY][formerPlayerPosX].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
@@ -245,7 +245,7 @@ class ViewPanel extends JPanel implements Observer {
 		//this.arrayPos = arrayPos;
 	}
 	
-	public void updateMapMonster(int arrayPos[][]){
+	public synchronized void updateMapMonster(int arrayPos[][]){
 		System.out.println("Salut");
 		int IDMaxMonsterInArray=1;
 		//i and IDMaxMonsterInArray = 1 because we don't want the pos of the player
@@ -277,7 +277,7 @@ class ViewPanel extends JPanel implements Observer {
 		//this.arrayPos = arrayPos;
 	}
 	
-	public void updateMapItem(int arrayPos[][]){
+	public synchronized void updateMapItem(int arrayPos[][]){
 		int IDMinItemInArray=0;
 		//i = 1 because we don't want the pos of the player
 		//calculate where the monster stop in the array
