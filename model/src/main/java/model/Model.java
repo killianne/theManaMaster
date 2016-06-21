@@ -32,7 +32,11 @@ public class Model extends Observable implements IModel{
 	public int lastPlayerX;
 	public int lastPlayerY;
 	
+	@SuppressWarnings("unused")
 	public void instantiateMonsters() throws Exception{
+		
+		if(this == null)
+			throw new Exception("npe : object not instanciated");
 		
 		this.alEntity = new ArrayList<Entity>();
 		for(int i=0;i<daoWorld.loadDemonAPosition(world.getId()).size()/2;i+=2){
