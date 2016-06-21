@@ -33,7 +33,6 @@ public class Model extends Observable implements IModel{
 	public int lastPlayerY;
 	
 	public void instantiateMonsters() throws Exception{
-		 player = new Player(0,0, ControllerOrder.NO);
 		
 		this.alEntity = new ArrayList<Entity>();
 		for(int i=0;i<daoWorld.loadDemonAPosition(world.getId()).size()/2;i+=2){
@@ -239,7 +238,8 @@ public class Model extends Observable implements IModel{
 	}
 	
 	
-	public Model(){
+	public Model() throws Exception{
+		player = new Player(0,0, ControllerOrder.NO);
 	}
 
 	public ArrayList<String> getWorldForController(){
