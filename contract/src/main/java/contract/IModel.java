@@ -21,6 +21,9 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
+	public boolean getSwitchWorldMonster();
+	public boolean getSwitchWorldPlayer();
+	
 	public void addPurse(int purse);
 	public int getPurse();
 	public void openDoor(int id);

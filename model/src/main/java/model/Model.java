@@ -443,17 +443,36 @@ public class Model extends Observable implements IModel{
 	public void switchWorld() throws Exception{
 		if(world.getId() == 2){
 			world.setId(1);
+			switchWorld++;
 		}
 		else if(world.getId() == 1){
 			world.setId(3);
+			switchWorld++;
 		}
 		else{
 			world.setId(world.getId() + 1);
+			switchWorld++;
 		}
 		alEntity = null;
 		instantiateMonsters();
 		arrayPos();
 	}
-	
+	int switchWorld=0;
+	int hereSwitchWorldPlayer=0;
+	int hereSwitchWorldMonster=0;
+	public boolean getSwitchWorldPlayer(){
+		if(switchWorld != hereSwitchWorldPlayer){
+			hereSwitchWorldPlayer=switchWorld;
+			return true;
+		}
+		return false;
+	}
+	public boolean getSwitchWorldMonster(){
+		if(switchWorld != hereSwitchWorldMonster){
+			hereSwitchWorldMonster=switchWorld;
+			return true;
+		}
+	return false;
+}
 	
 }

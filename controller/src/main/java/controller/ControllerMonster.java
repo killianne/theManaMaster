@@ -56,21 +56,28 @@ public class ControllerMonster implements Runnable {
 	}
 	public void init(){
 		//this.controller.getModel();
+		getMonster();
+	}
+	public void getMonster()
+	{
 		this.itemCollision=controller.getPos();
 		for(int i=0;i<itemCollision.length;i++){
 			if(itemCollision[i][2] == 1){ iaMonster1=true; }
 			if(itemCollision[i][2] == 2){ iaMonster2=true; }
 		}
 	}
-	
 	public void run(){
 		
 		init();
 		
 		while(running) {
-			map=this.model.getWorldForController();
+			
+			if(this.model.getSwitchWorldMonster()){
+				map=this.model.getWorldForController();
+				getMonster();}
 			if(iaMonster1){
 				monsterIaTypeA();
+				System.out.println("ok------>><<");
 				}
 				if(iaMonster2)
 				monsterIaTypeB();
