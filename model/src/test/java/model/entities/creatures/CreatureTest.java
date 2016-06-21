@@ -21,14 +21,7 @@ public class CreatureTest extends EntityTest{
 	
 	@Before
 	public void setUp() throws Exception {
-	}
-	
-	public void testGetPosX(){
-		assertNotNull(this.creature.getPosX());
-	}
-	
-	public void testGetPosY(){
-		assertNotNull(this.creature.getPosY());
+		// Abstract class
 	}
 
 }

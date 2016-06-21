@@ -12,24 +12,16 @@ public class EntityTest{
 
 	protected Entity entity;
 	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
 	@Before
 	public void setUp() throws Exception {
+		// Abstract class
 	}
 
-	@Test
-	public void testGetPosX(){
-		assertNotNull(this.entity.getPosX());
+	/*
+	public void testIsDead(){
+		assertNotNull(this.entity.isDead());
 	}
-	
-	@Test
-	public void testGetPosY(){
-		assertNotNull(this.entity.getPosY());
-	}
-	
+	*/
 	
 
 }

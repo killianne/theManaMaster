@@ -46,6 +46,25 @@ public class PlayerTest extends CreatureTest{
 	}
 	
 	@Test
+	public void testIsDead(){ // Life is 0
+		boolean expected = true;
+		assertEquals(expected, this.creature.isDead());
+	}
+	
+	@Test
+	public void testGetHealth(){
+		int expected = 0; // No Lives have been put;
+		assertEquals(expected, this.creature.getHealth());
+	}
+	
+	@Test
+	public void testSetHealth(){
+		int expected = 11;
+		this.creature.setHealth(expected);
+		assertEquals(expected, this.creature.getHealth());
+	}
+	
+	@Test
 	public void testPlayerMinPosX(){
 		try{
 		new Player(-1, 9, ControllerOrder.NO);
