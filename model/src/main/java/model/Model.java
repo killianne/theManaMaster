@@ -21,7 +21,7 @@ import model.worlds.World;
 public class Model extends Observable implements IModel{
 
 	
-	protected World world  = new World(3);
+	protected World world  = new World(2);
 	DAOWorld daoWorld = new DAOWorld();
 	private IController controller;
 	
@@ -31,8 +31,6 @@ public class Model extends Observable implements IModel{
 	
 	public int lastPlayerX;
 	public int lastPlayerY;
-	
-	public boolean isOpen = false;
 	
 	public void instantiateMonsters() throws Exception{
 		
@@ -57,6 +55,7 @@ public class Model extends Observable implements IModel{
 		}
 		for(int i=0;i<daoWorld.loadDoorPosition(world.getId()).size()/2;i+=2){
 			alEntity.add(new Door(daoWorld.loadDoorPosition(world.getId()).get(i)-1,daoWorld.loadDoorPosition(world.getId()).get(i+1)-1,daoWorld.loadDoorPosition(world.getId()).get(i+2)==1));
+			System.out.println(daoWorld.loadDoorPosition(world.getId()).get(i+2));
 		}
 		
 		//instantiation of the personage in function the Database
@@ -119,8 +118,8 @@ public class Model extends Observable implements IModel{
 			if(alEntity.get(i) instanceof Door) {
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
-				//Door door = (Door) alEntity.get(i);
-				//boolean isOpen = door.isOpen();
+				Door door = (Door) alEntity.get(i);
+				boolean isOpen = door.isOpen();
 				if(isOpen){
 					array[i+1][2] = 7;
 				}
@@ -132,13 +131,14 @@ public class Model extends Observable implements IModel{
 			}
 			
 		}
-		/*
 		for(int i=0; i<array.length; i++){
 			for(int j=0; j<array[0].length; j++){
 				System.out.print(array[i][j] + "-");
 			}
 			System.out.println();
-		}*/
+		}
+		System.out.println();
+		System.out.println();
 		
 		return array;
 	}
@@ -404,9 +404,6 @@ public class Model extends Observable implements IModel{
 		}
 	}
 	
-
-	
-	
 	private int tab[][] = new int[1][3];
 	public int[][] getPlayerPositions(){
 		tab[0][0] = player.getPosX();
@@ -433,20 +430,30 @@ public class Model extends Observable implements IModel{
 	public void removeAlFromEntity(int id){
 		alEntity.remove(id);
 	}
+	
 	/**
 	 *Open the closed door
 	 */
-	public void openDoor(){
-		
-		isOpen = true;
+	public void openDoor(int id){
+		Door door = (Door) alEntity.get(id);
+		door.openDoor();
+		alEntity.set(id,(Entity) door);
 	}
 	
-	
-
-	/*
-	public void tickAll(){
-		getPlayer().tick();
+	public void switchWorld() throws Exception{
+		if(world.getId() == 2){
+			world.setId(1);
+		}
+		else if(world.getId() == 1){
+			world.setId(3);
+		}
+		else{
+			world.setId(world.getId() + 1);
+		}
+		alEntity = null;
+		instantiateMonsters();
+		arrayPos();
 	}
-	*/
+	
 	
 }

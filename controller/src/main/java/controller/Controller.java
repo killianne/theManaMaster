@@ -64,7 +64,7 @@ public class Controller implements IController {
 		this.view.getArrayPosFromController(this.getPos());
 	}
 	
-	public void run(){
+	public void run() throws Exception{
 	
 		this.memoryPos();
 		this.playerMove();
@@ -95,7 +95,7 @@ public class Controller implements IController {
 	
 	public IModel getModel() { return this.model; }
 	
-	public void getCollision(int x , int y){
+	public void getCollision(int x , int y) throws Exception{
 		int[][] itemCollision=getPos();
 		positionInArraylist=map.get(20*y+x);
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
@@ -105,7 +105,11 @@ public class Controller implements IController {
 		{
 			if(itemCollision[i][4]!=0 && itemCollision[i][0]==x && itemCollision[i][1]==y){
 				if(itemCollision[i][2]==5){
-					this.model.openDoor();
+					for(int j=0; j<itemCollision.length;j++){
+						if(itemCollision[j][2]==8){
+							this.model.openDoor(itemCollision[j][3]);
+						}
+					}
 					this.model.removeAlFromEntity(itemCollision[i][3]);
 				}
 				else if(itemCollision[i][2]==6){
@@ -113,16 +117,17 @@ public class Controller implements IController {
 					this.view.setScore(this.model.getPurse());
 					this.model.removeAlFromEntity(itemCollision[i][3]);
 				}
-				else if(itemCollision[i][2]==8){
-					
+				else if(itemCollision[i][2]==7){
+					this.model.switchWorld();
+					this.view.getMapFromController(this.model.getWorldForController());
+					this.view.setBoolMonsterFirstTimeToFalse();
 				}
-				
-				
-				else {collision();}
+				else {
+					collision();
+				}
 			}
 		}
-		//TODO collission	
-		}
+	}
 
 	public void collision(){
 	this.model.setPlayerPosX(lastPlayerPositionX);
@@ -148,7 +153,7 @@ public class Controller implements IController {
 	this.model.setPlayerPosY(playerPositionY);
 }
 
-	public void orderPerform(final ControllerOrder controllerOrder) {
+	public void orderPerform(final ControllerOrder controllerOrder) throws Exception {
 		this.controllerOrder=controllerOrder;
 		if(controllerOrder == controllerOrder.SHOOT){
 			this.controllerFireBall.start();

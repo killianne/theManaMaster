@@ -103,6 +103,10 @@ class ViewPanel extends JPanel implements Observer {
 		this.lorannKey=s;
 	}
 	
+	public void setBoolMonsterFirstTimeToFalse(){
+		this.boolMonsterFirstTime = false;
+	}
+	
 	/**
 	 * Save the map in a variable and load the JPanels that ViewPanel contains
 	 * 
@@ -242,6 +246,7 @@ class ViewPanel extends JPanel implements Observer {
 	}
 	
 	public void updateMapMonster(int arrayPos[][]){
+		System.out.println("Salut");
 		int IDMaxMonsterInArray=1;
 		//i and IDMaxMonsterInArray = 1 because we don't want the pos of the player
 		//calculate where the monster stop in the array
@@ -253,11 +258,13 @@ class ViewPanel extends JPanel implements Observer {
 				IDMaxMonsterInArray++;
 			}
 		}
+		System.out.println("nb mons : " + IDMaxMonsterInArray);
 		//Display the monster
 		for(int i=1; i<IDMaxMonsterInArray; i++){
 			for(int k=0; k<arrayMonsterImageName.length; k++){
 				if(boolMonsterFirstTime){
 					//if the monster isn't at the same place he used to be
+					System.out.println("arrayPos length : " + this.arrayPos.length);
 					if(this.arrayPos[i][0] != arrayPos[i][0] || this.arrayPos[i][1] != arrayPos[i][1]){
 						jArrayMap[this.arrayPos[i][1]][this.arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
 					}
@@ -271,8 +278,8 @@ class ViewPanel extends JPanel implements Observer {
 	}
 	
 	public void updateMapItem(int arrayPos[][]){
-		int IDMinItemInArray=1;
-		//i and IDMinItemInArray = 1 because we don't want the pos of the player
+		int IDMinItemInArray=0;
+		//i = 1 because we don't want the pos of the player
 		//calculate where the monster stop in the array
 		for(int i=1; i<arrayPos.length; i++){
 			if(arrayPos[i][2] > 4){

@@ -248,7 +248,11 @@ class ViewFrame extends JFrame implements KeyListener {
 				arrayKey[4] = true;
 				break;
 		}
-		this.getController().orderPerform(View.keyCodeToControllerOrder(arrayKey));
+		try {
+			this.getController().orderPerform(View.keyCodeToControllerOrder(arrayKey));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	/*

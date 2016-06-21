@@ -98,6 +98,10 @@ public class View implements IView, Runnable {
 	protected static int getCounterThread(){
 		return counterThread;
 	}
+	
+	public void setBoolMonsterFirstTimeToFalse(){
+		this.viewFrame.getViewPanel().setBoolMonsterFirstTimeToFalse();
+	}
 
 	/*
 	 * (non-Javadoc)

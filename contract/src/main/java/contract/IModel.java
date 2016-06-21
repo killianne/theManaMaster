@@ -23,7 +23,9 @@ public interface IModel {
 	
 	public void addPurse(int purse);
 	public int getPurse();
-	public void openDoor();
+	public void openDoor(int id);
+	
+	public void switchWorld() throws Exception;
 	
 	public void removeAlFromEntity(int id);
 	

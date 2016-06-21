@@ -22,5 +22,7 @@ public interface IView {
 	public void getArrayPosFireBallFromController(int x, int y,int id, ControllerOrder direction);
 	
 	public void setScore(int purse);
+	
+	public void setBoolMonsterFirstTimeToFalse();
 
 }

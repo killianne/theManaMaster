@@ -7,8 +7,8 @@ package contract;
  * @author Jean-Aymeric Diet
  */
 public interface IController {
-		public void orderPerform(ControllerOrder controllerOrder);
-		public void run();
+		public void orderPerform(ControllerOrder controllerOrder) throws Exception;
+		public void run() throws Exception;
 	
 		
 }
