@@ -75,8 +75,13 @@ public class ControllerMonster implements Runnable {
 			if(this.model.getSwitchWorldMonster()){
 				try { thread.sleep(500);} catch (InterruptedException e) { e.printStackTrace(); }
 				map=this.model.getWorldForController();
-				getMonster();
+	
 				}
+			
+			this.itemCollision=controller.getPos();
+			
+			getMonster();
+			
 			if(iaMonster1){
 				monsterIaTypeA();
 				System.out.println("ok------>><<");

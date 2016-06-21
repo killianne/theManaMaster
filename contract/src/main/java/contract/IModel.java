@@ -23,10 +23,12 @@ public interface IModel {
 	
 	public boolean getSwitchWorldMonster();
 	public boolean getSwitchWorldPlayer();
-	
+	public boolean getSwitchWorldFireball();
 	public void addPurse(int purse);
 	public int getPurse();
 	public void openDoor(int id);
+	
+	public void removeFireBall();
 	
 	public void switchWorld() throws Exception;
 	

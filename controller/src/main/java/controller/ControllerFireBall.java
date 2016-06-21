@@ -33,11 +33,26 @@ public class ControllerFireBall implements Runnable {
 		}
 		
 		while(running) {
+			if(this.model.getSwitchWorldFireball()){
+				alMap=this.model.getWorldForController();
+				running=false;
+				this.model.removeFireBall();
+				try {
+					thread.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else{
+			
 			tick();
 			render();
 			idImage++;
 			if(idImage == 5) { idImage=0;}
 			
+			
+			}
 			try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
 		
@@ -45,6 +60,7 @@ public class ControllerFireBall implements Runnable {
 	
 	public void init() throws Exception{
 		this.model.shootFireBall();
+		System.out.println("i'm here");
 		alMap = this.model.getWorldForController();
 	}
 	
@@ -78,12 +94,25 @@ public class ControllerFireBall implements Runnable {
 	}
 	
 	public void collision(){
+		int[][] arrayPos = this.model.arrayPos();
 		int x = this.model.getPosFireBall()[0];
 		int y = this.model.getPosFireBall()[1];
 		String elementInArrayList = alMap.get(20*y+x);
 		if(elementInArrayList.equals("vb") || elementInArrayList.equals("hb") || elementInArrayList.equals("b")){
-			System.out.println("MUR !!");
 			this.model.moveFireBallReverse();
+		}
+		for(int i=0; i<arrayPos.length; i++){
+			if(x == arrayPos[i][0] && y == arrayPos[i][1]){
+				if(arrayPos[i][2] == 5 || arrayPos[i][2] == 6 || arrayPos[i][2] == 7 || arrayPos[i][2] == 8){
+					this.model.moveFireBallReverse();
+				}
+				else if(arrayPos[i][2] == 1 || arrayPos[i][2] == 2 || arrayPos[i][2] == 3 || arrayPos[i][2] == 4){
+					this.model.removeAlFromEntity(arrayPos[i][3]);
+				}
+				else if(arrayPos[i][2] == 0){
+					
+				}
+			}
 		}
 	}
 

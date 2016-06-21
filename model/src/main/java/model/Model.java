@@ -473,6 +473,19 @@ public class Model extends Observable implements IModel{
 			return true;
 		}
 	return false;
-}
+	}
+	int hereSwitchWorldFire=0;
+	public boolean getSwitchWorldFireball(){
+		if(switchWorld != hereSwitchWorldFire){
+			hereSwitchWorldFire=switchWorld;
+			return true;
+		}
+		return false;
+	}
+	public void removeFireBall(){
+		this.player.setFireBall(null);
+	}
+
+	
 	
 }
