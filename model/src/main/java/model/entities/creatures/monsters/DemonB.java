@@ -4,6 +4,10 @@ public class DemonB extends Monster{
 
 	public DemonB(int posX, int posY) throws Exception {
 		super(posX, posY);
+		if(this.getPosX() < 0 || this.getPosX() > 20)
+			throw new Exception("demonB posX out of range");
+		if(this.getPosY() < 0 || this.getPosY() > 12)
+			throw new Exception("demonB posY out of range");
 	}
 
 	public void tick()		{ move(); }
