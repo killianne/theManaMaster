@@ -8,6 +8,10 @@ public class FireBall extends Item{
 	
 	public FireBall(int posX, int posY, ControllerOrder direction) throws Exception {
 		super(posX, posY);
+		if(this.getPosX() < 0 || this.getPosX() > 20)
+			throw new Exception("fireBall posX out of range");
+		if(this.getPosY() < 0 || this.getPosY() > 12)
+			throw new Exception("fireBall posY out of range");
 		this.direction = direction;
 	}
 	

@@ -4,6 +4,7 @@ public class Wall extends Item{
 
 	public Wall(int posX, int posY) throws Exception {
 		super(posX, posY);
+		
 	}
 
 	public boolean isSolid() {
