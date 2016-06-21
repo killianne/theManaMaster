@@ -11,18 +11,7 @@ import java.util.Observable;
 public interface IModel {
 
 	//public ControllerOrder getOrderPerform(ControllerOrder controllerOrder);
-	/**
-	 * Gets the message.
-	 *
-	 * @return the message
-	 */
-
-	/**
-	 * Load the message.
-	 *
-	 * @param key
-	 *          the key
-	 */
+	
 	ArrayList<String> getWorldForController();
 
 	/**
