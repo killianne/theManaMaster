@@ -6,6 +6,10 @@ public class Door extends Item implements IDoor{
 
 	public Door(int posX, int posY,boolean door) throws Exception {
 		super(posX, posY);
+		if(this.getPosX() < 0 || this.getPosX() > 20)
+			throw new Exception("door posX out of range");
+		if(this.getPosY() < 0 || this.getPosY() > 12)
+			throw new Exception("door posY out of range");
 		this.isOpen=door;
 	}
 	

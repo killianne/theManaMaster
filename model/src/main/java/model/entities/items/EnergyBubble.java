@@ -4,6 +4,10 @@ public class EnergyBubble extends Item{
 
 	public EnergyBubble(int posX, int posY) throws Exception {
 		super(posX, posY);
+		if(this.getPosX() < 0 || this.getPosX() > 20)
+			throw new Exception("energyBubble posX out of range");
+		if(this.getPosY() < 0 || this.getPosY() > 12)
+			throw new Exception("energyBubble posY out of range");
 	}
 
 	public boolean isSolid() { return false; }
