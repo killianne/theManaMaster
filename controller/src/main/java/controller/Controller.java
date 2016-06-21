@@ -100,22 +100,23 @@ public class Controller implements IController {
 		positionInArraylist=map.get(20*y+x);
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
 			collision();
-			//System.out.println("ok");
 		}
 		for(int i=0;i<itemCollision.length;i++)
 		{
-			//System.out.println(i+" cheep"+itemCollision[i][3]);
 			if(itemCollision[i][4]!=0 && itemCollision[i][0]==x && itemCollision[i][1]==y){
-				//System.out.println("collision with player or other item");
-				if(itemCollision[i][2]==6){
+				if(itemCollision[i][2]==5){
+					this.model.openDoor();
+					this.model.removeAlFromEntity(itemCollision[i][3]);
+				}
+				else if(itemCollision[i][2]==6){
 					this.model.addPurse(500);
 					this.view.setScore(this.model.getPurse());
 					this.model.removeAlFromEntity(itemCollision[i][3]);
 				}
-				else if(itemCollision[i][2]==5){
-					this.model.openDoor(itemCollision[i][3]);
-					this.model.removeAlFromEntity(itemCollision[i][3]);
+				else if(itemCollision[i][2]==8){
+					
 				}
+				
 				
 				else {collision();}
 			}

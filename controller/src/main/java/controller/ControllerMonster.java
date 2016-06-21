@@ -10,13 +10,15 @@ public class ControllerMonster implements Runnable {
 
 	private Thread thread;
 	
-	IModel model;
-	Controller controller;
-	IView view;
+	private IModel model;
+	private Controller controller;
+	private IView view;
+	
+	private boolean iaMonster1=false,iaMonster2=false,iaMonster3=false,iaMonster4=false;
 	
 	/** Map arraylist in String */
-	String positionInArraylist;
-	int itemCollision[][];
+	private String positionInArraylist;
+	private int itemCollision[][];
 	/** arraylist, map for contain position of item   */
 	private ArrayList<String> map = new ArrayList<String>();
 	
@@ -35,16 +37,16 @@ public class ControllerMonster implements Runnable {
 		this.itemCollision=controller.getPos();
 		positionInArraylist=map.get(20*yColis+xColis);
 		
-		System.out.println("Position Monster : "+positionInArraylist + "/id ="+ id);
+	
 		
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
-			System.out.println("Monster Collision ");
+		
 			return true;
 		}
 		for(int i=0;i<itemCollision.length;i++)
 		{
 			if(itemCollision[i][4]!=id && itemCollision[i][0]==x && itemCollision[i][1]==y){
-				System.out.println("collision with player or other item");
+				
 				return true;
 			}
 		}
@@ -53,7 +55,12 @@ public class ControllerMonster implements Runnable {
 		return false;	
 	}
 	public void init(){
-		this.controller.getModel();
+		//this.controller.getModel();
+		this.itemCollision=controller.getPos();
+		for(int i=0;i<itemCollision.length;i++){
+			if(itemCollision[i][2] == 1){ iaMonster1=true; }
+			if(itemCollision[i][2] == 2){ iaMonster2=true; }
+		}
 	}
 	
 	public void run(){
@@ -61,8 +68,11 @@ public class ControllerMonster implements Runnable {
 		init();
 		
 		while(running) {
-			monsterIaTypeA();
-			monsterIaTypeB();
+			if(iaMonster1){
+				monsterIaTypeA();
+				}
+				if(iaMonster2)
+				monsterIaTypeB();
 			try {
 				Thread.sleep(125);
 			} catch (InterruptedException e) {
@@ -144,18 +154,7 @@ public class ControllerMonster implements Runnable {
 				 yT=true;
 			 }
 			controllerOrder=iAMonsterBExtend( x,  y,  xT , yT);
-			
-			 
-			 
-			 
-			 
-			System.out.println("Monster B direction: "+controllerOrder + " // X="+x+"Y="+y);
-		
-			
-			
-			
-			
-		
+	
 			this.model.setDemonPos(controllerOrder,arreyMonsterB[i][2]);
 			arreyMonsterB = this.model.getDemonBPos();
 			if(getCollisionMonster(arreyMonsterB[i][0],arreyMonsterB[i][1],arreyMonsterB[i][3]))
@@ -169,35 +168,27 @@ public class ControllerMonster implements Runnable {
 	public ControllerOrder iAMonsterBExtend(int x, int y, boolean xT ,boolean yT){
 	
 		if(x<y && xT==true && x!=0){
-			System.out.println("1");
 			 return ControllerOrder.LEFT;
 		 }
 		 else if(x<y && x!=0 ){
-			 System.out.println("2");
 			 return ControllerOrder.RIGHT;
 		 }
 		 else if(y<x && yT==true&& y!=0){
-			 System.out.println("3");
 			 return ControllerOrder.UP;
 		 }
 		 else if(y<x && y!=0){
-			 System.out.println("4");
 			 return ControllerOrder.DOWN;
 		 }
 		 else if(x<y  && x==0 && yT==true){
-			 System.out.println("5");
 			 return ControllerOrder.UP;
 		 }
 		 else if(x<y && x==0 ){
-			 System.out.println("6");
 			 return ControllerOrder.DOWN;
 		 }
 		 else if(y<x  && y==0 && xT==true){
-			 System.out.println("7");
 			 return ControllerOrder.LEFT;
 		 }
 		 else if(y<x && y==0){
-			 System.out.println("8");
 			 return ControllerOrder.RIGHT;
 		 }
 		 else{

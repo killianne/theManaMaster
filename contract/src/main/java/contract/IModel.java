@@ -23,7 +23,7 @@ public interface IModel {
 	
 	public void addPurse(int purse);
 	public int getPurse();
-	public void openDoor(int id);
+	public void openDoor();
 	
 	public void removeAlFromEntity(int id);
 	

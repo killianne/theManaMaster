@@ -21,7 +21,7 @@ import model.worlds.World;
 public class Model extends Observable implements IModel{
 
 	
-	protected World world  = new World(1);
+	protected World world  = new World(3);
 	DAOWorld daoWorld = new DAOWorld();
 	private IController controller;
 	
@@ -31,6 +31,8 @@ public class Model extends Observable implements IModel{
 	
 	public int lastPlayerX;
 	public int lastPlayerY;
+	
+	public boolean isOpen = false;
 	
 	public void instantiateMonsters() throws Exception{
 		
@@ -117,8 +119,8 @@ public class Model extends Observable implements IModel{
 			if(alEntity.get(i) instanceof Door) {
 				array[i+1][0] = alEntity.get(i).getPosX();
 				array[i+1][1] = alEntity.get(i).getPosY();
-				Door door = (Door) alEntity.get(i);
-				boolean isOpen = door.isOpen();
+				//Door door = (Door) alEntity.get(i);
+				//boolean isOpen = door.isOpen();
 				if(isOpen){
 					array[i+1][2] = 7;
 				}
@@ -137,6 +139,7 @@ public class Model extends Observable implements IModel{
 			}
 			System.out.println();
 		}*/
+		
 		return array;
 	}
 	
@@ -430,13 +433,12 @@ public class Model extends Observable implements IModel{
 	public void removeAlFromEntity(int id){
 		alEntity.remove(id);
 	}
-
-	public void openDoor(int id){
+	/**
+	 *Open the closed door
+	 */
+	public void openDoor(){
 		
-		Door door = (Door) alEntity.get(id);
-		door.openDoor();
-	//	alEntity.get(id)=door;
-		((Door) alEntity.get(id)).openDoor();
+		isOpen = true;
 	}
 	
 	
