@@ -68,6 +68,7 @@ public class ControllerMonster implements Runnable {
 		init();
 		
 		while(running) {
+			map=this.model.getWorldForController();
 			if(iaMonster1){
 				monsterIaTypeA();
 				}

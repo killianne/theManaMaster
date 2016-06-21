@@ -65,7 +65,7 @@ public class Controller implements IController {
 	}
 	
 	public void run() throws Exception{
-	
+		map=this.model.getWorldForController();
 		this.memoryPos();
 		this.playerMove();
 		this.getCollision(playerPositionX, playerPositionY);
@@ -95,7 +95,7 @@ public class Controller implements IController {
 	
 	public IModel getModel() { return this.model; }
 	
-	public void getCollision(int x , int y) throws Exception{
+	public synchronized void getCollision(int x , int y) throws Exception{
 		int[][] itemCollision=getPos();
 		positionInArraylist=map.get(20*y+x);
 		if(positionInArraylist.contains("b")||positionInArraylist.contains("hb")||positionInArraylist.contains("vb")){
