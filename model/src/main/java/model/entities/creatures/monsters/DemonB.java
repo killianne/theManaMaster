@@ -2,7 +2,7 @@ package model.entities.creatures.monsters;
 
 public class DemonB extends Monster{
 
-	public DemonB(int posX, int posY) {
+	public DemonB(int posX, int posY) throws Exception {
 		super(posX, posY);
 	}
 

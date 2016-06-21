@@ -1,4 +1,4 @@
-package model.entities.creatures;
+package model.entities;
 
 import static org.junit.Assert.*;
 
@@ -8,27 +8,28 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import model.entities.Entity;
-import model.entities.EntityTest;
+public class EntityTest{
 
-public class CreatureTest extends EntityTest{
-
-	protected Creature creature;
+	protected Entity entity;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 	}
-	
+
+	@Test
 	public void testGetPosX(){
-		assertNotNull(this.creature.getPosX());
+		assertNotNull(this.entity.getPosX());
 	}
 	
+	@Test
 	public void testGetPosY(){
-		assertNotNull(this.creature.getPosY());
+		assertNotNull(this.entity.getPosY());
 	}
+	
+	
 
 }

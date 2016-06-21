@@ -21,19 +21,20 @@ import model.worlds.World;
 public class Model extends Observable implements IModel{
 
 	
-	
 	protected World world  = new World(1);
 	DAOWorld daoWorld = new DAOWorld();
 	private IController controller;
-
-	Player player = new Player(0,0, ControllerOrder.NO);
+	
+	Player player;
 	
 	private ArrayList<Entity> alEntity;
 	
 	public int lastPlayerX;
 	public int lastPlayerY;
 	
-	public void instantiateMonsters(){
+	public void instantiateMonsters() throws Exception{
+		 player = new Player(0,0, ControllerOrder.NO);
+		
 		this.alEntity = new ArrayList<Entity>();
 		for(int i=0;i<daoWorld.loadDemonAPosition(world.getId()).size()/2;i+=2){
 			alEntity.add(new DemonA(daoWorld.loadDemonAPosition(world.getId()).get(i)-1,daoWorld.loadDemonAPosition(world.getId()).get(i+1)-1));
@@ -140,7 +141,7 @@ public class Model extends Observable implements IModel{
 		return array;
 	}
 	
-	public boolean shootFireBall(){
+	public boolean shootFireBall() throws Exception{
 		return player.shootFireBall();
 	}
 	

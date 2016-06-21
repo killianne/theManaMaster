@@ -2,7 +2,7 @@ package model.entities.items;
 
 public class EnergyBubble extends Item{
 
-	public EnergyBubble(int posX, int posY) {
+	public EnergyBubble(int posX, int posY) throws Exception {
 		super(posX, posY);
 	}
 

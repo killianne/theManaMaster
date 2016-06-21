@@ -6,7 +6,7 @@ public class FireBall extends Item{
 
 	ControllerOrder direction;
 	
-	public FireBall(int posX, int posY, ControllerOrder direction) {
+	public FireBall(int posX, int posY, ControllerOrder direction) throws Exception {
 		super(posX, posY);
 		this.direction = direction;
 	}

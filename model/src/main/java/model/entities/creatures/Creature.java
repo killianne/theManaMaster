@@ -8,7 +8,7 @@ public abstract class Creature extends Entity implements IMove{
 	
 	protected float speed = 2.0f;
 	
-	public Creature(int posX, int posY) {
+	public Creature(int posX, int posY) throws Exception {
 		super(posX, posY);
 		initMovePosition();
 	}

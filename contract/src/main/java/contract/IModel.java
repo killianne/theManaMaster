@@ -38,7 +38,7 @@ public interface IModel {
 	
 	public void removeAlFromEntity(int id);
 	
-	public boolean shootFireBall();
+	public boolean shootFireBall() throws Exception;
 	public void moveFireBall();
 	public int[] getPosFireBall();
 	public ControllerOrder getDirectionFireBall();
@@ -67,6 +67,6 @@ public interface IModel {
 	public Integer EnergyBubbleIsInTheWorld();
 	public Integer PurseIsInTheWorld();
 	
-	public void instantiateMonsters();
+	public void instantiateMonsters() throws Exception;
 	public int[][] arrayPos();
 }

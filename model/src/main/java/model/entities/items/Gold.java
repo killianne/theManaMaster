@@ -2,7 +2,7 @@ package model.entities.items;
 
 public class Gold extends Item{
 
-	public Gold(int posX, int posY) {
+	public Gold(int posX, int posY) throws Exception {
 		super(posX, posY);
 	}
 

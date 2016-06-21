@@ -58,7 +58,7 @@ public class Controller implements IController {
 		this.model = model;
 	}
 	
-	public void instantiateInitialMap(){
+	public void instantiateInitialMap() throws Exception{
 		this.view.getMapFromController(this.model.getWorldForController());
 		this.model.instantiateMonsters();
 		this.view.getArrayPosFromController(this.getPos());

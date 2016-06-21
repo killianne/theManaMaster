@@ -21,8 +21,12 @@ public class Player extends Creature{
 
 	ControllerOrder direction;
 	
-	public Player(int posX, int posY, ControllerOrder direction) {
+	public Player(int posX, int posY, ControllerOrder direction) throws Exception{
 		super(posX, posY);
+		if(this.getPosX() < 0 || this.getPosX() > 20)
+			throw new Exception("player posX out of range");
+		if(this.getPosY() < 0 || this.getPosY() > 12)
+			throw new Exception("player posY out of range");
 	}
 	
 	public FireBall getFireBall() 						{ return fireBall; }
@@ -31,7 +35,7 @@ public class Player extends Creature{
 	
 	public boolean isFireBallNull()                     { return fireBall == null; }
 	
-	public boolean shootFireBall(){
+	public boolean shootFireBall() throws Exception{
 		if(isFireBallNull()){
 			switch(direction){
 				case UP :
@@ -72,7 +76,7 @@ public class Player extends Creature{
 
 	public void tick() { move(); }
 	
-	public void shoot(){
+	public void shoot() throws Exception{
 		fireBall = new FireBall(posX, posY, this.direction);
 		System.out.println("FireBall direction" + this.direction);
 	}
@@ -96,8 +100,14 @@ public class Player extends Creature{
 
 	public void setPosY(int posY) { this.posY = posY; }
 
-	public int getWIDTH()         { return this.WIDTH; }
+	public int getWIDTH() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-	public int getHEIGHT()        { return this.HEIGHT; }	
-	
+	public int getHEIGHT() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

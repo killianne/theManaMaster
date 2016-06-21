@@ -7,8 +7,6 @@ import contract.IView;
 
 public class ControllerFireBall implements Runnable {
 	
-	private Controller ctrl;
-	
 	private IModel model;
 	
 	private IView view;
@@ -22,13 +20,17 @@ public class ControllerFireBall implements Runnable {
 	private ArrayList<String> alMap;
 	
 	public ControllerFireBall(Controller ctrl, IModel model, IView view){
-		this.ctrl = ctrl;		
 		this.model = model;
 		this.view = view;
 	}
 
 	public void run() {
-		init();
+		try {
+			init();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		while(running) {
 			tick();
@@ -41,7 +43,7 @@ public class ControllerFireBall implements Runnable {
 		
 	}
 	
-	public void init(){
+	public void init() throws Exception{
 		this.model.shootFireBall();
 		alMap = this.model.getWorldForController();
 	}

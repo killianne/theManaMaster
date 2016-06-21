@@ -4,7 +4,7 @@ import model.entities.creatures.Creature;
 
 public abstract class Monster extends Creature{
 
-	public Monster(int posX, int posY) {
+	public Monster(int posX, int posY) throws Exception {
 		super(posX, posY);
 	}
 	

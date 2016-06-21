@@ -4,7 +4,7 @@ public class Door extends Item implements IDoor{
 	
 	public boolean isOpen;
 
-	public Door(int posX, int posY,boolean door) {
+	public Door(int posX, int posY,boolean door) throws Exception {
 		super(posX, posY);
 		this.isOpen=door;
 	}
