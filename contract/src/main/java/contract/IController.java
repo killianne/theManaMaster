@@ -9,6 +9,9 @@ package contract;
 public interface IController {
 		public void orderPerform(ControllerOrder controllerOrder) throws Exception;
 		public void run() throws Exception;
+		
+		public void startMonster();
+		public void stopMonster();
 	
 		
 }

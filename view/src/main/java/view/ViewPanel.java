@@ -269,7 +269,6 @@ class ViewPanel extends JPanel implements Observer {
 						jArrayMap[this.arrayPos[i][1]][this.arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
 					}
 				}
-				System.out.println(i);
 				// k- 1 because in the table ID = 1 minimum but in the array of name it begin at 0
 				if(arrayPos[i][2] == k) { jArrayMap[arrayPos[i][1]] [arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayMonsterImageName[k-1] + ".png")); }
 			}

@@ -43,11 +43,26 @@ public class Controller implements IController {
 	
 	private ControllerFireBall controllerFireBall;
 	
+	private ControllerMonster controlMonster;
+	
 	public Controller( IView view,  IModel model) {
 		this.setView(view);
 		this.setModel(model);
 		controllerFireBall = new ControllerFireBall(this,model,view);
 		map=this.model.getWorldForController();
+	}
+	
+	public void instantiateMonsterThread(){
+		 controlMonster = new ControllerMonster(this,model,view);
+		 controlMonster.start();
+	}
+	
+	public void startMonster(){
+		controlMonster.start();
+	}
+	
+	public void stopMonster(){
+		controlMonster.stop();
 	}
 	
 	private void setView(final IView view) {

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import contract.IController;
 import contract.IModel;
 import contract.IView;
 
@@ -10,6 +11,8 @@ public class ControllerFireBall implements Runnable {
 	private IModel model;
 	
 	private IView view;
+	
+	private IController ctrl;
 	
 	private int idImage=0;
 	
@@ -22,6 +25,7 @@ public class ControllerFireBall implements Runnable {
 	public ControllerFireBall(Controller ctrl, IModel model, IView view){
 		this.model = model;
 		this.view = view;
+		this.ctrl = ctrl;
 	}
 
 	public void run() {
@@ -107,9 +111,15 @@ public class ControllerFireBall implements Runnable {
 					this.model.moveFireBallReverse();
 				}
 				else if(arrayPos[i][2] == 1 || arrayPos[i][2] == 2 || arrayPos[i][2] == 3 || arrayPos[i][2] == 4){
+					this.ctrl.stopMonster();
 					this.model.removeFireBall();
 					this.model.removeAlFromEntity(arrayPos[i][3]);
+					running=false;
+					this.ctrl.startMonster();
 					
+					alMap = this.model.getWorldForController();
+					arrayPos = this.model.arrayPos();
+					this.view.updateAllMapFromController(arrayPos, alMap);
 					try {thread.join();}
 					catch (InterruptedException e) {e.printStackTrace();}
 				}

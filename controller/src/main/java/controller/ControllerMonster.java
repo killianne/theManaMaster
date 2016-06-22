@@ -81,12 +81,17 @@ public class ControllerMonster implements Runnable {
 				iaMonster2=false;
 				iaMonster3=false;
 				iaMonster4=false;
-				try { thread.sleep(500);} catch (InterruptedException e) { e.printStackTrace(); }
+				try { thread.sleep(200);} catch (InterruptedException e) { e.printStackTrace(); }
 				map=this.model.getWorldForController();
 		
 				}
 			
 			this.itemCollision=controller.getPos();
+			
+			iaMonster1=false;
+			iaMonster2=false;
+			iaMonster3=false;
+			iaMonster4=false;
 			
 			getMonster();
 			
@@ -104,7 +109,7 @@ public class ControllerMonster implements Runnable {
 				}
 			//view.getArrayPosMonsterFromController(controller.getPos());
 			view.getArrayPosFromController(controller.getPos());
-			try { Thread.sleep(125); } catch (InterruptedException e) {e.printStackTrace();}
+			try { Thread.sleep(200); } catch (InterruptedException e) {e.printStackTrace();}
 		}
 		
 	}

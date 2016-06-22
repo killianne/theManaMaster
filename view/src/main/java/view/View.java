@@ -79,6 +79,11 @@ public class View implements IView, Runnable {
 		//viewFrame.getViewPanel().updateMapItem(arrayPos);
 	}
 	
+	public void updateAllMapFromController(int[][] arrayPos, ArrayList<String> alMap){
+		viewFrame.getViewPanel().setALMap(alMap);
+		viewFrame.getViewPanel().updateMap(arrayPos);
+	}
+	
 	public void getArrayPosPersonageFromController(int[][] arrayPos){
 		viewFrame.getViewPanel().updateMapPersonage(arrayPos);
 	}
