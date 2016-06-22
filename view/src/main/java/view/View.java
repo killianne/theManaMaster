@@ -165,6 +165,7 @@ public class View implements IView, Runnable {
 	public void setController(final IController controller) {
 		viewFrame.setController(controller);
 	}
+	
 
 	public void setScore(int purse){
 		this.viewFrame.getViewPanel().setScore(purse);

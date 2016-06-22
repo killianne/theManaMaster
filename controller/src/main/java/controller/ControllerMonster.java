@@ -46,7 +46,9 @@ public class ControllerMonster implements Runnable {
 		for(int i=0;i<itemCollision.length;i++)
 		{
 			if(itemCollision[i][4]!=id && itemCollision[i][0]==x && itemCollision[i][1]==y){
-				
+				if(itemCollision[i][4]==0){
+					System.exit(0);
+				}
 				return true;
 			}
 		}
@@ -64,6 +66,8 @@ public class ControllerMonster implements Runnable {
 		for(int i=0;i<itemCollision.length;i++){
 			if(itemCollision[i][2] == 1){ iaMonster1=true; }
 			if(itemCollision[i][2] == 2){ iaMonster2=true; }
+			if(itemCollision[i][2] == 3){ iaMonster3=true; }
+			if(itemCollision[i][2] == 4){ iaMonster4=true; }
 		}
 	}
 	public void run(){
@@ -72,10 +76,14 @@ public class ControllerMonster implements Runnable {
 		
 		while(running) {
 			
-			if(this.model.getSwitchWorldMonster()){
+			if(this.model.getSwitchWorldMonster()){		
+				iaMonster1=false;
+				iaMonster2=false;
+				iaMonster3=false;
+				iaMonster4=false;
 				try { thread.sleep(500);} catch (InterruptedException e) { e.printStackTrace(); }
 				map=this.model.getWorldForController();
-	
+		
 				}
 			
 			this.itemCollision=controller.getPos();
@@ -84,11 +92,16 @@ public class ControllerMonster implements Runnable {
 			
 			if(iaMonster1){
 				monsterIaTypeA();
-				System.out.println("ok------>><<");
 				}
 			if(iaMonster2)
 				monsterIaTypeB();
 			
+			if(iaMonster3){
+				monsterIaTypeC();
+				}
+			if(iaMonster4){
+				monsterIaTypeD();
+				}
 			//view.getArrayPosMonsterFromController(controller.getPos());
 			view.getArrayPosFromController(controller.getPos());
 			try { Thread.sleep(125); } catch (InterruptedException e) {e.printStackTrace();}
@@ -148,7 +161,7 @@ public class ControllerMonster implements Runnable {
 	}
 	public void monsterIaTypeB(){
 		ControllerOrder controllerOrder = ControllerOrder.NO;
-		int random;
+		
 		int[][] position=controller.getPos();
 		int x,y;
 		boolean xT=false,yT=false;
@@ -173,6 +186,90 @@ public class ControllerMonster implements Runnable {
 				returnPosMonster(controllerOrder,arreyMonsterB[i][2]);
 							
 			arreyMonsterB = this.model.getDemonBPos();
+			
+		}
+		
+	}
+	public void monsterIaTypeC(){
+		ControllerOrder controllerOrder = ControllerOrder.NO;	
+		int[][] arreyMonsterC = this.model.getDemonCPos();
+		int random1;
+		random1 = (int) (Math.random() * 2);
+		for(int i=0; i<arreyMonsterC.length; i++){
+		switch(random1){
+		case 0:
+		int random;
+	
+			random = (int) (Math.random() * 4);
+			
+			switch(random){
+			case 0:
+				controllerOrder = ControllerOrder.UP;
+				break;
+			case 1:
+				controllerOrder = ControllerOrder.DOWN;
+				break;
+			case 2:
+				controllerOrder = ControllerOrder.RIGHT;
+				break;
+			case 3:
+				controllerOrder = ControllerOrder.LEFT;
+				break;
+			}
+			break;
+			
+			case 1:
+			int x,y;
+			int[][] position=controller.getPos();
+			boolean xT=false,yT=false;
+	
+				
+				x=position[0][0]-arreyMonsterC[i][0];
+				y=position[0][1]-arreyMonsterC[i][1];
+				 if(x<= 0){
+					 x=x*-1;
+					 xT=true;
+				 }
+				 if(y<=0){
+					 y=y*-1;
+					 yT=true;
+				 }
+				controllerOrder=iAMonsterBExtend( x,  y,  xT , yT);
+			break;
+			}
+			
+			this.model.setDemonPos(controllerOrder,arreyMonsterC[i][2]);
+		arreyMonsterC = this.model.getDemonCPos();
+			if(getCollisionMonster(arreyMonsterC[i][0],arreyMonsterC[i][1],arreyMonsterC[i][3]))
+				returnPosMonster(controllerOrder,arreyMonsterC[i][2]);
+			
+			arreyMonsterC = this.model.getDemonAPos();
+			
+		}
+		
+	}
+	public void monsterIaTypeD(){
+		ControllerOrder controllerOrder = ControllerOrder.NO;
+		int random;
+		int[][] arreyMonsterD = this.model.getDemonDPos();
+		for(int i=0; i<arreyMonsterD.length; i++){
+			random = (int) (Math.random() * 2);
+			
+			switch(random){
+			case 0:
+				controllerOrder = ControllerOrder.UP;
+				break;
+			case 1:
+				controllerOrder = ControllerOrder.DOWN;
+			}
+			
+		
+			this.model.setDemonPos(controllerOrder,arreyMonsterD[i][2]);
+		arreyMonsterD = this.model.getDemonDPos();
+			if(getCollisionMonster(arreyMonsterD[i][0],arreyMonsterD[i][1],arreyMonsterD[i][3]))
+				returnPosMonster(controllerOrder,arreyMonsterD[i][2]);
+			
+			arreyMonsterD = this.model.getDemonDPos();
 			
 		}
 		
@@ -218,4 +315,6 @@ public class ControllerMonster implements Runnable {
 			}
 		}
 	}
+
+
 }

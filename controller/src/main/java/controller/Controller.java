@@ -26,17 +26,17 @@ public class Controller implements IController {
 	String positionInArraylist;
 	
 	/** tab position in map for all entity */
-	int tab[][]= new int[1][3];
-	int checkItem[] =new int[6];
+	private int tab[][]= new int[1][3];
+	private int checkItem[] =new int[6];
 	
 	
 	/** Direction */ 
 	ControllerOrder controllerOrder;
 	/** position Player */
-	int lastPlayerPositionX;
-	int lastPlayerPositionY;
-	int playerPositionX;
-	int playerPositionY;
+	private int lastPlayerPositionX;
+	private int lastPlayerPositionY;
+	private int playerPositionX;
+	private int playerPositionY;
 	
 	// arraylist
 	private ArrayList<String> map = new ArrayList<String>();
@@ -161,6 +161,22 @@ public class Controller implements IController {
 	this.model.setPlayerPosY(playerPositionY);
 }
 
+	public int getPlayerPositionX() {
+		return playerPositionX;
+	}
+
+	public void setPlayerPositionX(int playerPositionX) {
+		this.playerPositionX = playerPositionX;
+	}
+
+	public int getPlayerPositionY() {
+		return playerPositionY;
+	}
+
+	public void setPlayerPositionY(int playerPositionY) {
+		this.playerPositionY = playerPositionY;
+	}
+
 	public void orderPerform(final ControllerOrder controllerOrder) throws Exception {
 		this.controllerOrder=controllerOrder;
 		if(controllerOrder == controllerOrder.SHOOT){
@@ -169,11 +185,14 @@ public class Controller implements IController {
 		this.run();
 	}
 
-
 	
-
-
-
-	
-
 }
+
+
+	
+
+
+
+	
+
+

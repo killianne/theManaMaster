@@ -246,7 +246,7 @@ class ViewPanel extends JPanel implements Observer {
 	}
 	
 	public synchronized void updateMapMonster(int arrayPos[][]){
-		System.out.println("Salut");
+		
 		int IDMaxMonsterInArray=1;
 		//i and IDMaxMonsterInArray = 1 because we don't want the pos of the player
 		//calculate where the monster stop in the array
@@ -258,17 +258,18 @@ class ViewPanel extends JPanel implements Observer {
 				IDMaxMonsterInArray++;
 			}
 		}
-		System.out.println("nb mons : " + IDMaxMonsterInArray);
+		
 		//Display the monster
 		for(int i=1; i<IDMaxMonsterInArray; i++){
-			for(int k=0; k<arrayMonsterImageName.length; k++){
+			for(int k=0; k<arrayMonsterImageName.length+1; k++){
 				if(boolMonsterFirstTime){
 					//if the monster isn't at the same place he used to be
-					System.out.println("arrayPos length : " + this.arrayPos.length);
+					
 					if(this.arrayPos[i][0] != arrayPos[i][0] || this.arrayPos[i][1] != arrayPos[i][1]){
 						jArrayMap[this.arrayPos[i][1]][this.arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+"/blank.png"));
 					}
 				}
+				System.out.println(i);
 				// k- 1 because in the table ID = 1 minimum but in the array of name it begin at 0
 				if(arrayPos[i][2] == k) { jArrayMap[arrayPos[i][1]] [arrayPos[i][0]].setIcon(new ImageIcon(arrayNameFile[this.viewFrame.getCurrentWorldID()]+ "/" + arrayMonsterImageName[k-1] + ".png")); }
 			}

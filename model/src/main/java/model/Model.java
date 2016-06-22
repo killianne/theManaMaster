@@ -135,15 +135,7 @@ public class Model extends Observable implements IModel{
 			}
 			
 		}
-		for(int i=0; i<array.length; i++){
-			for(int j=0; j<array[0].length; j++){
-				System.out.print(array[i][j] + "-");
-			}
-			System.out.println();
-		}
-		System.out.println();
-		System.out.println();
-		
+
 		return array;
 	}
 	
@@ -451,6 +443,10 @@ public class Model extends Observable implements IModel{
 		}
 		else if(world.getId() == 1){
 			world.setId(3);
+			switchWorld++;
+		}
+		else if(world.getId() == 6){
+			world.setId(2);
 			switchWorld++;
 		}
 		else{

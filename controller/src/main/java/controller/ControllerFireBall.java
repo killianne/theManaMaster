@@ -53,14 +53,14 @@ public class ControllerFireBall implements Runnable {
 			
 			
 			}
-			try { Thread.sleep(500); } catch (InterruptedException e) { e.printStackTrace(); }
+			try { Thread.sleep(250); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
 		
 	}
 	
 	public void init() throws Exception{
 		this.model.shootFireBall();
-		System.out.println("i'm here");
+	
 		alMap = this.model.getWorldForController();
 	}
 	
@@ -107,10 +107,18 @@ public class ControllerFireBall implements Runnable {
 					this.model.moveFireBallReverse();
 				}
 				else if(arrayPos[i][2] == 1 || arrayPos[i][2] == 2 || arrayPos[i][2] == 3 || arrayPos[i][2] == 4){
+					this.model.removeFireBall();
 					this.model.removeAlFromEntity(arrayPos[i][3]);
+					
+					try {thread.join();}
+					catch (InterruptedException e) {e.printStackTrace();}
 				}
 				else if(arrayPos[i][2] == 0){
-					
+					this.view.getArrayPosFireBallFromController(this.model.getPosFireBall()[0], this.model.getPosFireBall()[1], this.idImage, this.model.getDirectionFireBall());
+					running=false;
+					this.model.removeFireBall();
+					try {thread.join();}
+					catch (InterruptedException e) {e.printStackTrace();}
 				}
 			}
 		}
