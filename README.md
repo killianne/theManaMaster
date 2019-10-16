@@ -1,2 +1,2 @@
 # Project Java
-Project Java first year prepatory school cesi exia
+Java project in first grade at Cesi Exia Rouen 
